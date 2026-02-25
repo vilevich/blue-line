@@ -1,0 +1,318 @@
+/*
+ * Blue Line Design System — Design Tokens
+ * Based on Figma Blue Line 2.2.2.
+ * Import via: <link rel="stylesheet" href="https://vilevich.github.io/blue-line/tokens.css">
+ */
+
+/* ===== @FONT-FACE ===== */
+@font-face { font-family: 'Simplon Norm'; src: url('fonts/simplonnorm-regular-webfont.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Simplon Norm'; src: url('fonts/simplonnorm-medium-webfont.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Simplon Norm'; src: url('fonts/simplonnorm-bold-webfont.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* ===== RESET ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ===== DESIGN TOKENS ===== */
+:root {
+  /* ===== FONTS ===== */
+  --font: 'Roboto', sans-serif;
+  --font-brand: 'Simplon Norm', sans-serif;
+
+  /* ===== COLOR PALETTE (from Figma Blue Line 2.2.2) ===== */
+  /* Neutral scale */
+  --neutral-100: #f8f9f9;
+  --neutral-200: #ebecee;
+  --neutral-300: #dee0e4;
+  --neutral-400: #c7ccd5;
+  --neutral-500: #a9b2c4;
+  --neutral-600: #607497;
+  --neutral-700: #475b81;
+  --neutral-800: #344565;
+  --neutral-900: #24324b;
+  --neutral-1000: #172234;
+  --neutral-1100: #141b27;
+  --neutral-1200: #0c121d;
+  --neutral-white: #ffffff;
+
+  /* Blue (Primary) scale */
+  --blue-100: #e8f0ff;
+  --blue-200: #c6dafe;
+  --blue-300: #a5c4fe;
+  --blue-400: #77a6fd;
+  --blue-500: #5690fd;
+  --blue-600: #357bfc;
+  --blue-700: #1d6bfc;
+  --blue-800: #1854c3;
+  --blue-900: #123d8b;
+  --blue-1000: #0d2654;
+  --blue-1100: #091b3b;
+
+  /* Red (Alert/Danger) scale */
+  --red-100: #ffdfdb;
+  --red-200: #ffbab7;
+  --red-300: #ff9392;
+  --red-400: #ff6e75;
+  --red-500: #ff495e;
+  --red-600: #ff254a;
+  --red-700: #ff003d;
+  --red-800: #d40031;
+  --red-900: #a90027;
+  --red-1000: #7e001d;
+
+  /* Green scale */
+  --green-100: #dffff5;
+  --green-200: #b3ffe8;
+  --green-300: #86ffdb;
+  --green-400: #59ffcd;
+  --green-500: #2dffc0;
+  --green-600: #00ffb2;
+  --green-700: #00da99;
+  --green-800: #00b67f;
+  --green-900: #009165;
+  --green-1000: #006c4c;
+  --green-1100: #004832;
+  --green-1200: #002318;
+
+  /* Orange scale */
+  --orange-100: #ffebde;
+  --orange-200: #ffd6b9;
+  --orange-300: #ffc094;
+  --orange-400: #ffab6f;
+  --orange-500: #ff954a;
+  --orange-600: #ff8025;
+  --orange-700: #ff6b00;
+  --orange-800: #d55300;
+  --orange-900: #aa3e00;
+  --orange-1000: #802b00;
+  --orange-1100: #551a00;
+
+  /* Yellow scale */
+  --yellow-100: #fff8d5;
+  --yellow-200: #fff1aa;
+  --yellow-300: #ffea80;
+  --yellow-400: #ffe355;
+  --yellow-500: #ffdc2b;
+  --yellow-600: #ffd600;
+  --yellow-700: #dbb600;
+  --yellow-800: #b69700;
+  --yellow-900: #927800;
+  --yellow-1000: #6d5a00;
+  --yellow-1100: #493c00;
+  --yellow-1200: #251e00;
+
+  /* Teal scale */
+  --teal-100: #e8feff;
+  --teal-200: #b8fbfe;
+  --teal-300: #88f8fe;
+  --teal-400: #58f5fd;
+  --teal-500: #28f2fd;
+  --teal-600: #03e7f5;
+  --teal-700: #02c5cf;
+  --teal-800: #02a3ac;
+  --teal-900: #018288;
+  --teal-1000: #016065;
+  --teal-1100: #013e42;
+  --teal-1200: #001d1e;
+
+  /* Purple scale */
+  --purple-100: #f7e5f8;
+  --purple-200: #ecc2ef;
+  --purple-300: #e09fe6;
+  --purple-400: #d57cdd;
+  --purple-500: #ca59d4;
+  --purple-600: #bf36cb;
+  --purple-700: #9f2caa;
+  --purple-800: #7f2387;
+  --purple-900: #5e1a64;
+  --purple-1000: #3e1142;
+
+  /* Constants */
+  --constant-empty: rgba(255,255,255,0);
+  --constant-fade: rgba(255,255,255,0.8);
+  --constant-overlay: rgba(96,116,151,0.6);
+
+  /* ===== ELEVATION / SHADOWS ===== */
+  --shadow-1: 0 1px 2px rgba(12,18,29,0.04);
+  --shadow-2: 0 2px 4px rgba(12,18,29,0.08);
+  --shadow-3: 0 4px 8px rgba(12,18,29,0.12);
+  --shadow-4: 0 8px 16px rgba(12,18,29,0.16);
+  --shadow-card: 1px 3px 4px -2px rgba(12,18,29,0.04), 2px 2px 4px 0px rgba(12,18,29,0.04);
+
+  /* ===== TYPOGRAPHY SCALE ===== */
+  --size-h1: 32px;
+  --size-h2: 24px;
+  --size-h3: 20px;
+  --size-h4: 16px;
+  --size-label: 14px;
+  --size-paragraph: 14px;
+  --size-note: 12px;
+  --size-inset: 10px;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --lh-h1: 36px;
+  --lh-h2: 27.4px;
+  --lh-h3: 22.8px;
+  --lh-h4: 18.2px;
+  --lh-body: 16px;
+  --lh-body-paragraph: 18.6px;
+  --lh-note: 13.7px;
+  --lh-note-paragraph: 16px;
+  --lh-inset: 11.4px;
+
+  /* ===== SPACING SCALE (Base 4) ===== */
+  --space-none: 0px;
+  --space-tiny: 2px;
+  --space-tight: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-std: 20px;
+  --space-double: 40px;
+  --space-gutter: 12px;
+  --space-gutter-compact: 8px;
+
+  /* ===== CORNER RADIUS ===== */
+  --radius-none: 0px;
+  --radius: 4px;              /* buttons, cards, fields */
+  --radius-graphics: 8px;
+  --radius-modals: 12px;
+  --radius-circular: 9999px;
+
+  /* ===== BREAKPOINTS ===== */
+  --screen-lg: 1920px;     /* Large: min 1461, max 1920 */
+  --screen-md: 1440px;     /* Medium: min 1025, max 1460 */
+  --screen-sm: 1024px;     /* Small: min 769, max 1024 */
+  --screen-tb: 768px;      /* Tablet Portrait: max 768 */
+
+  /* ===== ELEMENT SIZES ===== */
+  --dot-sm: 6px;
+  --dot-lg: 8px;
+  --avatar-sm: 20px;
+  --avatar-lg: 32px;
+
+  /* ===== TABLE TOKENS ===== */
+  --table-pad-left: 20px;
+  --table-pad-right: 12px;
+  --table-pad-left-mid: 12px;
+  --table-pad-right-last: 20px;
+
+  /* ===== SEMANTIC ALIASES (mapped to palette) ===== */
+  --text-strong: var(--neutral-1200);
+  --text-subtle: var(--neutral-800);
+  --text-muted: var(--neutral-600);
+  --surface-bg: var(--neutral-100);
+  --surface-card: var(--neutral-white);
+  --border-200: var(--neutral-300);
+  --border-card: var(--neutral-200);
+  --border-bg: var(--neutral-200);
+  --primary: var(--blue-700);
+  --primary-hover: var(--blue-800);
+  --toggle-active: var(--blue-700);
+  --toggle-inactive: var(--neutral-400);
+  --tab-bg: var(--neutral-200);
+  --tab-active-bg: #1a2138;
+  --tab-text: var(--neutral-800);
+  --tab-active-text: var(--neutral-white);
+  --sidebar-width: 260px;
+  --sidebar-collapsed: 60px;
+  --header-bg: #1a2138;
+
+  /* ===== INTERACTION STATE TOKENS ===== */
+  --hover-subtle: rgba(0,0,0,0.03);
+  --hover-default: rgba(0,0,0,0.06);
+  --focus-ring: 0 0 0 3px rgba(29,107,252,0.15);
+
+  /* ===== OVERLAY TOKENS ===== */
+  --overlay-heavy: rgba(12,18,29,0.45);
+  --overlay-medium: rgba(12,18,29,0.3);
+
+  /* ===== EXTENDED SHADOW TOKENS ===== */
+  --shadow-dropdown: 0 4px 16px rgba(12,18,29,0.12), 0 1px 4px rgba(12,18,29,0.08);
+  --shadow-modal: 0 8px 32px rgba(12,18,29,0.18);
+  --shadow-panel: -4px 0 24px rgba(12,18,29,0.12);
+  --shadow-toast: 0 4px 12px rgba(0,0,0,0.15);
+
+  /* ===== ADDITIONAL SEMANTIC ALIASES ===== */
+  --danger: var(--red-800);
+  --danger-hover: #b0002a;
+  --text-link: var(--blue-800);
+  --text-on-fill: var(--neutral-white);
+  --text-muted-accessible: #566479;
+  --surface-hover: var(--neutral-100);
+
+  /* ===== FEEDBACK COLORS (toasts, status dots) ===== */
+  --feedback-success: #34a853;
+  --feedback-warning: #e6a817;
+  --feedback-error: #ea4335;
+
+  /* ===== DS SEMANTIC COLOR TOKENS ===== */
+  --ds-neutral-100: var(--neutral-100);  --ds-neutral-text: var(--neutral-1200); --ds-neutral-700: var(--neutral-700);
+  --ds-inactive-100: var(--neutral-100); --ds-inactive-text: var(--neutral-600); --ds-inactive-700: var(--neutral-500);
+  --ds-secure-100: var(--green-100);     --ds-secure-text: var(--green-1200);    --ds-secure-700: var(--green-1000);   --ds-secure-fill: var(--green-1000);
+  --ds-success-100: var(--green-100);    --ds-success-text: var(--green-1200);   --ds-success-700: var(--green-800);   --ds-success-fill: var(--green-800);
+  --ds-accent-100: var(--blue-100);      --ds-accent-text: var(--blue-1000);     --ds-accent-700: var(--blue-700);     --ds-accent-fill: var(--blue-700);
+  --ds-guide-100: #ede8ff;               --ds-guide-text: #2d1a6e;              --ds-guide-700: var(--purple-700);    --ds-guide-fill: var(--purple-700);
+  --ds-alert-100: var(--red-100);        --ds-alert-text: var(--red-1000);       --ds-alert-700: var(--red-700);       --ds-alert-fill: var(--red-700);
+  --ds-warn-100: var(--orange-100);      --ds-warn-text: var(--orange-1000);     --ds-warn-700: var(--orange-700);     --ds-warn-fill: var(--orange-700);
+  --ds-caution-100: var(--yellow-100);   --ds-caution-text: var(--yellow-1000);  --ds-caution-700: var(--yellow-700);  --ds-caution-fill: var(--yellow-700);
+}
+
+/* ===== BASE BODY ===== */
+body {
+  font-family: var(--font);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-strong);
+  background: var(--surface-bg);
+  min-height: 100vh;
+}
+
+/* ===== DARK MODE — Variable Overrides Only ===== */
+[data-theme="dark"] {
+  /* Semantic aliases — remapped for dark */
+  --surface-bg: var(--neutral-1200);
+  --surface-card: var(--neutral-1100);
+  --header-bg: var(--neutral-1200);
+  --tab-bg: var(--neutral-1100);
+  --border-bg: var(--neutral-1100);
+  --border-200: var(--neutral-800);
+  --border-card: var(--neutral-900);
+  --text-strong: #ffffff;
+  --text-subtle: var(--neutral-500);
+  --text-muted: var(--neutral-600);
+  --primary: #4d8dff;
+  --primary-hover: #3a7df5;
+
+  /* Interaction states — dark */
+  --hover-subtle: rgba(255,255,255,0.04);
+  --hover-default: rgba(255,255,255,0.08);
+  --text-link: #6fa3ff;
+  --overlay-heavy: rgba(0,0,0,0.55);
+  --overlay-medium: rgba(0,0,0,0.4);
+  --surface-hover: rgba(255,255,255,0.03);
+
+  /* Extended shadows — dark */
+  --shadow-dropdown: 0 4px 16px rgba(0,0,0,0.24), 0 1px 4px rgba(0,0,0,0.16);
+  --shadow-modal: 0 8px 32px rgba(0,0,0,0.36);
+  --shadow-panel: -4px 0 24px rgba(0,0,0,0.24);
+  --shadow-toast: 0 4px 12px rgba(0,0,0,0.3);
+
+  /* Elevation — dark uses heavier shadows */
+  --shadow-card: 1px 3px 4px -2px rgba(0,0,0,0.16), 2px 2px 4px 0px rgba(0,0,0,0.12);
+  --shadow-1: 0 1px 2px rgba(0,0,0,0.16);
+  --shadow-2: 0 2px 4px rgba(0,0,0,0.20);
+  --shadow-3: 0 4px 8px rgba(0,0,0,0.24);
+  --shadow-4: 0 8px 16px rgba(0,0,0,0.32);
+
+  /* Semantic tag/badge tokens — dark */
+  --ds-neutral-100: var(--neutral-1000);  --ds-neutral-text: #ffffff;              --ds-neutral-700: var(--neutral-600);
+  --ds-inactive-100: var(--neutral-1000); --ds-inactive-text: var(--neutral-600);  --ds-inactive-700: var(--neutral-700);
+  --ds-secure-100: #003d2b;               --ds-secure-text: var(--green-200);      --ds-secure-700: var(--green-800);    --ds-secure-fill: var(--green-1000);
+  --ds-success-100: #003d2b;              --ds-success-text: var(--green-200);     --ds-success-700: var(--green-800);   --ds-success-fill: var(--green-1000);
+  --ds-accent-100: var(--blue-1000);      --ds-accent-text: var(--blue-200);       --ds-accent-700: #4d8dff;            --ds-accent-fill: var(--blue-1000);
+  --ds-guide-100: #1e1250;                --ds-guide-text: #c8b8ff;               --ds-guide-700: #a78bfa;             --ds-guide-fill: var(--purple-700);
+  --ds-alert-100: #4d0011;                --ds-alert-text: var(--red-200);         --ds-alert-700: #ff6b6b;             --ds-alert-fill: var(--red-1000);
+  --ds-warn-100: #4d1a00;                 --ds-warn-text: var(--orange-400);       --ds-warn-700: var(--orange-400);    --ds-warn-fill: var(--orange-1000);
+  --ds-caution-100: #3d3200;              --ds-caution-text: var(--yellow-200);    --ds-caution-700: var(--yellow-200); --ds-caution-fill: var(--yellow-1000);
+}
+
+[data-theme="dark"] body { background: var(--surface-bg); color: var(--text-subtle); }
