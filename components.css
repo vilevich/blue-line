@@ -2085,6 +2085,657 @@ select:focus { border-color: var(--primary); outline: none; }
 }
 [data-theme="dark"] .count-more { background: rgba(29,107,252,0.15); color: var(--blue-400); }
 
+
+/* ========================================================================
+   INFO BAR (Horizontal card with divided sections)
+   ======================================================================== */
+.info-bar {
+  display: flex;
+  background: var(--surface-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+.info-bar-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  flex: 1;
+}
+.info-bar-divider {
+  width: 1px;
+  background: var(--border-card);
+  align-self: stretch;
+}
+.info-bar-icon {
+  width: 64px;
+  height: 64px;
+  background: var(--neutral-100);
+  border-radius: var(--radius-graphics);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.info-bar-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.info-bar-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.3px;
+}
+.info-bar-value {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-strong);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+[data-theme="dark"] .info-bar-icon { background: var(--neutral-900); }
+[data-theme="dark"] .info-bar-divider { background: var(--border-card); }
+
+/* ========================================================================
+   BANNER (CTA / alert banner with icon, text, action links)
+   ======================================================================== */
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--blue-100);
+  border: 1px solid var(--blue-200);
+  border-radius: var(--radius);
+  padding: 12px 20px;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+.banner-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.banner-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--blue-200);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue-800);
+  flex-shrink: 0;
+}
+.banner-icon svg { width: 16px; height: 16px; }
+.banner-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.banner-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-strong);
+}
+.banner-desc {
+  font-size: 13px;
+  color: var(--text-subtle);
+}
+.banner-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.banner-link {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.banner-link:hover { text-decoration: underline; }
+.banner-sep {
+  width: 1px;
+  height: 16px;
+  background: var(--blue-300);
+}
+
+[data-theme="dark"] .banner { background: rgba(29,107,252,0.08); border-color: rgba(29,107,252,0.18); }
+[data-theme="dark"] .banner-icon { background: rgba(29,107,252,0.15); color: var(--blue-400); }
+[data-theme="dark"] .banner-sep { background: rgba(29,107,252,0.2); }
+
+/* ========================================================================
+   CHART DONUT (SVG donut with legend)
+   ======================================================================== */
+.chart-donut-group {
+  display: flex;
+  align-items: stretch;
+}
+.chart-donut {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+}
+.chart-donut-sep {
+  width: 1px;
+  background: var(--border-card);
+  align-self: stretch;
+}
+.chart-donut-svg {
+  width: 44px;
+  height: 44px;
+  transform: rotate(-90deg);
+  flex-shrink: 0;
+}
+.chart-donut-track { stroke: var(--neutral-100); }
+.chart-donut-seg { transition: stroke-dasharray 0.3s; }
+.chart-donut-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.chart-donut-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+.chart-donut-value {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+.chart-donut-num {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text-strong);
+}
+.chart-donut-delta {
+  font-size: 12px;
+  font-weight: 500;
+}
+.chart-legend-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+.chart-legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  flex-shrink: 0;
+}
+.chart-legend-label {
+  color: var(--text-subtle);
+  flex: 1;
+}
+.chart-legend-val {
+  color: var(--text-strong);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* --- Delta direction --- */
+.delta-pos { color: var(--ds-success-text); }
+.delta-neg { color: var(--ds-alert-text); }
+
+[data-theme="dark"] .chart-donut-track { stroke: var(--neutral-800); }
+[data-theme="dark"] .chart-donut-sep { background: var(--border-card); }
+
+/* ========================================================================
+   STAT CARD (KPI metric card with value, delta, legend, optional bar chart)
+   ======================================================================== */
+.stat-card-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.stat-card {
+  margin-bottom: 0 !important;
+  display: flex;
+  flex-direction: column;
+}
+.stat-card-body {
+  padding: 16px 20px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+.stat-card-total {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.stat-card-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+.stat-card-value {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--text-strong);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.stat-card-trend {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.stat-card-trend svg { width: 12px; height: 12px; }
+.stat-card-trend-up svg { color: var(--ds-success-text); }
+.stat-card-trend-down svg { color: var(--ds-alert-text); transform: rotate(180deg); }
+.stat-card-trend-text {
+  font-size: 12px;
+  color: var(--ds-success-text);
+  font-weight: 500;
+}
+.stat-card-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.stat-card-legend-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+}
+.stat-card-legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  flex-shrink: 0;
+}
+.stat-card-legend-label {
+  flex: 1;
+  color: var(--text-subtle);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.stat-card-legend-val {
+  color: var(--text-strong);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ========================================================================
+   CHART BAR (Simple category bar chart)
+   ======================================================================== */
+.chart-bar {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 72px;
+  border-top: 1px solid var(--neutral-100);
+  padding-top: 8px;
+  margin-top: 4px;
+}
+.chart-bar-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  height: 100%;
+}
+.chart-bar-label {
+  font-size: 9px;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+.chart-bar-fill {
+  width: 100%;
+  min-height: 2px;
+  border-radius: 2px 2px 0 0;
+  transition: height 0.3s;
+}
+.chart-bar-x-label {
+  font-size: 9px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+[data-theme="dark"] .chart-bar { border-color: var(--border-200); }
+
+/* ========================================================================
+   CHART STACKED (Stacked bar / trend chart with y-axis and legend)
+   ======================================================================== */
+.chart-stacked-legend {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.chart-stacked-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-subtle);
+  white-space: nowrap;
+}
+.chart-stacked-legend-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.chart-stacked-tabs {
+  display: flex;
+  border: 1px solid var(--border-200);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.chart-stacked-tab {
+  padding: 0 10px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-subtle);
+  cursor: pointer;
+  border-right: 1px solid var(--border-200);
+  display: inline-flex;
+  align-items: center;
+}
+.chart-stacked-tab:last-child { border-right: none; }
+.chart-stacked-tab:hover { background: var(--hover-subtle); color: var(--text-strong); }
+.chart-stacked-tab.active { background: var(--blue-100); color: var(--primary); }
+.chart-stacked-wrap {
+  display: flex;
+  align-items: stretch;
+  padding: 8px 20px 0;
+  height: 180px;
+}
+.chart-stacked-y-axis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 24px;
+  padding-right: 8px;
+  font-size: 10px;
+  color: var(--text-muted);
+  text-align: right;
+  flex-shrink: 0;
+  min-width: 32px;
+}
+.chart-stacked-area {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  border-left: 1px solid var(--neutral-100);
+  border-bottom: 1px solid var(--neutral-100);
+  padding: 0 12px;
+}
+.chart-stacked-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  height: 100%;
+}
+.chart-stacked-bar {
+  width: 100%;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: stretch;
+  gap: 1px;
+  max-height: 130px;
+  min-height: 0;
+  flex: 1;
+  justify-content: flex-start;
+}
+.chart-stacked-seg {
+  width: 100%;
+  min-height: 2px;
+  border-radius: 1px;
+  transition: height 0.3s;
+}
+.chart-stacked-x-label {
+  font-size: 10px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  padding-bottom: 4px;
+}
+
+[data-theme="dark"] .chart-stacked-area { border-color: var(--border-200); }
+[data-theme="dark"] .chart-stacked-tabs { border-color: var(--border-200); }
+[data-theme="dark"] .chart-stacked-tab { border-right-color: var(--border-200); }
+[data-theme="dark"] .chart-stacked-tab.active { background: rgba(29,107,252,0.12); color: var(--primary); }
+
+/* ========================================================================
+   PROGRESS RING (Circular SVG progress indicator with percentage label)
+   ======================================================================== */
+.progress-ring {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.progress-ring-svg {
+  width: 52px;
+  height: 52px;
+  transform: rotate(-90deg);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.progress-ring-track {
+  fill: none;
+  stroke: var(--neutral-100);
+  stroke-width: 4;
+}
+.progress-ring-fill {
+  fill: none;
+  stroke-width: 4;
+  stroke-linecap: round;
+  transition: stroke-dasharray 0.3s;
+}
+.progress-ring-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-strong);
+  position: relative;
+  z-index: 1;
+  line-height: 1;
+}
+
+[data-theme="dark"] .progress-ring-track { stroke: var(--neutral-800); }
+
+/* ========================================================================
+   CHART TREEMAP (Treemap visualization)
+   ======================================================================== */
+.chart-treemap {
+  flex: 1.4;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 16px;
+  min-width: 0;
+}
+.chart-treemap-row {
+  display: flex;
+  gap: 2px;
+  min-height: 0;
+}
+.chart-treemap-cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 6px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  overflow: hidden;
+  min-width: 0;
+}
+.chart-treemap-cell:hover { opacity: 0.85; }
+.chart-treemap-name {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.9);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+}
+.chart-treemap-count {
+  font-size: 10px;
+  color: rgba(255,255,255,0.65);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ========================================================================
+   CHART LEGEND PANEL (Side legend with bars, for use with treemaps etc.)
+   ======================================================================== */
+.chart-legend-panel {
+  flex: 1;
+  border-left: 1px solid var(--border-card);
+  display: flex;
+  flex-direction: column;
+  padding: 16px 20px;
+  min-width: 0;
+}
+.chart-legend-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--neutral-100);
+}
+.chart-legend-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-strong);
+}
+.chart-legend-total {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--primary);
+}
+.chart-legend-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.chart-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.chart-legend-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.chart-legend-icon svg { width: 14px; height: 14px; }
+.chart-legend-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.chart-legend-name {
+  font-size: 12px;
+  color: var(--text-subtle);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.chart-legend-bar-wrap {
+  height: 4px;
+  background: var(--neutral-100);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.chart-legend-bar {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s;
+}
+.chart-legend-value {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-strong);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .chart-legend-panel { border-left-color: var(--border-card); }
+[data-theme="dark"] .chart-legend-header { border-bottom-color: var(--border-200); }
+[data-theme="dark"] .chart-legend-bar-wrap { background: var(--neutral-800); }
+
+/* ========================================================================
+   TAG EXTENSIONS (Status variants for the existing .tag component)
+   ======================================================================== */
+.tag-running   { background: var(--blue-100);  color: var(--blue-800); }
+.tag-cancelled { background: var(--red-100);   color: var(--red-800); }
+
+[data-theme="dark"] .tag-running   { background: rgba(29,107,252,0.15);  color: var(--blue-400); }
+[data-theme="dark"] .tag-cancelled { background: rgba(212,0,49,0.15);    color: var(--red-400); }
+
+/* ========================================================================
+   RESPONSIVE (Chart-specific breakpoints)
+   ======================================================================== */
+@media (max-width: 1200px) {
+  .stat-card-row { grid-template-columns: repeat(2, 1fr); }
+  .stat-card-row .stat-card:last-child { grid-column: span 2; }
+}
+
+@media (max-width: 900px) {
+  .chart-donut-group { flex-direction: column; }
+  .chart-donut-sep { width: auto; height: 1px; }
+  .info-bar { flex-direction: column; }
+  .info-bar-divider { width: auto; height: 1px; }
+  .stat-card-row { grid-template-columns: 1fr; }
+  .stat-card-row .stat-card:last-child { grid-column: span 1; }
+  .chart-legend-panel { border-left: none; border-top: 1px solid var(--border-card); }
+}
+
+@media (max-width: 600px) {
+  .chart-stacked-wrap { height: 140px; }
+  .chart-stacked-tabs { display: none; }
+  .chart-stacked-legend { flex-wrap: wrap; gap: 8px; }
+}
+
 /* ========================================================================
    RESPONSIVE BREAKPOINTS
    ======================================================================== */
