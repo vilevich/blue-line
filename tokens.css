@@ -242,6 +242,7 @@
   /* ===== FEEDBACK COLORS (toasts, status dots) ===== */
   --feedback-success: #34a853;
   --feedback-warning: #e6a817;
+  --feedback-warning-text: #8a6400; /* WCAG: passes 4.5:1 on white, use for warning foreground text */
   --feedback-error: #ea4335;
 
   /* ===== DS SEMANTIC COLOR TOKENS ===== */
@@ -279,6 +280,7 @@ body {
   --text-strong: #ffffff;
   --text-subtle: var(--neutral-500);
   --text-muted: var(--neutral-600);
+  --text-muted-accessible: #7b8da6; /* WCAG: passes 4.5:1 on dark surfaces */
   --primary: #4d8dff;
   --primary-hover: #3a7df5;
 

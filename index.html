@@ -16,6 +16,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="icons.css">
+  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
   <style>
 body { font-family: var(--font); background: var(--surface-bg); color: var(--text-strong); }
 
@@ -114,6 +116,63 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
 .ds-preview .avatar-dropdown { position: static; opacity: 1; pointer-events: auto; display: flex; }
 .ds-preview .notif-dropdown { position: static; opacity: 1; pointer-events: auto; display: flex; max-width: 380px; }
 .ds-preview .advanced-filters-panel { position: static; transform: none; height: auto; max-height: 400px; overflow: hidden; width: 360px; }
+
+/* ===== COMPONENT BLOCK WITH TABS ===== */
+.ds-component-block { margin-bottom: 24px; border: 1px solid var(--border-200); border-radius: 8px; overflow: hidden; }
+.ds-component-block .ds-preview { border: none; border-radius: 0; }
+.ds-component-block .ds-code { border: none; border-radius: 0; margin-bottom: 0; border-top: 1px solid var(--border-200); }
+
+.ds-tabs-bar {
+  display: flex; gap: 0; border-bottom: 1px solid var(--border-200);
+  background: var(--surface-card); padding: 0 4px;
+}
+.ds-tabs-bar button {
+  padding: 10px 16px; font-size: 13px; font-weight: 500; font-family: var(--font);
+  background: none; border: none; border-bottom: 2px solid transparent;
+  color: var(--text-muted); cursor: pointer; margin-bottom: -1px;
+}
+.ds-tabs-bar button:hover { color: var(--text-strong); }
+.ds-tabs-bar button.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+/* ===== USAGE GUIDELINES ===== */
+.ds-guideline {
+  padding: 12px 16px; border-left: 3px solid var(--blue-400); border-radius: 0 6px 6px 0;
+  background: var(--blue-100); font-size: 13px; line-height: 1.6; color: var(--text-subtle);
+  margin-bottom: 16px;
+}
+[data-theme="dark"] .ds-guideline { background: rgba(29,107,252,0.08); }
+.ds-guideline code { font-family: 'SF Mono', Consolas, monospace; font-size: 12px; background: rgba(0,0,0,0.06); padding: 1px 5px; border-radius: 3px; }
+[data-theme="dark"] .ds-guideline code { background: rgba(255,255,255,0.08); }
+.ds-do { border-left-color: var(--green-800); background: var(--green-100); }
+[data-theme="dark"] .ds-do { background: rgba(0,218,153,0.08); }
+.ds-dont { border-left-color: var(--red-700); background: var(--red-100); }
+[data-theme="dark"] .ds-dont { background: rgba(255,0,61,0.08); }
+
+/* ===== PRISM OVERRIDES ===== */
+.ds-code pre[class*="language-"] { background: #1e293b; margin: 0; padding: 16px 20px; border-radius: 0; font-size: 12.5px; line-height: 1.6; }
+.ds-code code[class*="language-"] { font-family: 'SF Mono', Consolas, monospace; font-size: 12.5px; text-shadow: none; }
+[data-theme="dark"] .ds-code pre[class*="language-"] { background: #0f172a; }
+
+/* ===== ICON GRID ===== */
+.ds-icon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; }
+.ds-icon-cell {
+  display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 16px 8px;
+  border: 1px solid var(--border-card); border-radius: 6px; text-align: center;
+}
+.ds-icon-cell:hover { border-color: var(--primary); background: var(--blue-100); }
+[data-theme="dark"] .ds-icon-cell:hover { background: rgba(29,107,252,0.08); }
+.ds-icon-cell .icon { color: var(--text-subtle); }
+.ds-icon-cell span:last-child { font-size: 11px; color: var(--text-muted); font-family: 'SF Mono', Consolas, monospace; }
+
+/* ===== SIDEBAR FOOTER ===== */
+.ds-sidebar-footer {
+  padding: 16px 20px; border-top: 1px solid var(--border-card); margin-top: 8px;
+  font-size: 12px; color: var(--text-muted);
+}
+.ds-sidebar-footer a { color: var(--primary); text-decoration: none; }
+.ds-sidebar-footer a:hover { text-decoration: underline; }
+
+html { scroll-behavior: smooth; }
   </style>
 </head>
 <body>
@@ -131,6 +190,7 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
     <h4 class="ds-sidebar-group-title">Getting Started</h4>
     <a class="ds-sidebar-link active" href="#overview">Overview</a>
     <a class="ds-sidebar-link" href="#tokens">Design Tokens</a>
+    <a class="ds-sidebar-link" href="#icons">Icons</a>
   </div>
   <div class="ds-sidebar-group">
     <h4 class="ds-sidebar-group-title">General</h4>
@@ -177,6 +237,15 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
     <a class="ds-sidebar-link" href="#toggles">Toggles</a>
     <a class="ds-sidebar-link" href="#miscellaneous">Miscellaneous</a>
   </div>
+  <div class="ds-sidebar-group">
+    <h4 class="ds-sidebar-group-title">Foundation</h4>
+    <a class="ds-sidebar-link" href="#accessibility">Accessibility</a>
+    <a class="ds-sidebar-link" href="#responsive">Responsive</a>
+  </div>
+  <div class="ds-sidebar-footer">
+    Blue Line v2.2.2<br>
+    <a href="https://github.com/vilevich/blue-line" target="_blank">View on GitHub</a>
+  </div>
 </nav>
 
 <main class="ds-main">
@@ -186,21 +255,76 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
      ============================================================ -->
 <section id="overview" class="ds-section">
   <h2 class="ds-section-title">Blue Line Design System</h2>
-  <p class="ds-section-desc">Design tokens and component library for MetaDefender Storage Security. Extracted from Figma Blue Line 2.2.2.</p>
+  <p class="ds-section-desc">OPSWAT's shared design system — tokens, components, and icons for building consistent product UIs. Based on Figma Blue Line 2.2.2.</p>
+
+  <div class="ds-preview-row" style="gap:24px; margin-bottom:24px;">
+    <div style="text-align:center; padding:12px 20px; border:1px solid var(--border-card); border-radius:6px; flex:1;">
+      <div style="font-size:24px; font-weight:500; color:var(--primary);">8</div>
+      <div style="font-size:12px; color:var(--text-muted);">Color Palettes</div>
+    </div>
+    <div style="text-align:center; padding:12px 20px; border:1px solid var(--border-card); border-radius:6px; flex:1;">
+      <div style="font-size:24px; font-weight:500; color:var(--primary);">27+</div>
+      <div style="font-size:12px; color:var(--text-muted);">Components</div>
+    </div>
+    <div style="text-align:center; padding:12px 20px; border:1px solid var(--border-card); border-radius:6px; flex:1;">
+      <div style="font-size:24px; font-weight:500; color:var(--primary);">15</div>
+      <div style="font-size:12px; color:var(--text-muted);">Icons</div>
+    </div>
+    <div style="text-align:center; padding:12px 20px; border:1px solid var(--border-card); border-radius:6px; flex:1;">
+      <div style="font-size:24px; font-weight:500; color:var(--primary);">4</div>
+      <div style="font-size:12px; color:var(--text-muted);">Breakpoints</div>
+    </div>
+  </div>
 
   <div class="ds-subsection">
-    <p class="ds-label">Quick Start</p>
-    <div class="ds-preview">
-      <div class="ds-preview-col" style="gap:4px; font-size:14px; color:var(--text-subtle);">
-        <p>Import the Google Font, tokens, and components CSS files to get started:</p>
-      </div>
-    </div>
+    <p class="ds-label">Installation</p>
+    <p style="font-size:14px; color:var(--text-subtle); margin-bottom:12px;">Add these links to your HTML <code style="font-family:'SF Mono',Consolas,monospace; font-size:12.5px; background:var(--blue-100); color:var(--blue-900); padding:1px 6px; border-radius:3px;">&lt;head&gt;</code> to get started:</p>
     <div class="ds-code">
       <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet"&gt;
-&lt;link rel="stylesheet" href="design-system/tokens.css"&gt;
-&lt;link rel="stylesheet" href="design-system/components.css"&gt;</code></pre>
+      <pre><code class="language-html">&lt;link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet"&gt;
+&lt;link rel="stylesheet" href="https://vilevich.github.io/blue-line/tokens.css"&gt;
+&lt;link rel="stylesheet" href="https://vilevich.github.io/blue-line/components.css"&gt;
+&lt;link rel="stylesheet" href="https://vilevich.github.io/blue-line/icons.css"&gt;</code></pre>
     </div>
+  </div>
+
+  <div class="ds-subsection">
+    <p class="ds-label">File Structure</p>
+    <table class="ds-table">
+      <thead><tr><th>File</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><code>tokens.css</code></td><td>CSS custom properties, @font-face, dark mode variable overrides, body base styles</td></tr>
+        <tr><td><code>components.css</code></td><td>All reusable component styles with colocated dark mode overrides</td></tr>
+        <tr><td><code>icons.css</code></td><td>SVG icons as CSS mask-images — inherit color from parent via currentColor</td></tr>
+        <tr><td><code>tokens.json</code></td><td>Structured design tokens for Style Dictionary, Figma Tokens, etc.</td></tr>
+      </tbody>
+    </table>
+    <div class="ds-guideline">Load order matters: <code>tokens.css</code> first, then <code>components.css</code>, then <code>icons.css</code>. Product-specific styles go in an inline <code>&lt;style&gt;</code> block after the DS links.</div>
+  </div>
+
+  <div class="ds-subsection">
+    <p class="ds-label">Dark Mode</p>
+    <p style="font-size:14px; color:var(--text-subtle); margin-bottom:12px;">Set <code style="font-family:'SF Mono',Consolas,monospace; font-size:12.5px; background:var(--blue-100); color:var(--blue-900); padding:1px 6px; border-radius:3px;">data-theme="dark"</code> on the <code style="font-family:'SF Mono',Consolas,monospace; font-size:12.5px; background:var(--blue-100); color:var(--blue-900); padding:1px 6px; border-radius:3px;">&lt;html&gt;</code> element. All tokens and components auto-adapt.</p>
+    <div class="ds-code">
+      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+      <pre><code class="language-html">&lt;!-- Toggle dark mode --&gt;
+&lt;html data-theme="dark"&gt;</code></pre>
+    </div>
+  </div>
+
+  <div class="ds-subsection">
+    <p class="ds-label">Naming Conventions</p>
+    <table class="ds-table">
+      <thead><tr><th>Pattern</th><th>Examples</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td><code>.btn-*</code></td><td><code>btn-primary</code>, <code>btn-outline</code>, <code>btn-danger</code></td><td>Buttons</td></tr>
+        <tr><td><code>.tag-*</code></td><td><code>tag-success</code>, <code>tag-alert</code>, <code>tag-warn</code></td><td>Status tags (read-only)</td></tr>
+        <tr><td><code>.chip-*</code></td><td><code>chip-accent</code>, <code>chip-selected</code></td><td>Interactive chips</td></tr>
+        <tr><td><code>.severity-*</code></td><td><code>severity-critical</code>, <code>severity-high</code></td><td>Severity indicators</td></tr>
+        <tr><td><code>.verdict-*</code></td><td><code>verdict-detected</code>, <code>verdict-secure</code></td><td>Scan verdicts</td></tr>
+        <tr><td><code>.icon-*</code></td><td><code>icon-search</code>, <code>icon-close</code>, <code>icon-edit</code></td><td>SVG icons</td></tr>
+      </tbody>
+    </table>
   </div>
 </section>
 
@@ -385,83 +509,259 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
 </section>
 
 <!-- ============================================================
+     ICONS
+     ============================================================ -->
+<section id="icons" class="ds-section">
+  <h2 class="ds-section-title">Icons</h2>
+  <p class="ds-section-desc">15 SVG icons rendered as CSS mask-images. Icons inherit color from the parent element via <code style="font-family:'SF Mono',Consolas,monospace; font-size:12.5px; background:var(--blue-100); color:var(--blue-900); padding:1px 6px; border-radius:3px;">currentColor</code>.</p>
+
+  <div class="ds-subsection">
+    <p class="ds-label">Icon Library</p>
+    <div class="ds-icon-grid">
+      <div class="ds-icon-cell"><span class="icon icon-chevron-down icon-lg"></span><span>icon-chevron-down</span></div>
+      <div class="ds-icon-cell"><span class="icon icon-chevron-up icon-lg"></span><span>icon-chevron-up</span></div>
+      <div class="ds-icon-cell"><span class="icon icon-chevron-left icon-lg"></span><span>icon-chevron-left</span></div>
+      <div class="ds-icon-cell"><span class="icon icon-chevron-right icon-lg"></span><span>icon-chevron-right</span></div>
+      <div class="ds-icon-cell"><span class="icon icon-filter icon-lg"></span><span>icon-filter</span></div>
+      <div class="ds-icon-cell"><span class="icon icon-search icon-lg"></span><span>icon-search</span></div>
+      <div class="ds-icon-cell"><span class="icon icon-action icon-lg"></span><span>icon-action</span></div>
+      <div class="ds-icon-cell"><span class="icon icon-add icon-lg"></span><span>icon-add</span></div>
+      <div class="ds-icon-cell"><span class="icon icon-check icon-lg"></span><span>icon-check</span></div>
+      <div class="ds-icon-cell"><span class="icon icon-minus icon-lg"></span><span>icon-minus</span></div>
+      <div class="ds-icon-cell"><span class="icon icon-edit icon-lg"></span><span>icon-edit</span></div>
+      <div class="ds-icon-cell"><span class="icon icon-control-h icon-lg"></span><span>icon-control-h</span></div>
+      <div class="ds-icon-cell"><span class="icon icon-control-v icon-lg"></span><span>icon-control-v</span></div>
+      <div class="ds-icon-cell"><span class="icon icon-close icon-lg"></span><span>icon-close</span></div>
+      <div class="ds-icon-cell"><span class="icon icon-drag-v icon-lg"></span><span>icon-drag-v</span></div>
+    </div>
+  </div>
+
+  <div class="ds-subsection">
+    <p class="ds-label">Sizes</p>
+    <div class="ds-component-block" id="block-icon-sizes">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-icon-sizes')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-icon-sizes')">Code</button>
+      </div>
+      <div class="ds-preview">
+        <div class="ds-preview-row" style="gap:24px;">
+          <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+            <span class="icon icon-search icon-sm" style="color:var(--text-subtle);"></span>
+            <span style="font-size:11px; color:var(--text-muted);">.icon-sm (12px)</span>
+          </div>
+          <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+            <span class="icon icon-search icon-md" style="color:var(--text-subtle);"></span>
+            <span style="font-size:11px; color:var(--text-muted);">.icon-md (16px)</span>
+          </div>
+          <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+            <span class="icon icon-search icon-lg" style="color:var(--text-subtle);"></span>
+            <span style="font-size:11px; color:var(--text-muted);">.icon-lg (20px)</span>
+          </div>
+          <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+            <span class="icon icon-search icon-xl" style="color:var(--text-subtle);"></span>
+            <span style="font-size:11px; color:var(--text-muted);">.icon-xl (24px)</span>
+          </div>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;span class="icon icon-search icon-sm"&gt;&lt;/span&gt;  &lt;!-- 12px --&gt;
+&lt;span class="icon icon-search icon-md"&gt;&lt;/span&gt;  &lt;!-- 16px (default) --&gt;
+&lt;span class="icon icon-search icon-lg"&gt;&lt;/span&gt;  &lt;!-- 20px --&gt;
+&lt;span class="icon icon-search icon-xl"&gt;&lt;/span&gt;  &lt;!-- 24px --&gt;</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-subsection">
+    <p class="ds-label">Icons in Buttons</p>
+    <div class="ds-component-block" id="block-icon-buttons">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-icon-buttons')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-icon-buttons')">Code</button>
+      </div>
+      <div class="ds-preview">
+        <div class="ds-preview-row">
+          <button class="btn-primary" style="display:inline-flex; align-items:center; gap:6px;"><span class="icon icon-add" style="color:#fff;"></span> Add Item</button>
+          <button class="btn-outline" style="display:inline-flex; align-items:center; gap:6px;"><span class="icon icon-filter"></span> Filters</button>
+          <button class="btn-icon"><span class="icon icon-close"></span></button>
+          <button class="btn-icon"><span class="icon icon-edit"></span></button>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;button class="btn-primary"&gt;
+  &lt;span class="icon icon-add"&gt;&lt;/span&gt; Add Item
+&lt;/button&gt;
+
+&lt;button class="btn-outline"&gt;
+  &lt;span class="icon icon-filter"&gt;&lt;/span&gt; Filters
+&lt;/button&gt;
+
+&lt;button class="btn-icon"&gt;
+  &lt;span class="icon icon-close"&gt;&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-subsection">
+    <p class="ds-label">Color Inheritance</p>
+    <div class="ds-component-block" id="block-icon-colors">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-icon-colors')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-icon-colors')">Code</button>
+      </div>
+      <div class="ds-preview">
+        <div class="ds-preview-row" style="gap:24px;">
+          <span class="icon icon-check icon-lg" style="color:var(--green-800);"></span>
+          <span class="icon icon-close icon-lg" style="color:var(--red-700);"></span>
+          <span class="icon icon-edit icon-lg" style="color:var(--primary);"></span>
+          <span class="icon icon-filter icon-lg" style="color:var(--orange-700);"></span>
+          <span class="icon icon-search icon-lg" style="color:var(--text-muted);"></span>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;!-- Icons inherit color from the parent or inline style --&gt;
+&lt;span class="icon icon-check" style="color: var(--green-800);"&gt;&lt;/span&gt;
+&lt;span class="icon icon-close" style="color: var(--red-700);"&gt;&lt;/span&gt;
+&lt;span class="icon icon-edit"  style="color: var(--primary);"&gt;&lt;/span&gt;</code></pre>
+      </div>
+    </div>
+    <div class="ds-guideline">Icons use <code>mask-image</code> with <code>currentColor</code>, so they automatically match the text color of their parent element. No need to set color explicitly in most cases.</div>
+  </div>
+
+  <div class="ds-subsection">
+    <p class="ds-label">Class Reference</p>
+    <table class="ds-table">
+      <thead><tr><th>Class</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>.icon</code></td><td>Base icon class (required). Default size: 16x16px.</td></tr>
+        <tr><td><code>.icon-sm</code></td><td>Small: 12x12px</td></tr>
+        <tr><td><code>.icon-md</code></td><td>Medium: 16x16px (same as default)</td></tr>
+        <tr><td><code>.icon-lg</code></td><td>Large: 20x20px</td></tr>
+        <tr><td><code>.icon-xl</code></td><td>Extra-large: 24x24px</td></tr>
+        <tr><td><code>.icon-chevron-*</code></td><td>Directional chevrons (down, up, left, right)</td></tr>
+        <tr><td><code>.icon-filter</code></td><td>Three horizontal lines (filter/sort)</td></tr>
+        <tr><td><code>.icon-search</code></td><td>Magnifying glass</td></tr>
+        <tr><td><code>.icon-action</code></td><td>Three horizontal dots (more actions)</td></tr>
+        <tr><td><code>.icon-add</code></td><td>Plus sign</td></tr>
+        <tr><td><code>.icon-check</code></td><td>Checkmark</td></tr>
+        <tr><td><code>.icon-minus</code></td><td>Minus / indeterminate</td></tr>
+        <tr><td><code>.icon-edit</code></td><td>Pencil</td></tr>
+        <tr><td><code>.icon-control-h</code></td><td>Horizontal sliders</td></tr>
+        <tr><td><code>.icon-control-v</code></td><td>Vertical sliders</td></tr>
+        <tr><td><code>.icon-close</code></td><td>X / close</td></tr>
+        <tr><td><code>.icon-drag-v</code></td><td>Six-dot vertical grip (drag handle)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============================================================
      BUTTONS
      ============================================================ -->
 <section id="buttons" class="ds-section">
   <h2 class="ds-section-title">Buttons</h2>
   <p class="ds-section-desc">Action triggers in multiple styles: primary, outline, text, brand gradient, icon-only, and danger variants.</p>
 
+  <div class="ds-guideline">Use <code>.btn-primary</code> for the main CTA — limit to one per section. Use <code>.btn-outline</code> for secondary actions. Use <code>.btn-danger</code> only for destructive actions (delete, remove).</div>
+
   <div class="ds-subsection">
     <p class="ds-label">All Variants</p>
-    <div class="ds-preview">
-      <div class="ds-preview-row">
-        <button class="btn-primary">Primary</button>
-        <button class="btn-outline">Outline</button>
-        <button class="btn-text">Text</button>
-        <button class="btn-brand">Brand</button>
-        <button class="btn-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="2" fill="none"/></svg></button>
-        <button class="btn-danger">Danger</button>
+    <div class="ds-component-block" id="block-btn-variants">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-btn-variants')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-btn-variants')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;button class="btn-primary"&gt;Primary&lt;/button&gt;
+      <div class="ds-preview">
+        <div class="ds-preview-row">
+          <button class="btn-primary">Primary</button>
+          <button class="btn-outline">Outline</button>
+          <button class="btn-text">Text</button>
+          <button class="btn-brand">Brand</button>
+          <button class="btn-icon"><span class="icon icon-add"></span></button>
+          <button class="btn-danger">Danger</button>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;button class="btn-primary"&gt;Primary&lt;/button&gt;
 &lt;button class="btn-outline"&gt;Outline&lt;/button&gt;
 &lt;button class="btn-text"&gt;Text&lt;/button&gt;
 &lt;button class="btn-brand"&gt;Brand&lt;/button&gt;
-&lt;button class="btn-icon"&gt;&lt;svg ...&gt;&lt;/svg&gt;&lt;/button&gt;
+&lt;button class="btn-icon"&gt;&lt;span class="icon icon-add"&gt;&lt;/span&gt;&lt;/button&gt;
 &lt;button class="btn-danger"&gt;Danger&lt;/button&gt;</code></pre>
+      </div>
     </div>
   </div>
 
   <div class="ds-subsection">
     <p class="ds-label">Danger Variants</p>
-    <div class="ds-preview">
-      <div class="ds-preview-row">
-        <button class="btn-danger">Danger</button>
-        <button class="btn-outline danger">Outline Danger</button>
-        <button class="btn-text danger">Text Danger</button>
+    <div class="ds-component-block" id="block-btn-danger">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-btn-danger')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-btn-danger')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;button class="btn-danger"&gt;Danger&lt;/button&gt;
+      <div class="ds-preview">
+        <div class="ds-preview-row">
+          <button class="btn-danger">Danger</button>
+          <button class="btn-outline danger">Outline Danger</button>
+          <button class="btn-text danger">Text Danger</button>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;button class="btn-danger"&gt;Danger&lt;/button&gt;
 &lt;button class="btn-outline danger"&gt;Outline Danger&lt;/button&gt;
 &lt;button class="btn-text danger"&gt;Text Danger&lt;/button&gt;</code></pre>
+      </div>
     </div>
   </div>
 
   <div class="ds-subsection">
     <p class="ds-label">States</p>
-    <div class="ds-preview">
-      <div class="ds-preview-row">
-        <button class="btn-primary" disabled>Disabled</button>
-        <button class="btn-primary btn-loading">Loading</button>
-        <button class="btn-outline" disabled>Disabled</button>
-        <button class="btn-outline btn-loading">Loading</button>
+    <div class="ds-component-block" id="block-btn-states">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-btn-states')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-btn-states')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;button class="btn-primary" disabled&gt;Disabled&lt;/button&gt;
-&lt;button class="btn-primary btn-loading"&gt;Loading&lt;/button&gt;</code></pre>
+      <div class="ds-preview">
+        <div class="ds-preview-row">
+          <button class="btn-primary" disabled>Disabled</button>
+          <button class="btn-primary btn-loading">Loading</button>
+          <button class="btn-outline" disabled>Disabled</button>
+          <button class="btn-outline btn-loading">Loading</button>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;button class="btn-primary" disabled&gt;Disabled&lt;/button&gt;
+&lt;button class="btn-primary btn-loading"&gt;Loading&lt;/button&gt;
+&lt;button class="btn-outline" disabled&gt;Disabled&lt;/button&gt;
+&lt;button class="btn-outline btn-loading"&gt;Loading&lt;/button&gt;</code></pre>
+      </div>
     </div>
   </div>
 
-  <table class="ds-table">
-    <thead><tr><th>Class</th><th>Description</th></tr></thead>
-    <tbody>
-      <tr><td><code>.btn-primary</code></td><td>Solid blue primary action button</td></tr>
-      <tr><td><code>.btn-outline</code></td><td>Bordered secondary action button</td></tr>
-      <tr><td><code>.btn-text</code></td><td>Borderless tertiary text button</td></tr>
-      <tr><td><code>.btn-brand</code></td><td>Gradient branded action button</td></tr>
-      <tr><td><code>.btn-icon</code></td><td>Square icon-only button (32x32)</td></tr>
-      <tr><td><code>.btn-danger</code></td><td>Solid red destructive action button</td></tr>
-      <tr><td><code>.danger</code></td><td>Modifier for outline/text danger variants</td></tr>
-      <tr><td><code>.btn-loading</code></td><td>Shows spinner, hides text, disables pointer</td></tr>
-      <tr><td><code>disabled</code></td><td>HTML attribute; applies 40% opacity</td></tr>
-    </tbody>
-  </table>
+  <div class="ds-subsection">
+    <p class="ds-label">Class Reference</p>
+    <table class="ds-table">
+      <thead><tr><th>Class</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>.btn-primary</code></td><td>Solid blue primary action button</td></tr>
+        <tr><td><code>.btn-outline</code></td><td>Bordered secondary action button</td></tr>
+        <tr><td><code>.btn-text</code></td><td>Borderless tertiary text button</td></tr>
+        <tr><td><code>.btn-brand</code></td><td>Gradient branded action button</td></tr>
+        <tr><td><code>.btn-icon</code></td><td>Square icon-only button (32x32)</td></tr>
+        <tr><td><code>.btn-danger</code></td><td>Solid red destructive action button</td></tr>
+        <tr><td><code>.danger</code></td><td>Modifier for outline/text danger variants</td></tr>
+        <tr><td><code>.btn-loading</code></td><td>Shows spinner, hides text, disables pointer</td></tr>
+        <tr><td><code>disabled</code></td><td>HTML attribute; applies 40% opacity</td></tr>
+      </tbody>
+    </table>
+  </div>
 </section>
 
 <!-- ============================================================
@@ -471,64 +771,89 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
   <h2 class="ds-section-title">Forms</h2>
   <p class="ds-section-desc">Input fields, select dropdowns, toggles, radios, file uploads, and form layout rows.</p>
 
+  <div class="ds-guideline">Use <code>.form-row</code> for horizontal label-field alignment. On screens &lt;= 1024px, form rows automatically stack vertically.</div>
+
   <div class="ds-subsection">
     <p class="ds-label">Input Field</p>
-    <div class="ds-preview">
-      <div class="ds-preview-col" style="max-width:340px;">
-        <div class="input-field"><input type="text" placeholder="Enter value"></div>
+    <div class="ds-component-block" id="block-forms-input">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-forms-input')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-forms-input')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;div class="input-field"&gt;
+      <div class="ds-preview">
+        <div class="ds-preview-col" style="max-width:340px;">
+          <div class="input-field"><input type="text" placeholder="Enter value"></div>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;div class="input-field"&gt;
   &lt;input type="text" placeholder="Enter value"&gt;
 &lt;/div&gt;</code></pre>
+      </div>
     </div>
   </div>
 
   <div class="ds-subsection">
     <p class="ds-label">Select Field</p>
-    <div class="ds-preview">
-      <div class="ds-preview-col" style="max-width:340px;">
-        <select><option>Option 1</option><option>Option 2</option><option>Option 3</option></select>
+    <div class="ds-component-block" id="block-forms-select">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-forms-select')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-forms-select')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;select&gt;
+      <div class="ds-preview">
+        <div class="ds-preview-col" style="max-width:340px;">
+          <select><option>Option 1</option><option>Option 2</option><option>Option 3</option></select>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;select&gt;
   &lt;option&gt;Option 1&lt;/option&gt;
   &lt;option&gt;Option 2&lt;/option&gt;
 &lt;/select&gt;</code></pre>
+      </div>
     </div>
   </div>
 
   <div class="ds-subsection">
     <p class="ds-label">Toggle Switch</p>
-    <div class="ds-preview">
-      <div class="ds-preview-row">
-        <div class="toggle-switch active" onclick="this.classList.toggle('active')"><div class="toggle-thumb"></div></div>
-        <div class="toggle-switch" onclick="this.classList.toggle('active')"><div class="toggle-thumb"></div></div>
+    <div class="ds-component-block" id="block-forms-toggle">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-forms-toggle')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-forms-toggle')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;div class="toggle-switch active" onclick="this.classList.toggle('active')"&gt;
+      <div class="ds-preview">
+        <div class="ds-preview-row">
+          <div class="toggle-switch active" onclick="this.classList.toggle('active')"><div class="toggle-thumb"></div></div>
+          <div class="toggle-switch" onclick="this.classList.toggle('active')"><div class="toggle-thumb"></div></div>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;div class="toggle-switch active" onclick="this.classList.toggle('active')"&gt;
   &lt;div class="toggle-thumb"&gt;&lt;/div&gt;
 &lt;/div&gt;</code></pre>
+      </div>
     </div>
   </div>
 
   <div class="ds-subsection">
     <p class="ds-label">Radio Group</p>
-    <div class="ds-preview">
-      <div class="radio-group">
-        <label class="radio-option"><span class="radio-circle"></span><span class="radio-label">Option A</span></label>
-        <label class="radio-option selected"><span class="radio-circle" style="border-color:var(--primary);"></span><span class="radio-label">Option B</span></label>
+    <div class="ds-component-block" id="block-forms-radio">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-forms-radio')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-forms-radio')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;div class="radio-group"&gt;
+      <div class="ds-preview">
+        <div class="radio-group">
+          <label class="radio-option"><span class="radio-circle"></span><span class="radio-label">Option A</span></label>
+          <label class="radio-option selected"><span class="radio-circle" style="border-color:var(--primary);"></span><span class="radio-label">Option B</span></label>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;div class="radio-group"&gt;
   &lt;label class="radio-option"&gt;
     &lt;span class="radio-circle"&gt;&lt;/span&gt;
     &lt;span class="radio-label"&gt;Option A&lt;/span&gt;
@@ -538,37 +863,50 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
     &lt;span class="radio-label"&gt;Option B&lt;/span&gt;
   &lt;/label&gt;
 &lt;/div&gt;</code></pre>
+      </div>
     </div>
   </div>
 
   <div class="ds-subsection">
     <p class="ds-label">File Upload</p>
-    <div class="ds-preview">
-      <div class="file-upload-field"><span class="file-upload-icon">&#128193;</span><span class="file-upload-text">Click to browse</span></div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;div class="file-upload-field"&gt;
+    <div class="ds-component-block" id="block-forms-file">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-forms-file')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-forms-file')">Code</button>
+      </div>
+      <div class="ds-preview">
+        <div class="file-upload-field"><span class="file-upload-icon">&#128193;</span><span class="file-upload-text">Click to browse</span></div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;div class="file-upload-field"&gt;
   &lt;span class="file-upload-icon"&gt;&#128193;&lt;/span&gt;
   &lt;span class="file-upload-text"&gt;Click to browse&lt;/span&gt;
 &lt;/div&gt;</code></pre>
+      </div>
     </div>
   </div>
 
   <div class="ds-subsection">
     <p class="ds-label">Form Row</p>
-    <div class="ds-preview">
-      <div class="form-row">
-        <label class="form-label">Label</label>
-        <div class="input-field" style="flex:1;"><input type="text" placeholder="Value"></div>
+    <div class="ds-component-block" id="block-forms-row">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-forms-row')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-forms-row')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;div class="form-row"&gt;
+      <div class="ds-preview">
+        <div class="form-row">
+          <label class="form-label">Label</label>
+          <div class="input-field" style="flex:1;"><input type="text" placeholder="Value"></div>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;div class="form-row"&gt;
   &lt;label class="form-label"&gt;Label&lt;/label&gt;
   &lt;div class="input-field"&gt;&lt;input type="text" placeholder="Value"&gt;&lt;/div&gt;
 &lt;/div&gt;</code></pre>
+      </div>
     </div>
   </div>
 
@@ -597,20 +935,26 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
 
   <div class="ds-subsection">
     <p class="ds-label">Default</p>
-    <div class="ds-preview">
-      <div class="tabs">
-        <button class="tab active">Tab One</button>
-        <button class="tab">Tab Two</button>
-        <button class="tab">Tab Three</button>
+    <div class="ds-component-block" id="block-tabs-default">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-tabs-default')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-tabs-default')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;div class="tabs"&gt;
+      <div class="ds-preview">
+        <div class="tabs">
+          <button class="tab active">Tab One</button>
+          <button class="tab">Tab Two</button>
+          <button class="tab">Tab Three</button>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;div class="tabs"&gt;
   &lt;button class="tab active"&gt;Tab One&lt;/button&gt;
   &lt;button class="tab"&gt;Tab Two&lt;/button&gt;
   &lt;button class="tab"&gt;Tab Three&lt;/button&gt;
 &lt;/div&gt;</code></pre>
+      </div>
     </div>
   </div>
 </section>
@@ -624,16 +968,22 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
 
   <div class="ds-subsection">
     <p class="ds-label">Default</p>
-    <div class="ds-preview">
-      <select><option>Option 1</option><option>Option 2</option><option>Option 3</option></select>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;select&gt;
+    <div class="ds-component-block" id="block-select-default">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-select-default')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-select-default')">Code</button>
+      </div>
+      <div class="ds-preview">
+        <select><option>Option 1</option><option>Option 2</option><option>Option 3</option></select>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;select&gt;
   &lt;option&gt;Option 1&lt;/option&gt;
   &lt;option&gt;Option 2&lt;/option&gt;
   &lt;option&gt;Option 3&lt;/option&gt;
 &lt;/select&gt;</code></pre>
+      </div>
     </div>
   </div>
 </section>
@@ -645,24 +995,31 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
   <h2 class="ds-section-title">Tags</h2>
   <p class="ds-section-desc">Semantic color-coded labels for status, category, and metadata display.</p>
 
+  <div class="ds-guideline">Tags are read-only status indicators. For user-interactive selections, use Chips instead.</div>
+
   <div class="ds-subsection">
     <p class="ds-label">All Variants</p>
-    <div class="ds-preview">
-      <div class="ds-preview-row">
-        <span class="tag tag-neutral">Neutral</span>
-        <span class="tag tag-not-active">Not Active</span>
-        <span class="tag tag-success">Success</span>
-        <span class="tag tag-accent">Accent</span>
-        <span class="tag tag-guide">Guide</span>
-        <span class="tag tag-alert">Alert</span>
-        <span class="tag tag-warn">Warn</span>
-        <span class="tag tag-caution">Caution</span>
-        <span class="tag tag-keyword">Keyword</span>
+    <div class="ds-component-block" id="block-tags-variants">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-tags-variants')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-tags-variants')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;span class="tag tag-neutral"&gt;Neutral&lt;/span&gt;
+      <div class="ds-preview">
+        <div class="ds-preview-row">
+          <span class="tag tag-neutral">Neutral</span>
+          <span class="tag tag-not-active">Not Active</span>
+          <span class="tag tag-success">Success</span>
+          <span class="tag tag-accent">Accent</span>
+          <span class="tag tag-guide">Guide</span>
+          <span class="tag tag-alert">Alert</span>
+          <span class="tag tag-warn">Warn</span>
+          <span class="tag tag-caution">Caution</span>
+          <span class="tag tag-keyword">Keyword</span>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;span class="tag tag-neutral"&gt;Neutral&lt;/span&gt;
 &lt;span class="tag tag-not-active"&gt;Not Active&lt;/span&gt;
 &lt;span class="tag tag-success"&gt;Success&lt;/span&gt;
 &lt;span class="tag tag-accent"&gt;Accent&lt;/span&gt;
@@ -671,6 +1028,7 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
 &lt;span class="tag tag-warn"&gt;Warn&lt;/span&gt;
 &lt;span class="tag tag-caution"&gt;Caution&lt;/span&gt;
 &lt;span class="tag tag-keyword"&gt;Keyword&lt;/span&gt;</code></pre>
+      </div>
     </div>
   </div>
 </section>
@@ -684,48 +1042,60 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
 
   <div class="ds-subsection">
     <p class="ds-label">Badge Dots</p>
-    <div class="ds-preview">
-      <div class="ds-preview-row">
-        <span class="badge-dot badge-dot-neutral"></span>
-        <span class="badge-dot badge-dot-not-active"></span>
-        <span class="badge-dot badge-dot-success"></span>
-        <span class="badge-dot badge-dot-accent"></span>
-        <span class="badge-dot badge-dot-guide"></span>
-        <span class="badge-dot badge-dot-alert"></span>
-        <span class="badge-dot badge-dot-warn"></span>
-        <span class="badge-dot badge-dot-caution"></span>
-        <span class="badge-dot badge-dot-secure"></span>
+    <div class="ds-component-block" id="block-badges-dots">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-badges-dots')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-badges-dots')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;span class="badge-dot badge-dot-neutral"&gt;&lt;/span&gt;
+      <div class="ds-preview">
+        <div class="ds-preview-row">
+          <span class="badge-dot badge-dot-neutral"></span>
+          <span class="badge-dot badge-dot-not-active"></span>
+          <span class="badge-dot badge-dot-success"></span>
+          <span class="badge-dot badge-dot-accent"></span>
+          <span class="badge-dot badge-dot-guide"></span>
+          <span class="badge-dot badge-dot-alert"></span>
+          <span class="badge-dot badge-dot-warn"></span>
+          <span class="badge-dot badge-dot-caution"></span>
+          <span class="badge-dot badge-dot-secure"></span>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;span class="badge-dot badge-dot-neutral"&gt;&lt;/span&gt;
 &lt;span class="badge-dot badge-dot-success"&gt;&lt;/span&gt;
 &lt;span class="badge-dot badge-dot-accent"&gt;&lt;/span&gt;
 &lt;span class="badge-dot badge-dot-alert"&gt;&lt;/span&gt;</code></pre>
+      </div>
     </div>
   </div>
 
   <div class="ds-subsection">
     <p class="ds-label">Badge Numbers</p>
-    <div class="ds-preview">
-      <div class="ds-preview-row">
-        <span class="badge-number badge-number-neutral">5</span>
-        <span class="badge-number badge-number-not-active">0</span>
-        <span class="badge-number badge-number-success">12</span>
-        <span class="badge-number badge-number-accent">3</span>
-        <span class="badge-number badge-number-guide">7</span>
-        <span class="badge-number badge-number-alert">99</span>
-        <span class="badge-number badge-number-warn">4</span>
-        <span class="badge-number badge-number-caution">8</span>
-        <span class="badge-number badge-number-secure">1</span>
+    <div class="ds-component-block" id="block-badges-numbers">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-badges-numbers')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-badges-numbers')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;span class="badge-number badge-number-accent"&gt;12&lt;/span&gt;
+      <div class="ds-preview">
+        <div class="ds-preview-row">
+          <span class="badge-number badge-number-neutral">5</span>
+          <span class="badge-number badge-number-not-active">0</span>
+          <span class="badge-number badge-number-success">12</span>
+          <span class="badge-number badge-number-accent">3</span>
+          <span class="badge-number badge-number-guide">7</span>
+          <span class="badge-number badge-number-alert">99</span>
+          <span class="badge-number badge-number-warn">4</span>
+          <span class="badge-number badge-number-caution">8</span>
+          <span class="badge-number badge-number-secure">1</span>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;span class="badge-number badge-number-accent"&gt;12&lt;/span&gt;
 &lt;span class="badge-number badge-number-alert"&gt;99&lt;/span&gt;
 &lt;span class="badge-number badge-number-success"&gt;3&lt;/span&gt;</code></pre>
+      </div>
     </div>
   </div>
 </section>
@@ -739,41 +1109,53 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
 
   <div class="ds-subsection">
     <p class="ds-label">All Variants</p>
-    <div class="ds-preview">
-      <div class="ds-preview-row">
-        <span class="chip chip-default">Default</span>
-        <span class="chip chip-neutral">Neutral</span>
-        <span class="chip chip-accent">Accent</span>
-        <span class="chip chip-success">Success</span>
-        <span class="chip chip-alert">Alert</span>
-        <span class="chip chip-warn">Warn</span>
-        <span class="chip chip-caution">Caution</span>
-        <span class="chip chip-guide">Guide</span>
+    <div class="ds-component-block" id="block-chips-variants">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-chips-variants')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-chips-variants')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;span class="chip chip-default"&gt;Default&lt;/span&gt;
+      <div class="ds-preview">
+        <div class="ds-preview-row">
+          <span class="chip chip-default">Default</span>
+          <span class="chip chip-neutral">Neutral</span>
+          <span class="chip chip-accent">Accent</span>
+          <span class="chip chip-success">Success</span>
+          <span class="chip chip-alert">Alert</span>
+          <span class="chip chip-warn">Warn</span>
+          <span class="chip chip-caution">Caution</span>
+          <span class="chip chip-guide">Guide</span>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;span class="chip chip-default"&gt;Default&lt;/span&gt;
 &lt;span class="chip chip-accent"&gt;Accent&lt;/span&gt;
 &lt;span class="chip chip-success"&gt;Success&lt;/span&gt;</code></pre>
+      </div>
     </div>
   </div>
 
   <div class="ds-subsection">
     <p class="ds-label">Selected with Remove</p>
-    <div class="ds-preview">
-      <div class="ds-preview-row">
-        <span class="chip chip-accent chip-selected">Selected<button class="chip-remove"><svg viewBox="0 0 10 10"><path d="M8.5 1.5L1.5 8.5M1.5 1.5l7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></button></span>
+    <div class="ds-component-block" id="block-chips-selected">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-chips-selected')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-chips-selected')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;span class="chip chip-accent chip-selected"&gt;
+      <div class="ds-preview">
+        <div class="ds-preview-row">
+          <span class="chip chip-accent chip-selected">Selected<button class="chip-remove"><svg viewBox="0 0 10 10"><path d="M8.5 1.5L1.5 8.5M1.5 1.5l7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></button></span>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;span class="chip chip-accent chip-selected"&gt;
   Selected
   &lt;button class="chip-remove"&gt;
     &lt;svg viewBox="0 0 10 10"&gt;&lt;path d="M8.5 1.5L1.5 8.5M1.5 1.5l7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/&gt;&lt;/svg&gt;
   &lt;/button&gt;
 &lt;/span&gt;</code></pre>
+      </div>
     </div>
   </div>
 </section>
@@ -787,24 +1169,29 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
 
   <div class="ds-subsection">
     <p class="ds-label">All Variants</p>
-    <div class="ds-preview">
-      <div class="ds-preview-row" style="gap:16px;">
-        <span class="verdict verdict-neutral"><span class="verdict-dot"></span><span class="verdict-text">Neutral</span></span>
-        <span class="verdict verdict-not-active"><span class="verdict-dot"></span><span class="verdict-text">Not Active</span></span>
-        <span class="verdict verdict-detected"><span class="verdict-dot"></span><span class="verdict-text">Detected</span></span>
-        <span class="verdict verdict-progress"><span class="verdict-dot"></span><span class="verdict-text">In Progress</span></span>
-        <span class="verdict verdict-completed"><span class="verdict-dot"></span><span class="verdict-text">Completed</span></span>
-        <span class="verdict verdict-failed"><span class="verdict-dot"></span><span class="verdict-text">Failed</span></span>
-        <span class="verdict verdict-secure"><span class="verdict-dot"></span><span class="verdict-text">Secure</span></span>
-        <span class="verdict verdict-warn"><span class="verdict-dot"></span><span class="verdict-text">Warning</span></span>
-        <span class="verdict verdict-accent"><span class="verdict-dot"></span><span class="verdict-text">Accent</span></span>
-        <span class="verdict verdict-guide"><span class="verdict-dot"></span><span class="verdict-text">Guide</span></span>
-        <span class="verdict verdict-caution"><span class="verdict-dot"></span><span class="verdict-text">Caution</span></span>
+    <div class="ds-component-block" id="block-verdicts-variants">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-verdicts-variants')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-verdicts-variants')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;span class="verdict verdict-secure"&gt;
+      <div class="ds-preview">
+        <div class="ds-preview-row" style="gap:16px;">
+          <span class="verdict verdict-neutral"><span class="verdict-dot"></span><span class="verdict-text">Neutral</span></span>
+          <span class="verdict verdict-not-active"><span class="verdict-dot"></span><span class="verdict-text">Not Active</span></span>
+          <span class="verdict verdict-detected"><span class="verdict-dot"></span><span class="verdict-text">Detected</span></span>
+          <span class="verdict verdict-progress"><span class="verdict-dot"></span><span class="verdict-text">In Progress</span></span>
+          <span class="verdict verdict-completed"><span class="verdict-dot"></span><span class="verdict-text">Completed</span></span>
+          <span class="verdict verdict-failed"><span class="verdict-dot"></span><span class="verdict-text">Failed</span></span>
+          <span class="verdict verdict-secure"><span class="verdict-dot"></span><span class="verdict-text">Secure</span></span>
+          <span class="verdict verdict-warn"><span class="verdict-dot"></span><span class="verdict-text">Warning</span></span>
+          <span class="verdict verdict-accent"><span class="verdict-dot"></span><span class="verdict-text">Accent</span></span>
+          <span class="verdict verdict-guide"><span class="verdict-dot"></span><span class="verdict-text">Guide</span></span>
+          <span class="verdict verdict-caution"><span class="verdict-dot"></span><span class="verdict-text">Caution</span></span>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;span class="verdict verdict-secure"&gt;
   &lt;span class="verdict-dot"&gt;&lt;/span&gt;
   &lt;span class="verdict-text"&gt;Secure&lt;/span&gt;
 &lt;/span&gt;
@@ -812,6 +1199,7 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
   &lt;span class="verdict-dot"&gt;&lt;/span&gt;
   &lt;span class="verdict-text"&gt;Detected&lt;/span&gt;
 &lt;/span&gt;</code></pre>
+      </div>
     </div>
   </div>
 </section>
@@ -825,21 +1213,27 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
 
   <div class="ds-subsection">
     <p class="ds-label">All Levels</p>
-    <div class="ds-preview">
-      <div class="ds-preview-row" style="gap:16px;">
-        <span class="severity severity-critical"><span class="severity-icon"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8.58 1.39a.67.67 0 00-1.16 0l-6.5 11.24A.67.67 0 001.5 13.67h13a.67.67 0 00.58-1.04L8.58 1.39z"/></svg></span>Critical</span>
-        <span class="severity severity-high"><span class="severity-icon"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8.58 1.39a.67.67 0 00-1.16 0l-6.5 11.24A.67.67 0 001.5 13.67h13a.67.67 0 00.58-1.04L8.58 1.39z"/></svg></span>High</span>
-        <span class="severity severity-medium"><span class="severity-icon"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8.58 1.39a.67.67 0 00-1.16 0l-6.5 11.24A.67.67 0 001.5 13.67h13a.67.67 0 00.58-1.04L8.58 1.39z"/></svg></span>Medium</span>
-        <span class="severity severity-low"><span class="severity-icon"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8.58 1.39a.67.67 0 00-1.16 0l-6.5 11.24A.67.67 0 001.5 13.67h13a.67.67 0 00.58-1.04L8.58 1.39z"/></svg></span>Low</span>
-        <span class="severity severity-none"><span class="severity-icon"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8.58 1.39a.67.67 0 00-1.16 0l-6.5 11.24A.67.67 0 001.5 13.67h13a.67.67 0 00.58-1.04L8.58 1.39z"/></svg></span>None</span>
+    <div class="ds-component-block" id="block-severities-levels">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-severities-levels')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-severities-levels')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;span class="severity severity-critical"&gt;
+      <div class="ds-preview">
+        <div class="ds-preview-row" style="gap:16px;">
+          <span class="severity severity-critical"><span class="severity-icon"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8.58 1.39a.67.67 0 00-1.16 0l-6.5 11.24A.67.67 0 001.5 13.67h13a.67.67 0 00.58-1.04L8.58 1.39z"/></svg></span>Critical</span>
+          <span class="severity severity-high"><span class="severity-icon"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8.58 1.39a.67.67 0 00-1.16 0l-6.5 11.24A.67.67 0 001.5 13.67h13a.67.67 0 00.58-1.04L8.58 1.39z"/></svg></span>High</span>
+          <span class="severity severity-medium"><span class="severity-icon"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8.58 1.39a.67.67 0 00-1.16 0l-6.5 11.24A.67.67 0 001.5 13.67h13a.67.67 0 00.58-1.04L8.58 1.39z"/></svg></span>Medium</span>
+          <span class="severity severity-low"><span class="severity-icon"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8.58 1.39a.67.67 0 00-1.16 0l-6.5 11.24A.67.67 0 001.5 13.67h13a.67.67 0 00.58-1.04L8.58 1.39z"/></svg></span>Low</span>
+          <span class="severity severity-none"><span class="severity-icon"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8.58 1.39a.67.67 0 00-1.16 0l-6.5 11.24A.67.67 0 001.5 13.67h13a.67.67 0 00.58-1.04L8.58 1.39z"/></svg></span>None</span>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;span class="severity severity-critical"&gt;
   &lt;span class="severity-icon"&gt;&lt;svg viewBox="0 0 16 16" fill="currentColor"&gt;&lt;path d="M8.58 1.39a.67.67 0 00-1.16 0l-6.5 11.24A.67.67 0 001.5 13.67h13a.67.67 0 00.58-1.04L8.58 1.39z"/&gt;&lt;/svg&gt;&lt;/span&gt;
   Critical
 &lt;/span&gt;</code></pre>
+      </div>
     </div>
   </div>
 </section>
@@ -853,33 +1247,45 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
 
   <div class="ds-subsection">
     <p class="ds-label">Level Badges</p>
-    <div class="ds-preview">
-      <div class="ds-preview-row">
-        <span class="level-badge warning">Warning</span>
-        <span class="level-badge error">Error</span>
-        <span class="level-badge info">Info</span>
-        <span class="level-badge success">Success</span>
+    <div class="ds-component-block" id="block-level-badges">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-level-badges')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-level-badges')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;span class="level-badge warning"&gt;Warning&lt;/span&gt;
+      <div class="ds-preview">
+        <div class="ds-preview-row">
+          <span class="level-badge warning">Warning</span>
+          <span class="level-badge error">Error</span>
+          <span class="level-badge info">Info</span>
+          <span class="level-badge success">Success</span>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;span class="level-badge warning"&gt;Warning&lt;/span&gt;
 &lt;span class="level-badge error"&gt;Error&lt;/span&gt;
 &lt;span class="level-badge info"&gt;Info&lt;/span&gt;
 &lt;span class="level-badge success"&gt;Success&lt;/span&gt;</code></pre>
+      </div>
     </div>
   </div>
 
   <div class="ds-subsection">
     <p class="ds-label">Category Badge</p>
-    <div class="ds-preview">
-      <div class="ds-preview-row">
-        <span class="category-badge">Category</span>
+    <div class="ds-component-block" id="block-category-badge">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-category-badge')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-category-badge')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;span class="category-badge"&gt;Category&lt;/span&gt;</code></pre>
+      <div class="ds-preview">
+        <div class="ds-preview-row">
+          <span class="category-badge">Category</span>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;span class="category-badge"&gt;Category&lt;/span&gt;</code></pre>
+      </div>
     </div>
   </div>
 </section>
@@ -893,35 +1299,41 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
 
   <div class="ds-subsection">
     <p class="ds-label">All Providers</p>
-    <div class="ds-preview">
-      <div class="ds-preview-row" style="gap:16px;">
-        <span class="inv-provider"><span class="inv-provider-icon aws">AW</span> AWS</span>
-        <span class="inv-provider"><span class="inv-provider-icon azure">AZ</span> Azure</span>
-        <span class="inv-provider"><span class="inv-provider-icon gcp">G</span> GCP</span>
-        <span class="inv-provider"><span class="inv-provider-icon s3">S3</span> S3</span>
-        <span class="inv-provider"><span class="inv-provider-icon minio">Mi</span> MinIO</span>
-        <span class="inv-provider"><span class="inv-provider-icon wasabi">Wa</span> Wasabi</span>
-        <span class="inv-provider"><span class="inv-provider-icon box">Bx</span> Box</span>
-        <span class="inv-provider"><span class="inv-provider-icon alibaba">Al</span> Alibaba</span>
-        <span class="inv-provider"><span class="inv-provider-icon sharepoint">SP</span> SharePoint</span>
-        <span class="inv-provider"><span class="inv-provider-icon onedrive">OD</span> OneDrive</span>
-        <span class="inv-provider"><span class="inv-provider-icon oracle">Or</span> Oracle</span>
-        <span class="inv-provider"><span class="inv-provider-icon netapp">NA</span> NetApp</span>
-        <span class="inv-provider"><span class="inv-provider-icon ftp">FT</span> FTP</span>
-        <span class="inv-provider"><span class="inv-provider-icon nfs">NF</span> NFS</span>
-        <span class="inv-provider"><span class="inv-provider-icon smb">SM</span> SMB</span>
-        <span class="inv-provider"><span class="inv-provider-icon sftp">SF</span> SFTP</span>
-        <span class="inv-provider"><span class="inv-provider-icon s3c">S3</span> S3 Compat</span>
+    <div class="ds-component-block" id="block-provider-icons">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-provider-icons')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-provider-icons')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;span class="inv-provider"&gt;
+      <div class="ds-preview">
+        <div class="ds-preview-row" style="gap:16px;">
+          <span class="inv-provider"><span class="inv-provider-icon aws">AW</span> AWS</span>
+          <span class="inv-provider"><span class="inv-provider-icon azure">AZ</span> Azure</span>
+          <span class="inv-provider"><span class="inv-provider-icon gcp">G</span> GCP</span>
+          <span class="inv-provider"><span class="inv-provider-icon s3">S3</span> S3</span>
+          <span class="inv-provider"><span class="inv-provider-icon minio">Mi</span> MinIO</span>
+          <span class="inv-provider"><span class="inv-provider-icon wasabi">Wa</span> Wasabi</span>
+          <span class="inv-provider"><span class="inv-provider-icon box">Bx</span> Box</span>
+          <span class="inv-provider"><span class="inv-provider-icon alibaba">Al</span> Alibaba</span>
+          <span class="inv-provider"><span class="inv-provider-icon sharepoint">SP</span> SharePoint</span>
+          <span class="inv-provider"><span class="inv-provider-icon onedrive">OD</span> OneDrive</span>
+          <span class="inv-provider"><span class="inv-provider-icon oracle">Or</span> Oracle</span>
+          <span class="inv-provider"><span class="inv-provider-icon netapp">NA</span> NetApp</span>
+          <span class="inv-provider"><span class="inv-provider-icon ftp">FT</span> FTP</span>
+          <span class="inv-provider"><span class="inv-provider-icon nfs">NF</span> NFS</span>
+          <span class="inv-provider"><span class="inv-provider-icon smb">SM</span> SMB</span>
+          <span class="inv-provider"><span class="inv-provider-icon sftp">SF</span> SFTP</span>
+          <span class="inv-provider"><span class="inv-provider-icon s3c">S3</span> S3 Compat</span>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;span class="inv-provider"&gt;
   &lt;span class="inv-provider-icon aws"&gt;AW&lt;/span&gt; AWS
 &lt;/span&gt;
 &lt;span class="inv-provider"&gt;
   &lt;span class="inv-provider-icon azure"&gt;AZ&lt;/span&gt; Azure
 &lt;/span&gt;</code></pre>
+      </div>
     </div>
   </div>
 </section>
@@ -935,16 +1347,22 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
 
   <div class="ds-subsection">
     <p class="ds-label">Default</p>
-    <div class="ds-preview">
-      <div class="ds-preview-row">
-        <span class="tag tag-keyword">Default Group</span>
-        <span class="count-more">+3 more</span>
+    <div class="ds-component-block" id="block-count-more">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-count-more')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-count-more')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;span class="tag tag-keyword"&gt;Default Group&lt;/span&gt;
+      <div class="ds-preview">
+        <div class="ds-preview-row">
+          <span class="tag tag-keyword">Default Group</span>
+          <span class="count-more">+3 more</span>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;span class="tag tag-keyword"&gt;Default Group&lt;/span&gt;
 &lt;span class="count-more"&gt;+3 more&lt;/span&gt;</code></pre>
+      </div>
     </div>
   </div>
 </section>
@@ -958,54 +1376,71 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
 
   <div class="ds-subsection">
     <p class="ds-label">Simple Card</p>
-    <div class="ds-preview">
-      <div class="audit-card" style="max-width:480px;">
-        <div class="card-header"><h2>Card Title</h2></div>
-        <div class="card-body"><p style="font-size:14px; color:var(--text-subtle);">Card content goes here.</p></div>
+    <div class="ds-component-block" id="block-cards-simple">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-cards-simple')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-cards-simple')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;div class="audit-card"&gt;
+      <div class="ds-preview">
+        <div class="audit-card" style="max-width:480px;">
+          <div class="card-header"><h2>Card Title</h2></div>
+          <div class="card-body"><p style="font-size:14px; color:var(--text-subtle);">Card content goes here.</p></div>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;div class="audit-card"&gt;
   &lt;div class="card-header"&gt;&lt;h2&gt;Card Title&lt;/h2&gt;&lt;/div&gt;
   &lt;div class="card-body"&gt;Card content goes here.&lt;/div&gt;
 &lt;/div&gt;</code></pre>
+      </div>
     </div>
   </div>
 
   <div class="ds-subsection">
     <p class="ds-label">Card with Description</p>
-    <div class="ds-preview">
-      <div class="audit-card" style="max-width:480px;">
-        <div class="card-header card-header-with-desc"><h2>Card Title</h2><p class="card-header-desc">A description of this card.</p></div>
-        <div class="card-body"><p style="font-size:14px; color:var(--text-subtle);">Content</p></div>
+    <div class="ds-component-block" id="block-cards-desc">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-cards-desc')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-cards-desc')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;div class="audit-card"&gt;
+      <div class="ds-preview">
+        <div class="audit-card" style="max-width:480px;">
+          <div class="card-header card-header-with-desc"><h2>Card Title</h2><p class="card-header-desc">A description of this card.</p></div>
+          <div class="card-body"><p style="font-size:14px; color:var(--text-subtle);">Content</p></div>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;div class="audit-card"&gt;
   &lt;div class="card-header card-header-with-desc"&gt;
     &lt;h2&gt;Card Title&lt;/h2&gt;
     &lt;p class="card-header-desc"&gt;A description of this card.&lt;/p&gt;
   &lt;/div&gt;
   &lt;div class="card-body"&gt;Content&lt;/div&gt;
 &lt;/div&gt;</code></pre>
+      </div>
     </div>
   </div>
 
   <div class="ds-subsection">
     <p class="ds-label">Data Table Header</p>
-    <div class="ds-preview">
-      <div class="audit-card-header" style="max-width:600px;">
-        <div class="audit-card-title"><h3>Items</h3><span class="count">24</span></div>
-        <div class="audit-card-actions">
-          <div class="audit-search"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6.5" cy="6.5" r="5.5"/><path d="M11 11l4 4"/></svg><input type="text" placeholder="Search"></div>
+    <div class="ds-component-block" id="block-cards-table-header">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-cards-table-header')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-cards-table-header')">Code</button>
+      </div>
+      <div class="ds-preview">
+        <div class="audit-card-header" style="max-width:600px;">
+          <div class="audit-card-title"><h3>Items</h3><span class="count">24</span></div>
+          <div class="audit-card-actions">
+            <div class="audit-search"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6.5" cy="6.5" r="5.5"/><path d="M11 11l4 4"/></svg><input type="text" placeholder="Search"></div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;div class="audit-card-header"&gt;
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;div class="audit-card-header"&gt;
   &lt;div class="audit-card-title"&gt;
     &lt;h3&gt;Items&lt;/h3&gt;&lt;span class="count"&gt;24&lt;/span&gt;
   &lt;/div&gt;
@@ -1013,6 +1448,7 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
     &lt;div class="audit-search"&gt;...&lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
+      </div>
     </div>
   </div>
 
@@ -1037,9 +1473,16 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
   <h2 class="ds-section-title">Tables</h2>
   <p class="ds-section-desc">Two table types: <strong>Small</strong> (auto layout, &le;5 columns, even widths) and <strong>Big</strong> (<code>.table-fixed</code>, many columns, pinned checkbox/name/action, horizontal scroll). All cells use 12px inner padding, 20px outer. Content never wraps — truncates with ellipsis.</p>
 
+  <div class="ds-guideline">Use small tables (<code>.data-table</code>) for &lt;= 5 columns with auto layout. Use big tables (<code>.data-table.table-fixed</code>) for 6+ columns with pinned columns and horizontal scroll.</div>
+
   <div class="ds-subsection">
     <p class="ds-label">Small Table (auto layout, &le;5 columns)</p>
-    <div class="ds-preview">
+    <div class="ds-component-block" id="block-tables-small">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-tables-small')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-tables-small')">Code</button>
+      </div>
+      <div class="ds-preview">
       <div class="table-scroll">
         <table class="data-table">
           <thead><tr>
@@ -1056,9 +1499,9 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
         </table>
       </div>
     </div>
-    <div class="ds-code">
+    <div class="ds-code" style="display:none">
       <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;!-- Small table: auto layout, no pinning, even widths --&gt;
+      <pre><code class="language-html">&lt;!-- Small table: auto layout, no pinning, even widths --&gt;
 &lt;table class="data-table"&gt;
   &lt;thead&gt;&lt;tr&gt;
     &lt;th&gt;Name&lt;/th&gt;
@@ -1076,11 +1519,17 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
   &lt;/tbody&gt;
 &lt;/table&gt;</code></pre>
     </div>
+    </div>
   </div>
 
   <div class="ds-subsection">
     <p class="ds-label">Big Table (fixed layout, pinned columns, horizontal scroll)</p>
-    <div class="ds-preview">
+    <div class="ds-component-block" id="block-tables-big">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-tables-big')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-tables-big')">Code</button>
+      </div>
+      <div class="ds-preview">
       <div class="table-scroll">
         <table class="data-table table-fixed" style="min-width:800px;">
           <thead><tr>
@@ -1099,9 +1548,9 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
         </table>
       </div>
     </div>
-    <div class="ds-code">
+    <div class="ds-code" style="display:none">
       <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;!-- Big table: fixed layout, pinned columns, horizontal scroll --&gt;
+      <pre><code class="language-html">&lt;!-- Big table: fixed layout, pinned columns, horizontal scroll --&gt;
 &lt;div class="table-scroll"&gt;
   &lt;table class="data-table table-fixed" style="min-width:1100px;"&gt;
     &lt;thead&gt;&lt;tr&gt;
@@ -1125,21 +1574,28 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
   &lt;/table&gt;
 &lt;/div&gt;</code></pre>
     </div>
+    </div>
   </div>
 
   <div class="ds-subsection">
     <p class="ds-label">User Cell</p>
-    <div class="ds-preview">
-      <div class="ds-preview-row">
-        <div class="audit-user"><div class="audit-avatar">J</div><span>John Smith</span></div>
+    <div class="ds-component-block" id="block-tables-user">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-tables-user')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-tables-user')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;div class="audit-user"&gt;
+      <div class="ds-preview">
+        <div class="ds-preview-row">
+          <div class="audit-user"><div class="audit-avatar">J</div><span>John Smith</span></div>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;div class="audit-user"&gt;
   &lt;div class="audit-avatar"&gt;J&lt;/div&gt;
   &lt;span&gt;John Smith&lt;/span&gt;
 &lt;/div&gt;</code></pre>
+      </div>
     </div>
   </div>
 
@@ -1169,36 +1625,48 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
 
   <div class="ds-subsection">
     <p class="ds-label">Search Bar</p>
-    <div class="ds-preview">
-      <div class="ds-preview-row">
-        <div class="audit-search"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6.5" cy="6.5" r="5.5"/><path d="M11 11l4 4"/></svg><input type="text" placeholder="Search..."></div>
+    <div class="ds-component-block" id="block-search-bar">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-search-bar')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-search-bar')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;div class="audit-search"&gt;
+      <div class="ds-preview">
+        <div class="ds-preview-row">
+          <div class="audit-search"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6.5" cy="6.5" r="5.5"/><path d="M11 11l4 4"/></svg><input type="text" placeholder="Search..."></div>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;div class="audit-search"&gt;
   &lt;svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"&gt;
     &lt;circle cx="6.5" cy="6.5" r="5.5"/&gt;&lt;path d="M11 11l4 4"/&gt;
   &lt;/svg&gt;
   &lt;input type="text" placeholder="Search..."&gt;
 &lt;/div&gt;</code></pre>
+      </div>
     </div>
   </div>
 
   <div class="ds-subsection">
     <p class="ds-label">Filter Button</p>
-    <div class="ds-preview">
-      <div class="ds-preview-row">
-        <button class="audit-filter-btn"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M1 2h14l-5 6v5l-4 2V8z"/></svg> Filters</button>
+    <div class="ds-component-block" id="block-filter-btn">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-filter-btn')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-filter-btn')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;button class="audit-filter-btn"&gt;
+      <div class="ds-preview">
+        <div class="ds-preview-row">
+          <button class="audit-filter-btn"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M1 2h14l-5 6v5l-4 2V8z"/></svg> Filters</button>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;button class="audit-filter-btn"&gt;
   &lt;svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"&gt;
     &lt;path d="M1 2h14l-5 6v5l-4 2V8z"/&gt;
   &lt;/svg&gt; Filters
 &lt;/button&gt;</code></pre>
+      </div>
     </div>
   </div>
 </section>
@@ -1212,22 +1680,27 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
 
   <div class="ds-subsection">
     <p class="ds-label">Default</p>
-    <div class="ds-preview">
-      <div class="audit-pagination">
-        <div class="audit-pagination-left">
-          <select style="height:28px; font-size:13px;"><option>10</option><option>25</option><option>50</option></select>
-          <span style="font-size:13px; color:var(--text-muted);">items per page</span>
-        </div>
-        <div class="audit-pagination-right">
-          <button class="audit-page-btn"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M10 3L5 8l5 5"/></svg></button>
-          <select class="audit-page-select"><option>Page 1</option><option>Page 2</option></select>
-          <button class="audit-page-btn"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6 3l5 5-5 5"/></svg></button>
+    <div class="ds-component-block" id="block-pagination-default">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-pagination-default')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-pagination-default')">Code</button>
+      </div>
+      <div class="ds-preview">
+        <div class="audit-pagination">
+          <div class="audit-pagination-left">
+            <select style="height:28px; font-size:13px;"><option>10</option><option>25</option><option>50</option></select>
+            <span style="font-size:13px; color:var(--text-muted);">items per page</span>
+          </div>
+          <div class="audit-pagination-right">
+            <button class="audit-page-btn"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M10 3L5 8l5 5"/></svg></button>
+            <select class="audit-page-select"><option>Page 1</option><option>Page 2</option></select>
+            <button class="audit-page-btn"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6 3l5 5-5 5"/></svg></button>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;div class="audit-pagination"&gt;
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;div class="audit-pagination"&gt;
   &lt;div class="audit-pagination-left"&gt;
     &lt;select&gt;&lt;option&gt;10&lt;/option&gt;&lt;option&gt;25&lt;/option&gt;&lt;/select&gt;
     &lt;span&gt;items per page&lt;/span&gt;
@@ -1238,6 +1711,7 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
     &lt;button class="audit-page-btn"&gt;&lt;svg ...&gt;&lt;/svg&gt;&lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
+      </div>
     </div>
   </div>
 </section>
@@ -1249,26 +1723,33 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
   <h2 class="ds-section-title">Modals</h2>
   <p class="ds-section-desc">Centered dialog overlays for confirmations, forms, and focused interactions.</p>
 
+  <div class="ds-guideline">Use modals for confirmations and focused tasks. For complex forms with many fields, prefer slide panels.</div>
+
   <div class="ds-subsection">
     <p class="ds-label">Default Modal</p>
-    <div class="ds-preview">
-      <div class="modal" style="position:static; transform:none; box-shadow:var(--shadow-3);">
-        <div class="modal-header">
-          <h3>Modal Title</h3>
-          <button class="modal-close"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M12.5 3.5l-9 9m0-9l9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></button>
-        </div>
-        <div class="modal-body">
-          <p style="font-size:14px; color:var(--text-subtle); line-height:1.5;">Modal body content goes here. This can contain forms, text, or any other content.</p>
-        </div>
-        <div class="modal-footer">
-          <button class="btn-outline">Cancel</button>
-          <button class="btn-primary">Confirm</button>
+    <div class="ds-component-block" id="block-modals-default">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-modals-default')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-modals-default')">Code</button>
+      </div>
+      <div class="ds-preview">
+        <div class="modal" style="position:static; transform:none; box-shadow:var(--shadow-3);">
+          <div class="modal-header">
+            <h3>Modal Title</h3>
+            <button class="modal-close"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M12.5 3.5l-9 9m0-9l9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></button>
+          </div>
+          <div class="modal-body">
+            <p style="font-size:14px; color:var(--text-subtle); line-height:1.5;">Modal body content goes here. This can contain forms, text, or any other content.</p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn-outline">Cancel</button>
+            <button class="btn-primary">Confirm</button>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;div class="modal"&gt;
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;div class="modal"&gt;
   &lt;div class="modal-header"&gt;
     &lt;h3&gt;Modal Title&lt;/h3&gt;
     &lt;button class="modal-close"&gt;&lt;svg ...&gt;&lt;/svg&gt;&lt;/button&gt;
@@ -1281,6 +1762,7 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
     &lt;button class="btn-primary"&gt;Confirm&lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
+      </div>
     </div>
   </div>
 
@@ -1305,23 +1787,28 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
 
   <div class="ds-subsection">
     <p class="ds-label">Panel with Banner</p>
-    <div class="ds-preview">
-      <div class="slide-panel" style="position:static; transform:none; height:auto; max-height:360px; width:360px; box-shadow:var(--shadow-3);">
-        <div class="slide-panel-header">
-          <h3>Panel Title</h3>
-          <button class="modal-close"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M12.5 3.5l-9 9m0-9l9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></button>
-        </div>
-        <div class="slide-panel-body">
-          <div class="panel-banner warning"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8.58 1.39a.67.67 0 00-1.16 0l-6.5 11.24A.67.67 0 001.5 13.67h13a.67.67 0 00.58-1.04L8.58 1.39z"/></svg><span>This is a warning banner message.</span></div>
-          <div class="panel-field"><label class="panel-field-label">Field Label</label><div class="input-field"><input type="text" placeholder="Enter value"></div></div>
-          <div class="panel-field"><label class="panel-field-label">Dropdown</label><select><option>Option 1</option></select></div>
-        </div>
-        <div class="slide-panel-footer"><button class="btn-outline">Cancel</button><button class="btn-primary">Save Changes</button></div>
+    <div class="ds-component-block" id="block-slide-panel">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-slide-panel')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-slide-panel')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;div class="slide-panel"&gt;
+      <div class="ds-preview">
+        <div class="slide-panel" style="position:static; transform:none; height:auto; max-height:360px; width:360px; box-shadow:var(--shadow-3);">
+          <div class="slide-panel-header">
+            <h3>Panel Title</h3>
+            <button class="modal-close"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M12.5 3.5l-9 9m0-9l9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></button>
+          </div>
+          <div class="slide-panel-body">
+            <div class="panel-banner warning"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8.58 1.39a.67.67 0 00-1.16 0l-6.5 11.24A.67.67 0 001.5 13.67h13a.67.67 0 00.58-1.04L8.58 1.39z"/></svg><span>This is a warning banner message.</span></div>
+            <div class="panel-field"><label class="panel-field-label">Field Label</label><div class="input-field"><input type="text" placeholder="Enter value"></div></div>
+            <div class="panel-field"><label class="panel-field-label">Dropdown</label><select><option>Option 1</option></select></div>
+          </div>
+          <div class="slide-panel-footer"><button class="btn-outline">Cancel</button><button class="btn-primary">Save Changes</button></div>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;div class="slide-panel"&gt;
   &lt;div class="slide-panel-header"&gt;
     &lt;h3&gt;Panel Title&lt;/h3&gt;
     &lt;button class="modal-close"&gt;&lt;svg ...&gt;&lt;/svg&gt;&lt;/button&gt;
@@ -1335,23 +1822,30 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
     &lt;button class="btn-primary"&gt;Save Changes&lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
+      </div>
     </div>
   </div>
 
   <div class="ds-subsection">
     <p class="ds-label">Panel Banner Variants</p>
-    <div class="ds-preview">
-      <div class="ds-preview-col" style="max-width:360px;">
-        <div class="panel-banner warning"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8.58 1.39a.67.67 0 00-1.16 0l-6.5 11.24A.67.67 0 001.5 13.67h13a.67.67 0 00.58-1.04L8.58 1.39z"/></svg><span>Warning banner message.</span></div>
-        <div class="panel-banner error"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0a8 8 0 100 16A8 8 0 008 0zm.75 11.5h-1.5v-1.5h1.5v1.5zm0-3h-1.5V4.5h1.5v4z"/></svg><span>Error banner message.</span></div>
-        <div class="panel-banner info"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0a8 8 0 100 16A8 8 0 008 0zm.75 11.5h-1.5v-1.5h1.5v1.5zm0-3h-1.5V4.5h1.5v4z"/></svg><span>Info banner message.</span></div>
+    <div class="ds-component-block" id="block-panel-banners">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-panel-banners')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-panel-banners')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;div class="panel-banner warning"&gt;...&lt;/div&gt;
+      <div class="ds-preview">
+        <div class="ds-preview-col" style="max-width:360px;">
+          <div class="panel-banner warning"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8.58 1.39a.67.67 0 00-1.16 0l-6.5 11.24A.67.67 0 001.5 13.67h13a.67.67 0 00.58-1.04L8.58 1.39z"/></svg><span>Warning banner message.</span></div>
+          <div class="panel-banner error"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0a8 8 0 100 16A8 8 0 008 0zm.75 11.5h-1.5v-1.5h1.5v1.5zm0-3h-1.5V4.5h1.5v4z"/></svg><span>Error banner message.</span></div>
+          <div class="panel-banner info"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0a8 8 0 100 16A8 8 0 008 0zm.75 11.5h-1.5v-1.5h1.5v1.5zm0-3h-1.5V4.5h1.5v4z"/></svg><span>Info banner message.</span></div>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;div class="panel-banner warning"&gt;...&lt;/div&gt;
 &lt;div class="panel-banner error"&gt;...&lt;/div&gt;
 &lt;div class="panel-banner info"&gt;...&lt;/div&gt;</code></pre>
+      </div>
     </div>
   </div>
 
@@ -1377,24 +1871,29 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
 
   <div class="ds-subsection">
     <p class="ds-label">Filter Panel</p>
-    <div class="ds-preview">
-      <div class="advanced-filters-panel" style="position:static; transform:none; height:auto; max-height:360px; width:360px; box-shadow:var(--shadow-3);">
-        <div class="af-header"><h3>Advanced Filters</h3><button class="af-close"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M12.5 3.5l-9 9m0-9l9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></button></div>
-        <div class="af-body">
-          <div class="af-section">
-            <div class="af-section-title">Status</div>
-            <div class="af-chips"><span class="af-chip selected">Active</span><span class="af-chip">Inactive</span><span class="af-chip">Pending</span></div>
-          </div>
-          <div class="af-section">
-            <div class="af-field"><label class="af-field-label">Date Range</label><select><option>Last 7 days</option></select></div>
-          </div>
-        </div>
-        <div class="af-footer"><span style="font-size:13px; color:var(--text-muted);">3 results</span><div style="display:flex; gap:8px;"><button class="btn-outline">Revert</button><button class="btn-primary">Apply</button></div></div>
+    <div class="ds-component-block" id="block-advanced-filters">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-advanced-filters')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-advanced-filters')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;div class="advanced-filters-panel"&gt;
+      <div class="ds-preview">
+        <div class="advanced-filters-panel" style="position:static; transform:none; height:auto; max-height:360px; width:360px; box-shadow:var(--shadow-3);">
+          <div class="af-header"><h3>Advanced Filters</h3><button class="af-close"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M12.5 3.5l-9 9m0-9l9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></button></div>
+          <div class="af-body">
+            <div class="af-section">
+              <div class="af-section-title">Status</div>
+              <div class="af-chips"><span class="af-chip selected">Active</span><span class="af-chip">Inactive</span><span class="af-chip">Pending</span></div>
+            </div>
+            <div class="af-section">
+              <div class="af-field"><label class="af-field-label">Date Range</label><select><option>Last 7 days</option></select></div>
+            </div>
+          </div>
+          <div class="af-footer"><span style="font-size:13px; color:var(--text-muted);">3 results</span><div style="display:flex; gap:8px;"><button class="btn-outline">Revert</button><button class="btn-primary">Apply</button></div></div>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;div class="advanced-filters-panel"&gt;
   &lt;div class="af-header"&gt;
     &lt;h3&gt;Advanced Filters&lt;/h3&gt;
     &lt;button class="af-close"&gt;&lt;svg ...&gt;&lt;/svg&gt;&lt;/button&gt;
@@ -1416,6 +1915,7 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
+      </div>
     </div>
   </div>
 </section>
@@ -1427,36 +1927,49 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
   <h2 class="ds-section-title">Toasts</h2>
   <p class="ds-section-desc">Notification toasts in bottom-center (simple) and top-right (typed with icon) positions.</p>
 
+  <div class="ds-guideline">Use bottom toasts for simple undo-able actions. Use top toasts with icons for success/error/warning/info feedback.</div>
+
   <div class="ds-subsection">
     <p class="ds-label">Bottom Toast</p>
-    <div class="ds-preview">
-      <div class="toast show" style="position:static; opacity:1; transform:none;">Action completed successfully <button onclick="">Undo</button></div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;div class="toast show"&gt;
+    <div class="ds-component-block" id="block-toasts-bottom">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-toasts-bottom')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-toasts-bottom')">Code</button>
+      </div>
+      <div class="ds-preview">
+        <div class="toast show" style="position:static; opacity:1; transform:none;">Action completed successfully <button onclick="">Undo</button></div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;div class="toast show"&gt;
   Action completed successfully
   &lt;button&gt;Undo&lt;/button&gt;
 &lt;/div&gt;</code></pre>
+      </div>
     </div>
   </div>
 
   <div class="ds-subsection">
     <p class="ds-label">Top Toasts</p>
-    <div class="ds-preview">
-      <div class="ds-preview-col">
-        <div class="top-toast visible type-success" style="position:static; opacity:1; transform:none;"><div class="top-toast-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0a8 8 0 100 16A8 8 0 008 0zm3.78 5.28l-4.5 5.5a.75.75 0 01-1.12.02l-2.5-2.5a.75.75 0 111.06-1.06l1.94 1.94 3.97-4.84a.75.75 0 111.15.94z"/></svg></div><div class="top-toast-content"><div class="top-toast-title">Success</div><div class="top-toast-desc">Operation completed.</div></div><button class="top-toast-close"><svg width="12" height="12" viewBox="0 0 16 16"><path d="M12.5 3.5l-9 9m0-9l9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></button></div>
-
-        <div class="top-toast visible type-error" style="position:static; opacity:1; transform:none;"><div class="top-toast-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0a8 8 0 100 16A8 8 0 008 0zm.75 11.5h-1.5v-1.5h1.5v1.5zm0-3h-1.5V4.5h1.5v4z"/></svg></div><div class="top-toast-content"><div class="top-toast-title">Error</div><div class="top-toast-desc">Something went wrong.</div></div><button class="top-toast-close"><svg width="12" height="12" viewBox="0 0 16 16"><path d="M12.5 3.5l-9 9m0-9l9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></button></div>
-
-        <div class="top-toast visible type-warning" style="position:static; opacity:1; transform:none;"><div class="top-toast-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8.58 1.39a.67.67 0 00-1.16 0l-6.5 11.24A.67.67 0 001.5 13.67h13a.67.67 0 00.58-1.04L8.58 1.39z"/></svg></div><div class="top-toast-content"><div class="top-toast-title">Warning</div><div class="top-toast-desc">Proceed with caution.</div></div><button class="top-toast-close"><svg width="12" height="12" viewBox="0 0 16 16"><path d="M12.5 3.5l-9 9m0-9l9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></button></div>
-
-        <div class="top-toast visible type-info" style="position:static; opacity:1; transform:none;"><div class="top-toast-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0a8 8 0 100 16A8 8 0 008 0zm.75 4.5v4h-1.5v-4h1.5zm0 7h-1.5v-1.5h1.5V11.5z"/></svg></div><div class="top-toast-content"><div class="top-toast-title">Info</div><div class="top-toast-desc">Additional information here.</div></div><button class="top-toast-close"><svg width="12" height="12" viewBox="0 0 16 16"><path d="M12.5 3.5l-9 9m0-9l9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></button></div>
+    <div class="ds-component-block" id="block-toasts-top">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-toasts-top')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-toasts-top')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;div class="top-toast visible type-success"&gt;
+      <div class="ds-preview">
+        <div class="ds-preview-col">
+          <div class="top-toast visible type-success" style="position:static; opacity:1; transform:none;"><div class="top-toast-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0a8 8 0 100 16A8 8 0 008 0zm3.78 5.28l-4.5 5.5a.75.75 0 01-1.12.02l-2.5-2.5a.75.75 0 111.06-1.06l1.94 1.94 3.97-4.84a.75.75 0 111.15.94z"/></svg></div><div class="top-toast-content"><div class="top-toast-title">Success</div><div class="top-toast-desc">Operation completed.</div></div><button class="top-toast-close"><svg width="12" height="12" viewBox="0 0 16 16"><path d="M12.5 3.5l-9 9m0-9l9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></button></div>
+
+          <div class="top-toast visible type-error" style="position:static; opacity:1; transform:none;"><div class="top-toast-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0a8 8 0 100 16A8 8 0 008 0zm.75 11.5h-1.5v-1.5h1.5v1.5zm0-3h-1.5V4.5h1.5v4z"/></svg></div><div class="top-toast-content"><div class="top-toast-title">Error</div><div class="top-toast-desc">Something went wrong.</div></div><button class="top-toast-close"><svg width="12" height="12" viewBox="0 0 16 16"><path d="M12.5 3.5l-9 9m0-9l9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></button></div>
+
+          <div class="top-toast visible type-warning" style="position:static; opacity:1; transform:none;"><div class="top-toast-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8.58 1.39a.67.67 0 00-1.16 0l-6.5 11.24A.67.67 0 001.5 13.67h13a.67.67 0 00.58-1.04L8.58 1.39z"/></svg></div><div class="top-toast-content"><div class="top-toast-title">Warning</div><div class="top-toast-desc">Proceed with caution.</div></div><button class="top-toast-close"><svg width="12" height="12" viewBox="0 0 16 16"><path d="M12.5 3.5l-9 9m0-9l9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></button></div>
+
+          <div class="top-toast visible type-info" style="position:static; opacity:1; transform:none;"><div class="top-toast-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0a8 8 0 100 16A8 8 0 008 0zm.75 4.5v4h-1.5v-4h1.5zm0 7h-1.5v-1.5h1.5V11.5z"/></svg></div><div class="top-toast-content"><div class="top-toast-title">Info</div><div class="top-toast-desc">Additional information here.</div></div><button class="top-toast-close"><svg width="12" height="12" viewBox="0 0 16 16"><path d="M12.5 3.5l-9 9m0-9l9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></button></div>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;div class="top-toast visible type-success"&gt;
   &lt;div class="top-toast-icon"&gt;&lt;svg ...&gt;&lt;/svg&gt;&lt;/div&gt;
   &lt;div class="top-toast-content"&gt;
     &lt;div class="top-toast-title"&gt;Success&lt;/div&gt;
@@ -1466,6 +1979,7 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
 &lt;/div&gt;
 
 &lt;!-- Types: type-success, type-error, type-warning, type-info --&gt;</code></pre>
+      </div>
     </div>
   </div>
 </section>
@@ -1479,19 +1993,24 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
 
   <div class="ds-subsection">
     <p class="ds-label">Default</p>
-    <div class="ds-preview">
-      <div class="avatar-dropdown" style="position:static; display:flex; opacity:1; pointer-events:auto; max-width:280px;">
-        <div class="avd-user"><div class="avd-avatar">E</div><div class="avd-user-info"><div class="avd-user-name">Elvijs Vilevics</div><div class="avd-user-email">elvijs@opswat.com</div></div></div>
-        <div class="avd-divider"></div>
-        <button class="avd-item"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 8a3 3 0 100-6 3 3 0 000 6zm0 1c-3.31 0-6 1.79-6 4v1h12v-1c0-2.21-2.69-4-6-4z"/></svg><span class="avd-item-text">Profile</span></button>
-        <button class="avd-item"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.21 8.46c.01-.15.02-.3.02-.46s-.01-.31-.02-.46l.96-.85a.23.23 0 00.05-.3l-.91-1.58a.23.23 0 00-.28-.1l-1.13.45a3.4 3.4 0 00-.78-.45L11 3.58a.22.22 0 00-.23-.18h-1.82a.22.22 0 00-.22.18l-.17 1.13a3.4 3.4 0 00-.78.45l-1.13-.45a.23.23 0 00-.28.1L5.46 6.39a.23.23 0 00.05.3l.96.85a3 3 0 000 .92l-.96.85a.23.23 0 00-.05.3l.91 1.58a.23.23 0 00.28.1l1.13-.45c.24.18.5.33.78.45l.17 1.13a.22.22 0 00.22.18h1.82a.22.22 0 00.23-.18l.17-1.13c.28-.12.54-.27.78-.45l1.13.45a.23.23 0 00.28-.1l.91-1.58a.23.23 0 00-.05-.3l-.96-.85zM9.82 9.96a2 2 0 110-3.92 2 2 0 010 3.92z"/></svg><span class="avd-item-text">Settings</span></button>
-        <div class="avd-divider"></div>
-        <button class="avd-item"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 3a1 1 0 011-1h5.5a.75.75 0 010 1.5H3.5v9h5a.75.75 0 010 1.5H3a1 1 0 01-1-1V3z"/><path d="M11.22 4.72a.75.75 0 011.06 0l2.5 2.5a.75.75 0 010 1.06l-2.5 2.5a.75.75 0 01-1.06-1.06l1.22-1.22H6.75a.75.75 0 010-1.5h5.69l-1.22-1.22a.75.75 0 010-1.06z"/></svg><span class="avd-item-text">Logout</span></button>
+    <div class="ds-component-block" id="block-avatar-dropdown">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-avatar-dropdown')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-avatar-dropdown')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;div class="avatar-dropdown"&gt;
+      <div class="ds-preview">
+        <div class="avatar-dropdown" style="position:static; display:flex; opacity:1; pointer-events:auto; max-width:280px;">
+          <div class="avd-user"><div class="avd-avatar">E</div><div class="avd-user-info"><div class="avd-user-name">Elvijs Vilevics</div><div class="avd-user-email">elvijs@opswat.com</div></div></div>
+          <div class="avd-divider"></div>
+          <button class="avd-item"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 8a3 3 0 100-6 3 3 0 000 6zm0 1c-3.31 0-6 1.79-6 4v1h12v-1c0-2.21-2.69-4-6-4z"/></svg><span class="avd-item-text">Profile</span></button>
+          <button class="avd-item"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.21 8.46c.01-.15.02-.3.02-.46s-.01-.31-.02-.46l.96-.85a.23.23 0 00.05-.3l-.91-1.58a.23.23 0 00-.28-.1l-1.13.45a3.4 3.4 0 00-.78-.45L11 3.58a.22.22 0 00-.23-.18h-1.82a.22.22 0 00-.22.18l-.17 1.13a3.4 3.4 0 00-.78.45l-1.13-.45a.23.23 0 00-.28.1L5.46 6.39a.23.23 0 00.05.3l.96.85a3 3 0 000 .92l-.96.85a.23.23 0 00-.05.3l.91 1.58a.23.23 0 00.28.1l1.13-.45c.24.18.5.33.78.45l.17 1.13a.22.22 0 00.22.18h1.82a.22.22 0 00.23-.18l.17-1.13c.28-.12.54-.27.78-.45l1.13.45a.23.23 0 00.28-.1l.91-1.58a.23.23 0 00-.05-.3l-.96-.85zM9.82 9.96a2 2 0 110-3.92 2 2 0 010 3.92z"/></svg><span class="avd-item-text">Settings</span></button>
+          <div class="avd-divider"></div>
+          <button class="avd-item"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 3a1 1 0 011-1h5.5a.75.75 0 010 1.5H3.5v9h5a.75.75 0 010 1.5H3a1 1 0 01-1-1V3z"/><path d="M11.22 4.72a.75.75 0 011.06 0l2.5 2.5a.75.75 0 010 1.06l-2.5 2.5a.75.75 0 01-1.06-1.06l1.22-1.22H6.75a.75.75 0 010-1.5h5.69l-1.22-1.22a.75.75 0 010-1.06z"/></svg><span class="avd-item-text">Logout</span></button>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;div class="avatar-dropdown"&gt;
   &lt;div class="avd-user"&gt;
     &lt;div class="avd-avatar"&gt;E&lt;/div&gt;
     &lt;div class="avd-user-info"&gt;
@@ -1509,6 +2028,7 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
     &lt;span class="avd-item-text"&gt;Logout&lt;/span&gt;
   &lt;/button&gt;
 &lt;/div&gt;</code></pre>
+      </div>
     </div>
   </div>
 </section>
@@ -1522,19 +2042,24 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
 
   <div class="ds-subsection">
     <p class="ds-label">Default</p>
-    <div class="ds-preview">
-      <div class="notif-dropdown" style="position:static; display:flex; opacity:1; pointer-events:auto; max-width:380px;">
-        <div class="notif-header"><span class="notif-header-title">Notifications</span><button class="notif-header-action">Mark all read</button></div>
-        <div class="notif-list" style="max-height:200px;">
-          <div class="notif-msg"><div class="notif-msg-top"><span class="notif-msg-title">Scan Complete</span><span class="notif-msg-dot"></span></div><div class="notif-msg-body">Storage scan completed with 0 detections.</div><div class="notif-msg-bottom"><span class="notif-msg-time">2 minutes ago</span></div></div>
-          <div class="notif-divider"></div>
-          <div class="notif-msg"><div class="notif-msg-top"><span class="notif-msg-title">New User Request</span></div><div class="notif-msg-body">A new user has requested access.</div><div class="notif-msg-bottom"><span class="notif-msg-time">1 hour ago</span></div></div>
+    <div class="ds-component-block" id="block-notification-dropdown">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-notification-dropdown')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-notification-dropdown')">Code</button>
+      </div>
+      <div class="ds-preview">
+        <div class="notif-dropdown" style="position:static; display:flex; opacity:1; pointer-events:auto; max-width:380px;">
+          <div class="notif-header"><span class="notif-header-title">Notifications</span><button class="notif-header-action">Mark all read</button></div>
+          <div class="notif-list" style="max-height:200px;">
+            <div class="notif-msg"><div class="notif-msg-top"><span class="notif-msg-title">Scan Complete</span><span class="notif-msg-dot"></span></div><div class="notif-msg-body">Storage scan completed with 0 detections.</div><div class="notif-msg-bottom"><span class="notif-msg-time">2 minutes ago</span></div></div>
+            <div class="notif-divider"></div>
+            <div class="notif-msg"><div class="notif-msg-top"><span class="notif-msg-title">New User Request</span></div><div class="notif-msg-body">A new user has requested access.</div><div class="notif-msg-bottom"><span class="notif-msg-time">1 hour ago</span></div></div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;div class="notif-dropdown"&gt;
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;div class="notif-dropdown"&gt;
   &lt;div class="notif-header"&gt;
     &lt;span class="notif-header-title"&gt;Notifications&lt;/span&gt;
     &lt;button class="notif-header-action"&gt;Mark all read&lt;/button&gt;
@@ -1552,6 +2077,7 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
+      </div>
     </div>
   </div>
 </section>
@@ -1565,18 +2091,23 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
 
   <div class="ds-subsection">
     <p class="ds-label">Default</p>
-    <div class="ds-preview">
-      <div style="max-width:360px; background:var(--surface-card); border:1px solid var(--border-200); border-radius:8px; padding:16px;">
-        <div class="col-vis-section-title">Fixed</div>
-        <div class="col-vis-item"><svg class="col-vis-drag" viewBox="0 0 16 16" fill="currentColor"><circle cx="5" cy="3" r="1.5"/><circle cx="11" cy="3" r="1.5"/><circle cx="5" cy="8" r="1.5"/><circle cx="11" cy="8" r="1.5"/><circle cx="5" cy="13" r="1.5"/><circle cx="11" cy="13" r="1.5"/></svg><span class="col-vis-label">Name</span><div class="toggle-switch active" style="pointer-events:none; opacity:0.5;"><div class="toggle-thumb"></div></div></div>
-        <div class="col-vis-section-title">Toggleable</div>
-        <div class="col-vis-item"><svg class="col-vis-drag" viewBox="0 0 16 16" fill="currentColor"><circle cx="5" cy="3" r="1.5"/><circle cx="11" cy="3" r="1.5"/><circle cx="5" cy="8" r="1.5"/><circle cx="11" cy="8" r="1.5"/><circle cx="5" cy="13" r="1.5"/><circle cx="11" cy="13" r="1.5"/></svg><span class="col-vis-label">Status</span><div class="toggle-switch active" onclick="this.classList.toggle('active')"><div class="toggle-thumb"></div></div></div>
-        <div class="col-vis-item"><svg class="col-vis-drag" viewBox="0 0 16 16" fill="currentColor"><circle cx="5" cy="3" r="1.5"/><circle cx="11" cy="3" r="1.5"/><circle cx="5" cy="8" r="1.5"/><circle cx="11" cy="8" r="1.5"/><circle cx="5" cy="13" r="1.5"/><circle cx="11" cy="13" r="1.5"/></svg><span class="col-vis-label">Date</span><div class="toggle-switch" onclick="this.classList.toggle('active')"><div class="toggle-thumb"></div></div></div>
+    <div class="ds-component-block" id="block-column-visibility">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-column-visibility')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-column-visibility')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;div class="col-vis-section-title"&gt;Fixed&lt;/div&gt;
+      <div class="ds-preview">
+        <div style="max-width:360px; background:var(--surface-card); border:1px solid var(--border-200); border-radius:8px; padding:16px;">
+          <div class="col-vis-section-title">Fixed</div>
+          <div class="col-vis-item"><svg class="col-vis-drag" viewBox="0 0 16 16" fill="currentColor"><circle cx="5" cy="3" r="1.5"/><circle cx="11" cy="3" r="1.5"/><circle cx="5" cy="8" r="1.5"/><circle cx="11" cy="8" r="1.5"/><circle cx="5" cy="13" r="1.5"/><circle cx="11" cy="13" r="1.5"/></svg><span class="col-vis-label">Name</span><div class="toggle-switch active" style="pointer-events:none; opacity:0.5;"><div class="toggle-thumb"></div></div></div>
+          <div class="col-vis-section-title">Toggleable</div>
+          <div class="col-vis-item"><svg class="col-vis-drag" viewBox="0 0 16 16" fill="currentColor"><circle cx="5" cy="3" r="1.5"/><circle cx="11" cy="3" r="1.5"/><circle cx="5" cy="8" r="1.5"/><circle cx="11" cy="8" r="1.5"/><circle cx="5" cy="13" r="1.5"/><circle cx="11" cy="13" r="1.5"/></svg><span class="col-vis-label">Status</span><div class="toggle-switch active" onclick="this.classList.toggle('active')"><div class="toggle-thumb"></div></div></div>
+          <div class="col-vis-item"><svg class="col-vis-drag" viewBox="0 0 16 16" fill="currentColor"><circle cx="5" cy="3" r="1.5"/><circle cx="11" cy="3" r="1.5"/><circle cx="5" cy="8" r="1.5"/><circle cx="11" cy="8" r="1.5"/><circle cx="5" cy="13" r="1.5"/><circle cx="11" cy="13" r="1.5"/></svg><span class="col-vis-label">Date</span><div class="toggle-switch" onclick="this.classList.toggle('active')"><div class="toggle-thumb"></div></div></div>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;div class="col-vis-section-title"&gt;Fixed&lt;/div&gt;
 &lt;div class="col-vis-item"&gt;
   &lt;svg class="col-vis-drag" ...&gt;...&lt;/svg&gt;
   &lt;span class="col-vis-label"&gt;Name&lt;/span&gt;
@@ -1584,6 +2115,7 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
     &lt;div class="toggle-thumb"&gt;&lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
+      </div>
     </div>
   </div>
 </section>
@@ -1597,51 +2129,69 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
 
   <div class="ds-subsection">
     <p class="ds-label">Page Header</p>
-    <div class="ds-preview">
-      <div class="page-header" style="border:none; padding:0;">
-        <h1 class="page-title">Page Title</h1>
-        <div class="page-header-actions"><button class="btn-outline">Secondary</button><button class="btn-primary">Primary</button></div>
+    <div class="ds-component-block" id="block-page-header">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-page-header')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-page-header')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;div class="page-header"&gt;
+      <div class="ds-preview">
+        <div class="page-header" style="border:none; padding:0;">
+          <h1 class="page-title">Page Title</h1>
+          <div class="page-header-actions"><button class="btn-outline">Secondary</button><button class="btn-primary">Primary</button></div>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;div class="page-header"&gt;
   &lt;h1 class="page-title"&gt;Page Title&lt;/h1&gt;
   &lt;div class="page-header-actions"&gt;
     &lt;button class="btn-outline"&gt;Secondary&lt;/button&gt;
     &lt;button class="btn-primary"&gt;Primary&lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
+      </div>
     </div>
   </div>
 
   <div class="ds-subsection">
     <p class="ds-label">Section Title &amp; Description</p>
-    <div class="ds-preview">
-      <div class="ds-preview-col">
-        <h2 class="section-title">Section Title</h2>
-        <p class="section-desc">Section description text goes here.</p>
+    <div class="ds-component-block" id="block-section-title">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-section-title')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-section-title')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;h2 class="section-title"&gt;Section Title&lt;/h2&gt;
+      <div class="ds-preview">
+        <div class="ds-preview-col">
+          <h2 class="section-title">Section Title</h2>
+          <p class="section-desc">Section description text goes here.</p>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;h2 class="section-title"&gt;Section Title&lt;/h2&gt;
 &lt;p class="section-desc"&gt;Section description text goes here.&lt;/p&gt;</code></pre>
+      </div>
     </div>
   </div>
 
   <div class="ds-subsection">
     <p class="ds-label">Breadcrumb</p>
-    <div class="ds-preview">
-      <div class="detail-breadcrumb"><a href="#">Parent</a><span>&rsaquo;</span><span>Current Page</span></div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;div class="detail-breadcrumb"&gt;
+    <div class="ds-component-block" id="block-breadcrumb">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-breadcrumb')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-breadcrumb')">Code</button>
+      </div>
+      <div class="ds-preview">
+        <div class="detail-breadcrumb"><a href="#">Parent</a><span>&rsaquo;</span><span>Current Page</span></div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;div class="detail-breadcrumb"&gt;
   &lt;a href="#"&gt;Parent&lt;/a&gt;
   &lt;span&gt;&amp;rsaquo;&lt;/span&gt;
   &lt;span&gt;Current Page&lt;/span&gt;
 &lt;/div&gt;</code></pre>
+      </div>
     </div>
   </div>
 </section>
@@ -1655,18 +2205,23 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
 
   <div class="ds-subsection">
     <p class="ds-label">Integration Grid</p>
-    <div class="ds-preview">
-      <div class="cards-grid" style="max-width:600px;">
-        <div class="grid-card"><div class="grid-card-icon" style="background:#232f3e;">AW</div><div class="grid-card-name">AWS S3</div><div class="grid-card-type">Storage</div></div>
-        <div class="grid-card"><div class="grid-card-icon" style="background:#0078d4;">AZ</div><div class="grid-card-name">Azure Blob</div><div class="grid-card-type">Storage</div></div>
-        <div class="grid-card"><div class="grid-card-icon" style="background:#ea4335;">G</div><div class="grid-card-name">GCP</div><div class="grid-card-type">Storage</div></div>
-        <div class="grid-card"><div class="grid-card-icon" style="background:#3b8526;">S3</div><div class="grid-card-name">S3 Compatible</div><div class="grid-card-type">Storage</div></div>
-        <div class="grid-card"><div class="grid-card-icon" style="background:#c72c48;">Mi</div><div class="grid-card-name">MinIO</div><div class="grid-card-type">Storage</div></div>
+    <div class="ds-component-block" id="block-cards-grid">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-cards-grid')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-cards-grid')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;div class="cards-grid"&gt;
+      <div class="ds-preview">
+        <div class="cards-grid" style="max-width:600px;">
+          <div class="grid-card"><div class="grid-card-icon" style="background:#232f3e;">AW</div><div class="grid-card-name">AWS S3</div><div class="grid-card-type">Storage</div></div>
+          <div class="grid-card"><div class="grid-card-icon" style="background:#0078d4;">AZ</div><div class="grid-card-name">Azure Blob</div><div class="grid-card-type">Storage</div></div>
+          <div class="grid-card"><div class="grid-card-icon" style="background:#ea4335;">G</div><div class="grid-card-name">GCP</div><div class="grid-card-type">Storage</div></div>
+          <div class="grid-card"><div class="grid-card-icon" style="background:#3b8526;">S3</div><div class="grid-card-name">S3 Compatible</div><div class="grid-card-type">Storage</div></div>
+          <div class="grid-card"><div class="grid-card-icon" style="background:#c72c48;">Mi</div><div class="grid-card-name">MinIO</div><div class="grid-card-type">Storage</div></div>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;div class="cards-grid"&gt;
   &lt;div class="grid-card"&gt;
     &lt;div class="grid-card-icon" style="background:#232f3e;"&gt;AW&lt;/div&gt;
     &lt;div class="grid-card-name"&gt;AWS S3&lt;/div&gt;
@@ -1674,6 +2229,7 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
   &lt;/div&gt;
   &lt;!-- more cards --&gt;
 &lt;/div&gt;</code></pre>
+      </div>
     </div>
   </div>
 </section>
@@ -1687,33 +2243,45 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
 
   <div class="ds-subsection">
     <p class="ds-label">Priority Toggle</p>
-    <div class="ds-preview">
-      <div class="ds-preview-row">
-        <div class="priority-toggle"><button class="priority-toggle-btn active">All</button><button class="priority-toggle-btn">Active</button><button class="priority-toggle-btn">Archived</button></div>
+    <div class="ds-component-block" id="block-toggles-priority">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-toggles-priority')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-toggles-priority')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;div class="priority-toggle"&gt;
+      <div class="ds-preview">
+        <div class="ds-preview-row">
+          <div class="priority-toggle"><button class="priority-toggle-btn active">All</button><button class="priority-toggle-btn">Active</button><button class="priority-toggle-btn">Archived</button></div>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;div class="priority-toggle"&gt;
   &lt;button class="priority-toggle-btn active"&gt;All&lt;/button&gt;
   &lt;button class="priority-toggle-btn"&gt;Active&lt;/button&gt;
   &lt;button class="priority-toggle-btn"&gt;Archived&lt;/button&gt;
 &lt;/div&gt;</code></pre>
+      </div>
     </div>
   </div>
 
   <div class="ds-subsection">
     <p class="ds-label">Expand Buttons</p>
-    <div class="ds-preview">
-      <div class="ds-preview-row">
-        <button class="expand-btn"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6 3l5 5-5 5"/></svg></button>
-        <button class="expand-btn open"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6 3l5 5-5 5"/></svg></button>
+    <div class="ds-component-block" id="block-toggles-expand">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-toggles-expand')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-toggles-expand')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;button class="expand-btn"&gt;&lt;svg ...&gt;&lt;/svg&gt;&lt;/button&gt;
+      <div class="ds-preview">
+        <div class="ds-preview-row">
+          <button class="expand-btn"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6 3l5 5-5 5"/></svg></button>
+          <button class="expand-btn open"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6 3l5 5-5 5"/></svg></button>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;button class="expand-btn"&gt;&lt;svg ...&gt;&lt;/svg&gt;&lt;/button&gt;
 &lt;button class="expand-btn open"&gt;&lt;svg ...&gt;&lt;/svg&gt;&lt;/button&gt;</code></pre>
+      </div>
     </div>
   </div>
 </section>
@@ -1727,63 +2295,84 @@ body { font-family: var(--font); background: var(--surface-bg); color: var(--tex
 
   <div class="ds-subsection">
     <p class="ds-label">Warning Banner</p>
-    <div class="ds-preview">
-      <div class="banner"><div class="banner-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8.58 1.39a.67.67 0 00-1.16 0l-6.5 11.24A.67.67 0 001.5 13.67h13a.67.67 0 00.58-1.04L8.58 1.39z"/></svg></div><div class="banner-content"><div class="banner-title">Warning</div><div class="banner-desc">This is a warning banner message.</div></div></div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;div class="banner"&gt;
+    <div class="ds-component-block" id="block-misc-banner">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-misc-banner')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-misc-banner')">Code</button>
+      </div>
+      <div class="ds-preview">
+        <div class="banner"><div class="banner-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8.58 1.39a.67.67 0 00-1.16 0l-6.5 11.24A.67.67 0 001.5 13.67h13a.67.67 0 00.58-1.04L8.58 1.39z"/></svg></div><div class="banner-content"><div class="banner-title">Warning</div><div class="banner-desc">This is a warning banner message.</div></div></div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;div class="banner"&gt;
   &lt;div class="banner-icon"&gt;&lt;svg ...&gt;&lt;/svg&gt;&lt;/div&gt;
   &lt;div class="banner-content"&gt;
     &lt;div class="banner-title"&gt;Warning&lt;/div&gt;
     &lt;div class="banner-desc"&gt;This is a warning banner message.&lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
+      </div>
     </div>
   </div>
 
   <div class="ds-subsection">
     <p class="ds-label">Status Dots &amp; Utilities</p>
-    <div class="ds-preview">
-      <div style="display:flex; gap:12px; align-items:center;">
-        <span class="status-dot" style="background:var(--green-800);"></span>
-        <span class="status-dot" style="background:var(--red-700);"></span>
-        <button class="copy-btn"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><rect x="5" y="5" width="9" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3 11V3a1 1 0 011-1h8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
-        <span class="av-badge">MetaDefender Core</span>
+    <div class="ds-component-block" id="block-misc-status">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-misc-status')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-misc-status')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;span class="status-dot" style="background:var(--green-800);"&gt;&lt;/span&gt;
+      <div class="ds-preview">
+        <div style="display:flex; gap:12px; align-items:center;">
+          <span class="status-dot" style="background:var(--green-800);"></span>
+          <span class="status-dot" style="background:var(--red-700);"></span>
+          <button class="copy-btn"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><rect x="5" y="5" width="9" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3 11V3a1 1 0 011-1h8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+          <span class="av-badge">MetaDefender Core</span>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;span class="status-dot" style="background:var(--green-800);"&gt;&lt;/span&gt;
 &lt;span class="status-dot" style="background:var(--red-700);"&gt;&lt;/span&gt;
 &lt;button class="copy-btn"&gt;&lt;svg ...&gt;&lt;/svg&gt;&lt;/button&gt;
 &lt;span class="av-badge"&gt;MetaDefender Core&lt;/span&gt;</code></pre>
+      </div>
     </div>
   </div>
 
   <div class="ds-subsection">
     <p class="ds-label">Header Navigation Icons</p>
-    <div class="ds-preview">
-      <div style="display:flex; gap:12px; align-items:center;">
-        <button class="header-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm.75 10.5h-1.5v-1.5h1.5v1.5zm0-3h-1.5V4.5h1.5v4z"/></svg></button>
-        <div style="position:relative; display:inline-block;"><button class="header-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5a2.5 2.5 0 00-2.5 2.5v3.25L4 8.75v1h8v-1L10.5 7.25V4A2.5 2.5 0 008 1.5zM9.5 11h-3a1.5 1.5 0 003 0z"/></svg></button><span class="notif-dot"></span></div>
-        <div class="header-avatar">E</div>
+    <div class="ds-component-block" id="block-misc-header-icons">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-misc-header-icons')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-misc-header-icons')">Code</button>
       </div>
-    </div>
-    <div class="ds-code">
-      <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-      <pre><code>&lt;button class="header-icon"&gt;&lt;svg ...&gt;&lt;/svg&gt;&lt;/button&gt;
+      <div class="ds-preview">
+        <div style="display:flex; gap:12px; align-items:center;">
+          <button class="header-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zm.75 10.5h-1.5v-1.5h1.5v1.5zm0-3h-1.5V4.5h1.5v4z"/></svg></button>
+          <div style="position:relative; display:inline-block;"><button class="header-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5a2.5 2.5 0 00-2.5 2.5v3.25L4 8.75v1h8v-1L10.5 7.25V4A2.5 2.5 0 008 1.5zM9.5 11h-3a1.5 1.5 0 003 0z"/></svg></button><span class="notif-dot"></span></div>
+          <div class="header-avatar">E</div>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;button class="header-icon"&gt;&lt;svg ...&gt;&lt;/svg&gt;&lt;/button&gt;
 &lt;div style="position:relative;"&gt;
   &lt;button class="header-icon"&gt;&lt;svg ...&gt;&lt;/svg&gt;&lt;/button&gt;
   &lt;span class="notif-dot"&gt;&lt;/span&gt;
 &lt;/div&gt;
 &lt;div class="header-avatar"&gt;E&lt;/div&gt;</code></pre>
+      </div>
     </div>
   </div>
 </section>
 
 </main>
 
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markup.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-css.min.js"></script>
 <script>
 // Dark mode toggle
 function toggleDarkMode() {
@@ -1804,6 +2393,16 @@ function copyCode(btn) {
     btn.textContent = 'Copied!';
     setTimeout(function() { btn.textContent = 'Copy'; }, 1500);
   });
+}
+
+// Tab switching for component blocks
+function switchTab(btn, blockId) {
+  var block = document.getElementById(blockId);
+  block.querySelectorAll('.ds-tabs-bar button').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  var target = btn.getAttribute('data-tab');
+  block.querySelector('.ds-preview').style.display = target === 'preview' ? '' : 'none';
+  block.querySelector('.ds-code').style.display = target === 'code' ? '' : 'none';
 }
 
 // Sidebar active tracking
@@ -1832,9 +2431,13 @@ function filterSidebar(q) {
       link.style.display = show ? '' : 'none';
       if (show) visible++;
     });
-    group.querySelector('.ds-sidebar-group-title').style.display = visible ? '' : 'none';
+    var title = group.querySelector('.ds-sidebar-group-title');
+    if (title) title.style.display = visible ? '' : 'none';
   });
 }
+
+// Prism syntax highlighting
+if (window.Prism) Prism.highlightAll();
 </script>
 
 </body>

@@ -1,0 +1,63 @@
+name: Component Request
+description: Request a new component or variant for Blue Line
+labels: ["enhancement", "component"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Component name
+      placeholder: "e.g., Date Picker, Breadcrumbs, Stepper"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What does this component do? What problem does it solve?
+    validations:
+      required: true
+
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use case
+      description: Which product needs this? How will it be used?
+    validations:
+      required: true
+
+  - type: input
+    id: figma
+    attributes:
+      label: Figma link
+      description: Link to the Figma design (if available)
+      placeholder: "https://figma.com/..."
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - Low — nice to have
+        - Medium — needed soon
+        - High — blocking product work
+    validations:
+      required: true
+
+  - type: input
+    id: similar
+    attributes:
+      label: Existing similar component
+      description: Is there already a Blue Line component that does something similar? This helps us avoid duplicates.
+      placeholder: "e.g., .tag-* is similar but doesn't support X"
+
+  - type: textarea
+    id: variants
+    attributes:
+      label: Variants needed
+      description: List any variants, sizes, or states this component needs.
+      placeholder: |
+        - Default
+        - Disabled
+        - With icon
+        - Compact size

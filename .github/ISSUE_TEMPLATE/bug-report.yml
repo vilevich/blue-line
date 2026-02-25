@@ -1,0 +1,82 @@
+name: Bug Report
+description: Report a visual bug or broken behavior in Blue Line
+labels: ["bug"]
+body:
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      description: Which component is affected?
+      options:
+        - Buttons
+        - Forms (input, select, file upload)
+        - Tabs
+        - Tables (data-table)
+        - Cards
+        - Tags
+        - Badges
+        - Chips
+        - Verdicts
+        - Severities
+        - Modals
+        - Slide Panels
+        - Toasts / Banners
+        - Dropdowns (avatar, notification, column, row action)
+        - Search / Filter
+        - Advanced Filters
+        - Pagination
+        - Toggle Switch
+        - Checkbox
+        - Radio
+        - Icons
+        - Tokens (colors, spacing, typography)
+        - Dark Mode
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What should happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: What happens instead?
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: theme
+    attributes:
+      label: Affected theme
+      options:
+        - label: Light mode
+        - label: Dark mode
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser & OS
+      placeholder: "e.g., Chrome 120 on macOS 14"
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: How can we reproduce this issue?
+      value: |
+        1. Go to...
+        2. Click on...
+        3. See...
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: Drag and drop screenshots here if applicable.

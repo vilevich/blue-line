@@ -14,6 +14,15 @@ icons.css       — SVG icon classes (inline background-image)
 tokens.json     — Structured design tokens (Style Dictionary / Figma Tokens format)
 index.html      — Interactive documentation page (self-contained)
 fonts/          — Simplon Norm woff2 (400, 500, 700)
+CHANGELOG.md    — Version history (Keep a Changelog format)
+docs/
+  guides/       — Workflow docs: designer-guide, maintainer-guide, developer-guide, ai-prompts
+  components/   — Per-component documentation (anatomy, variants, states, accessibility)
+  accessibility/ — WCAG overview and checklist
+.github/
+  ISSUE_TEMPLATE/ — Bug report, component request, accessibility issue templates
+  PULL_REQUEST_TEMPLATE.md — PR checklist
+  CODEOWNERS    — Review requirements for core files
 ```
 
 ## Architecture: tokens → components → icons
@@ -74,11 +83,45 @@ Products load all three via `<link>` tags. Product-specific styles go in an inli
 1. Add styles to `components.css` following existing patterns
 2. Include dark mode override colocated with the component (use `[data-theme="dark"]` selector)
 3. Use existing token variables — never hardcode colors or spacing
-4. Add an example to `index.html` docs page
-5. Test in both light and dark mode
+4. Include `:focus-visible` states for all interactive elements
+5. Ensure touch targets are at least 24x24px (WCAG 2.5.8)
+6. Add an example to `index.html` docs page
+7. Create or update `docs/components/[name].md`
+8. Update `CHANGELOG.md`
+9. Test in both light and dark mode
+
+## WCAG Requirements
+
+All components must meet WCAG 2.2 AA:
+- **Focus indicators**: `:focus-visible` on every interactive element (2px solid `var(--primary)`)
+- **Color contrast**: text >= 4.5:1, large text >= 3:1, UI components >= 3:1
+- **Touch targets**: minimum 24x24px
+- **Color-only indicators**: states must have a secondary indicator (border, icon, weight) beyond color
+- **Reduced motion**: transitions covered by the `prefers-reduced-motion` block
+- **High contrast**: Windows forced-colors overrides in the `forced-colors` block
+- Use `--text-muted-accessible` (not `--text-muted`) for placeholder text and low-emphasis foreground text
+
+## Component Maturity
+
+- **Stable** — used in production, API locked, changes are backward-compatible
+- **Beta** — used in at least one product, API mostly stable
+- **Alpha** — new, API may change significantly
+
+## Documentation
+
+- **Guides**: `docs/guides/` — designer, maintainer, developer, and AI prompt workflows
+- **Components**: `docs/components/` — per-component reference with anatomy, variants, states, accessibility
+- **Accessibility**: `docs/accessibility/` — WCAG overview and audit checklist
 
 ## Branch Workflow
 
 - `main` = stable, deployed to GitHub Pages
 - `feature/component-name` = work in progress
 - PRs require reviewer approval before merge to main
+
+## Versioning
+
+Follows [Semantic Versioning](https://semver.org/):
+- **Major** = breaking changes (rare)
+- **Minor** = new components, new tokens
+- **Patch** = bug fixes, doc updates, WCAG improvements

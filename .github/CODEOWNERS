@@ -1,0 +1,10 @@
+# Blue Line Design System — Code Owners
+# Update team handles when repo moves to a GitHub organization
+# (e.g., replace @vilevich with @opswat-ui/ds-leads)
+
+* @vilevich
+
+# Core design system files require owner review
+components.css @vilevich
+tokens.css @vilevich
+icons.css @vilevich

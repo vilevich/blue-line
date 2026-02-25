@@ -1,0 +1,68 @@
+name: Accessibility Issue
+description: Report a WCAG compliance problem
+labels: ["accessibility", "wcag"]
+body:
+  - type: input
+    id: criterion
+    attributes:
+      label: WCAG criterion
+      description: Which WCAG success criterion is affected?
+      placeholder: "e.g., 2.4.7 Focus Visible, 1.4.3 Contrast"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - Critical — users cannot complete tasks
+        - Major — significant barrier for some users
+        - Minor — best practice improvement
+    validations:
+      required: true
+
+  - type: input
+    id: component
+    attributes:
+      label: Component affected
+      placeholder: "e.g., .row-action-btn, .data-table"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What is the accessibility problem?
+    validations:
+      required: true
+
+  - type: textarea
+    id: current
+    attributes:
+      label: Current behavior
+      description: What happens now for users relying on assistive technology or keyboard navigation?
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What should happen to meet WCAG compliance?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: testing
+    attributes:
+      label: Testing method
+      description: How was this discovered?
+      options:
+        - Keyboard navigation
+        - Screen reader (VoiceOver, NVDA, JAWS)
+        - Contrast checker
+        - Automated audit (Lighthouse, axe)
+        - Manual inspection
+        - Other

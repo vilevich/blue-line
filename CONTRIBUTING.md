@@ -99,9 +99,55 @@ The goal: one well-built component in Blue Line, used everywhere.
 Before opening a PR, verify:
 
 - [ ] Uses existing token variables (no hardcoded colors, spacing, or fonts)
-- [ ] Includes `[data-theme="dark"]` override
+- [ ] Includes `[data-theme="dark"]` override (colocated)
 - [ ] Class name follows existing conventions
 - [ ] Example added to `index.html` docs page
+- [ ] `docs/components/` markdown created or updated
 - [ ] Tested in both light and dark mode
-- [ ] Works at all breakpoints
+- [ ] Works at all breakpoints (1920, 1440, 1024, 768)
 - [ ] Focus-visible states included for interactive elements
+- [ ] Touch targets at least 24x24px
+- [ ] No class name collisions with existing components
+- [ ] `CHANGELOG.md` updated
+
+---
+
+## Filing Issues
+
+Use the GitHub issue templates:
+
+- **Bug Report** — for visual bugs or broken behavior
+- **Component Request** — to request a new component or variant
+- **Accessibility Issue** — to report a WCAG compliance problem
+
+---
+
+## Governance
+
+### Decision Rights
+- **New components**: design system owner reviews and approves
+- **Breaking changes**: require explicit approval and a migration note in CHANGELOG
+- **Deprecation**: 2-quarter notice period, documented in CHANGELOG
+
+### Versioning
+Blue Line follows [Semantic Versioning](https://semver.org/):
+- **Major** (3.0.0) — breaking changes to existing class names or token values
+- **Minor** (2.3.0) — new components, new tokens, new variants
+- **Patch** (2.2.3) — bug fixes, doc updates, WCAG improvements
+
+### Release Process
+1. Update `CHANGELOG.md` with changes under `[Unreleased]`
+2. Bump version in `components.css` header comment
+3. Move `[Unreleased]` to a versioned heading (e.g., `[2.3.0] - 2026-03-15`)
+4. Merge to `main` — auto-deploys to GitHub Pages
+5. Verify the live docs site
+
+---
+
+## Detailed Guides
+
+For deeper documentation, see:
+- **[Designer Guide](docs/guides/designer-guide.md)** — starting a product, naming conventions, handoff
+- **[Maintainer Guide](docs/guides/maintainer-guide.md)** — PR review, collision detection, release process
+- **[Developer Guide](docs/guides/developer-guide.md)** — consuming Blue Line, extending, dark mode
+- **[AI Prompts Guide](docs/guides/ai-prompts.md)** — Claude Code prompt templates
