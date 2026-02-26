@@ -151,7 +151,8 @@ select:focus { border-color: var(--primary); outline: none; }
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 8px 12px;
+  height: 32px;
+  padding: 0 12px;
   background: transparent;
   border: 1px solid var(--border-200);
   border-radius: var(--radius);
