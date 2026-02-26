@@ -2175,21 +2175,156 @@ html { scroll-behavior: smooth; }
   </div>
 
   <div class="ds-subsection">
-    <p class="ds-label">Breadcrumb</p>
-    <div class="ds-component-block" id="block-breadcrumb">
+    <p class="ds-label">Page Header — All Variants</p>
+    <div class="ds-component-block" id="block-page-header">
       <div class="ds-tabs-bar">
-        <button class="active" data-tab="preview" onclick="switchTab(this,'block-breadcrumb')">Preview</button>
-        <button data-tab="code" onclick="switchTab(this,'block-breadcrumb')">Code</button>
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-page-header')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-page-header')">Code</button>
       </div>
-      <div class="ds-preview">
-        <div class="detail-breadcrumb"><a href="#">Parent</a><span>&rsaquo;</span><span>Current Page</span></div>
+      <div class="ds-preview" style="display:flex; flex-direction:column; gap:32px;">
+
+        <!-- Skeleton: page with breadcrumbs -->
+        <div class="page-header">
+          <div class="breadcrumb">
+            <span class="skeleton-text"></span>
+            <span class="breadcrumb-sep"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3l5 5-5 5"/></svg></span>
+            <span class="skeleton-text" style="width:80px;"></span>
+            <span class="breadcrumb-sep"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3l5 5-5 5"/></svg></span>
+            <span class="skeleton-text" style="width:100px;"></span>
+          </div>
+          <div class="page-title-row">
+            <span class="skeleton-block"></span>
+            <div class="page-header-actions">
+              <span class="skeleton-btn"></span>
+              <span class="skeleton-btn"></span>
+              <span class="skeleton-btn"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skeleton: page only -->
+        <div class="page-title-row">
+          <span class="skeleton-block"></span>
+          <div class="page-header-actions">
+            <span class="skeleton-btn"></span>
+            <span class="skeleton-btn"></span>
+            <span class="skeleton-btn"></span>
+          </div>
+        </div>
+
+        <!-- Title only with actions -->
+        <div class="page-title-row">
+          <h1 class="page-title">Page Name</h1>
+          <div class="page-header-actions">
+            <button class="btn-outline"><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-right:4px;vertical-align:-2px;"><path d="M2 4h12M5 1v3M11 1v3M2 7h4M2 10h3M9 9l2 2 4-4"/></svg>Filter</button>
+            <button class="btn-primary">Button</button>
+            <button class="btn-primary">Button</button>
+          </div>
+        </div>
+
+        <!-- 1 parent + title -->
+        <div class="page-header">
+          <div class="breadcrumb">
+            <a class="breadcrumb-item" href="#">Page Name</a>
+          </div>
+          <div class="page-title-row">
+            <h1 class="page-title">Page Name</h1>
+            <div class="page-header-actions">
+              <button class="btn-outline">Filter</button>
+              <button class="btn-primary">Button</button>
+              <button class="btn-primary">Button</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 parents + title -->
+        <div class="page-header">
+          <div class="breadcrumb">
+            <a class="breadcrumb-item" href="#">Page Name</a>
+            <span class="breadcrumb-sep"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3l5 5-5 5"/></svg></span>
+            <a class="breadcrumb-item" href="#">Page Name</a>
+          </div>
+          <div class="page-title-row">
+            <h1 class="page-title">Page Name</h1>
+            <div class="page-header-actions">
+              <button class="btn-outline">Filter</button>
+              <button class="btn-primary">Button</button>
+              <button class="btn-primary">Button</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 parents + title -->
+        <div class="page-header">
+          <div class="breadcrumb">
+            <a class="breadcrumb-item" href="#">Page Name</a>
+            <span class="breadcrumb-sep"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3l5 5-5 5"/></svg></span>
+            <a class="breadcrumb-item" href="#">Page Name</a>
+            <span class="breadcrumb-sep"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3l5 5-5 5"/></svg></span>
+            <a class="breadcrumb-item" href="#">Page Name</a>
+          </div>
+          <div class="page-title-row">
+            <h1 class="page-title">Page Name</h1>
+            <div class="page-header-actions">
+              <button class="btn-outline">Filter</button>
+              <button class="btn-primary">Button</button>
+              <button class="btn-primary">Button</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Collapsed (ellipsis) + title -->
+        <div class="page-header">
+          <div class="breadcrumb">
+            <a class="breadcrumb-item" href="#">Page Name</a>
+            <span class="breadcrumb-sep"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3l5 5-5 5"/></svg></span>
+            <span class="breadcrumb-ellipsis">...</span>
+            <span class="breadcrumb-sep"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3l5 5-5 5"/></svg></span>
+            <a class="breadcrumb-item" href="#">Page Name</a>
+            <span class="breadcrumb-sep"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3l5 5-5 5"/></svg></span>
+            <a class="breadcrumb-item" href="#">Page Name</a>
+          </div>
+          <div class="page-title-row">
+            <h1 class="page-title">Page Name</h1>
+            <div class="page-header-actions">
+              <button class="btn-outline">Filter</button>
+              <button class="btn-primary">Button</button>
+              <button class="btn-primary">Button</button>
+            </div>
+          </div>
+        </div>
+
       </div>
       <div class="ds-code" style="display:none">
         <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-        <pre><code class="language-html">&lt;div class="detail-breadcrumb"&gt;
-  &lt;a href="#"&gt;Parent&lt;/a&gt;
-  &lt;span&gt;&amp;rsaquo;&lt;/span&gt;
-  &lt;span&gt;Current Page&lt;/span&gt;
+        <pre><code class="language-html">&lt;!-- Title only --&gt;
+&lt;div class="page-title-row"&gt;
+  &lt;h1 class="page-title"&gt;Page Name&lt;/h1&gt;
+  &lt;div class="page-header-actions"&gt;
+    &lt;button class="btn-outline"&gt;Filter&lt;/button&gt;
+    &lt;button class="btn-primary"&gt;Button&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- With breadcrumbs --&gt;
+&lt;div class="page-header"&gt;
+  &lt;div class="breadcrumb"&gt;
+    &lt;a class="breadcrumb-item" href="#"&gt;Parent&lt;/a&gt;
+    &lt;span class="breadcrumb-sep"&gt;&lt;svg ...chevron-right&gt;&lt;/span&gt;
+    &lt;a class="breadcrumb-item" href="#"&gt;Parent&lt;/a&gt;
+  &lt;/div&gt;
+  &lt;div class="page-title-row"&gt;
+    &lt;h1 class="page-title"&gt;Page Name&lt;/h1&gt;
+    &lt;div class="page-header-actions"&gt;...&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Skeleton --&gt;
+&lt;div class="page-title-row"&gt;
+  &lt;span class="skeleton-block"&gt;&lt;/span&gt;
+  &lt;div class="page-header-actions"&gt;
+    &lt;span class="skeleton-btn"&gt;&lt;/span&gt;
+  &lt;/div&gt;
 &lt;/div&gt;</code></pre>
       </div>
     </div>
@@ -2294,6 +2429,85 @@ html { scroll-behavior: smooth; }
   <p class="ds-section-desc">Banners, status dots, copy buttons, AV badges, and header navigation icons.</p>
 
   <div class="ds-subsection">
+    <p class="ds-label">Info Bar — Sectioned Card</p>
+    <div class="ds-component-block" id="block-misc-infobar">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-misc-infobar')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-misc-infobar')">Code</button>
+      </div>
+      <div class="ds-preview">
+        <div class="info-bar">
+          <div class="info-bar-section">
+            <div class="info-bar-icon">
+              <svg viewBox="0 0 40 40" fill="none">
+                <path d="M11.2711 16.7164C11.2711 17.2103 11.3243 17.6107 11.4174 17.9043C11.5239 18.1979 11.6569 18.5182 11.8431 18.8653C11.9096 18.972 11.9362 19.0788 11.9362 19.1722C11.9362 19.3057 11.8564 19.4392 11.6835 19.5726L10.8455 20.1332C10.7257 20.2133 10.606 20.2533 10.4996 20.2533C10.3666 20.2533 10.2335 20.1866 10.1005 20.0665C9.91429 19.8663 9.75466 19.6527 9.62164 19.4392C9.48862 19.2123 9.35559 18.9587 9.20927 18.6517C8.17169 19.8796 6.86806 20.4936 5.29839 20.4936C4.181 20.4936 3.28975 20.1732 2.63793 19.5326C1.98612 18.892 1.65356 18.0378 1.65356 16.97C1.65356 15.8355 2.05263 14.9146 2.86407 14.2206C3.67551 13.5265 4.753 13.1795 6.12314 13.1795C6.57541 13.1795 7.04099 13.2196 7.53318 13.2863C8.02536 13.353 8.53085 13.4598 9.06294 13.5799V12.6056C9.06294 11.5913 8.85011 10.8839 8.43773 10.4701C8.01206 10.0564 7.29374 9.85618 6.26946 9.85618C5.80388 9.85618 5.325 9.90957 4.83281 10.0297C4.34063 10.1498 3.86175 10.2966 3.39617 10.4835C3.18333 10.5769 3.0237 10.6303 2.93058 10.657C2.83747 10.6837 2.77096 10.697 2.71775 10.697C2.53152 10.697 2.4384 10.5636 2.4384 10.2833V9.62928C2.4384 9.41574 2.465 9.25557 2.53152 9.16215C2.59803 9.06872 2.71775 8.97529 2.90398 8.88186C3.36956 8.64162 3.92826 8.44142 4.58007 8.28126C5.23188 8.10775 5.9236 8.02767 6.65523 8.02767C8.2382 8.02767 9.3955 8.38803 10.1404 9.10876C10.8721 9.82949 11.2445 10.9239 11.2445 12.3921V16.7164H11.2711ZM5.87039 18.7451C6.30937 18.7451 6.76165 18.6651 7.24053 18.5049C7.71941 18.3447 8.14508 18.0511 8.50425 17.6507C8.71708 17.3971 8.87671 17.1168 8.95652 16.7965C9.03634 16.4762 9.08955 16.0891 9.08955 15.6353V15.0748C8.70378 14.9813 8.29141 14.9013 7.86574 14.8479C7.44006 14.7945 7.02769 14.7678 6.61532 14.7678C5.72407 14.7678 5.07225 14.9413 4.63328 15.3017C4.1943 15.662 3.98147 16.1692 3.98147 16.8365C3.98147 17.4638 4.14109 17.931 4.47365 18.2513C4.79291 18.585 5.25849 18.7451 5.87039 18.7451ZM16.5521 20.1866C16.3127 20.1866 16.1531 20.1466 16.0466 20.0531C15.9402 19.973 15.8471 19.7862 15.7673 19.5326L12.6413 9.21553C12.5614 8.9486 12.5215 8.77509 12.5215 8.68166C12.5215 8.46811 12.628 8.34799 12.8408 8.34799H14.1444C14.3972 8.34799 14.5701 8.38803 14.6632 8.48146C14.7696 8.56154 14.8494 8.7484 14.9293 9.00199L17.164 17.8376L19.2392 9.00199C19.3057 8.73505 19.3855 8.56154 19.4919 8.48146C19.5984 8.40138 19.7846 8.34799 20.024 8.34799H21.0882C21.341 8.34799 21.5139 8.38803 21.6203 8.48146C21.7267 8.56154 21.8198 8.7484 21.8731 9.00199L23.9748 17.9443L26.2761 9.00199C26.3559 8.73505 26.449 8.56154 26.5422 8.48146C26.6486 8.40138 26.8215 8.34799 27.0609 8.34799H28.2981C28.5109 8.34799 28.6306 8.45477 28.6306 8.68166C28.6306 8.7484 28.6173 8.81513 28.604 8.89521C28.5907 8.97529 28.5641 9.08207 28.5109 9.22888L25.305 19.5459C25.2252 19.8129 25.1321 19.9864 25.0257 20.0665C24.9193 20.1466 24.7463 20.1999 24.5202 20.1999H23.3762C23.1235 20.1999 22.9505 20.1599 22.8441 20.0665C22.7377 19.973 22.6446 19.7995 22.5914 19.5326L20.5295 10.9239L18.481 19.5193C18.4145 19.7862 18.3346 19.9597 18.2282 20.0531C18.1218 20.1466 17.9356 20.1866 17.6961 20.1866H16.5521ZM33.6456 20.547C32.9539 20.547 32.2621 20.4669 31.597 20.3067C30.9319 20.1466 30.4131 19.973 30.0673 19.7728C29.8544 19.6527 29.7081 19.5193 29.6549 19.3991C29.6017 19.279 29.5751 19.1455 29.5751 19.0254V18.3447C29.5751 18.0645 29.6815 17.931 29.881 17.931C29.9608 17.931 30.0407 17.9443 30.1205 17.971C30.2003 17.9977 30.32 18.0511 30.453 18.1045C30.9053 18.3047 31.3975 18.4649 31.9163 18.5716C32.4484 18.6784 32.9672 18.7318 33.4993 18.7318C34.3373 18.7318 34.9891 18.585 35.4414 18.2913C35.8937 17.9977 36.1331 17.5706 36.1331 17.0234C36.1331 16.6497 36.0134 16.3427 35.774 16.0891C35.5345 15.8355 35.0822 15.6086 34.4304 15.3951L32.5016 14.7945C31.5305 14.4875 30.8122 14.0337 30.3732 13.4331C29.9342 12.8459 29.7081 12.1919 29.7081 11.4978C29.7081 10.9373 29.8278 10.4434 30.0673 10.0163C30.3067 9.58924 30.626 9.21553 31.025 8.9219C31.4241 8.61493 31.8764 8.38803 32.4085 8.22787C32.9406 8.06771 33.4993 8.00098 34.0846 8.00098C34.3772 8.00098 34.6832 8.01432 34.9758 8.05436C35.2818 8.0944 35.5611 8.14779 35.8405 8.20118C36.1065 8.26791 36.3593 8.33465 36.5987 8.41473C36.8381 8.49481 37.0244 8.57489 37.1574 8.65497C37.3436 8.76174 37.4766 8.86852 37.5565 8.98864C37.6363 9.09541 37.6762 9.24223 37.6762 9.42908V10.0564C37.6762 10.3367 37.5698 10.4835 37.3702 10.4835C37.2638 10.4835 37.0909 10.4301 36.8647 10.3233C36.1065 9.9763 35.2552 9.80279 34.3107 9.80279C33.5525 9.80279 32.9539 9.92291 32.5415 10.1765C32.1291 10.4301 31.9163 10.8171 31.9163 11.3644C31.9163 11.7381 32.0493 12.0584 32.3154 12.312C32.5814 12.5656 33.0736 12.8192 33.7786 13.0461L35.6675 13.6467C36.6253 13.9536 37.317 14.3807 37.7294 14.928C38.1418 15.4752 38.3413 16.1025 38.3413 16.7965C38.3413 17.3704 38.2216 17.8909 37.9954 18.3447C37.756 18.7985 37.4367 19.1989 37.0244 19.5193C36.612 19.8529 36.1198 20.0932 35.5478 20.2667C34.9492 20.4535 34.324 20.547 33.6456 20.547Z" fill="#172234"/>
+                <path d="M36.1599 27.0334C31.7834 30.2767 25.4249 31.9984 19.9577 31.9984C12.2956 31.9984 5.39169 29.1556 0.177189 24.4308C-0.235182 24.0571 0.137282 23.5499 0.629467 23.8436C6.26964 27.1269 13.2267 29.1155 20.4233 29.1155C25.2786 29.1155 30.6128 28.1012 35.5214 26.0191C36.253 25.6854 36.8782 26.4996 36.1599 27.0334Z" fill="#FF9900"/>
+                <path d="M37.9826 24.9526C37.4239 24.2319 34.2845 24.6056 32.8612 24.7791C32.4355 24.8325 32.369 24.4588 32.7548 24.1785C35.2556 22.4167 39.366 22.9239 39.8449 23.5111C40.3238 24.1117 39.7119 28.2359 37.3707 30.2112C37.0115 30.5182 36.6656 30.358 36.8253 29.9576C37.3574 28.6363 38.5413 25.66 37.9826 24.9526Z" fill="#FF9900"/>
+              </svg>
+            </div>
+            <div class="info-bar-meta">
+              <div class="info-bar-label">Storage Unit</div>
+              <div class="info-bar-value">AWS Unit Name</div>
+            </div>
+          </div>
+
+          <div class="info-bar-divider"></div>
+
+          <div class="info-bar-section">
+            <div class="info-bar-meta">
+              <div class="info-bar-label">Status</div>
+              <div class="info-bar-value">
+                <span class="tag tag-info">Operational</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-bar-divider"></div>
+
+          <div class="info-bar-section" style="flex:1 0 0; min-width:0;">
+            <div class="info-bar-meta">
+              <div class="info-bar-label">Client ID</div>
+              <div class="info-bar-value">
+                <span class="info-bar-value-text" style="font-family:'Roboto Mono',monospace; font-weight:400;">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</span>
+                <button class="copy-btn"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13 2H6C5.44772 2 5 2.44772 5 3V10C5 10.5523 5.44772 11 6 11H13C13.5523 11 14 10.5523 14 10V3C14 2.44772 13.5523 2 13 2Z"/><path d="M11 12.5V14H3C2.45 14 2 13.55 2 13V5H3.5V12.5H11Z"/></svg></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;div class="info-bar"&gt;
+  &lt;div class="info-bar-section"&gt;
+    &lt;div class="info-bar-icon"&gt;&lt;svg ...&gt;&lt;/svg&gt;&lt;/div&gt;
+    &lt;div class="info-bar-meta"&gt;
+      &lt;div class="info-bar-label"&gt;Storage Unit&lt;/div&gt;
+      &lt;div class="info-bar-value"&gt;AWS Unit Name&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="info-bar-divider"&gt;&lt;/div&gt;
+  &lt;div class="info-bar-section"&gt;
+    &lt;div class="info-bar-meta"&gt;
+      &lt;div class="info-bar-label"&gt;Status&lt;/div&gt;
+      &lt;div class="info-bar-value"&gt;&lt;span class="tag tag-info"&gt;Operational&lt;/span&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="info-bar-divider"&gt;&lt;/div&gt;
+  &lt;div class="info-bar-section"&gt;
+    &lt;div class="info-bar-meta"&gt;
+      &lt;div class="info-bar-label"&gt;Client ID&lt;/div&gt;
+      &lt;div class="info-bar-value"&gt;
+        &lt;span class="info-bar-value-text"&gt;e3b0c442...&lt;/span&gt;
+        &lt;button class="copy-btn"&gt;...&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-subsection">
     <p class="ds-label">Info Banner — All States</p>
     <div class="ds-component-block" id="block-misc-banner">
       <div class="ds-tabs-bar">
@@ -2362,7 +2576,7 @@ html { scroll-behavior: smooth; }
         <div style="display:flex; gap:12px; align-items:center;">
           <span class="status-dot" style="background:var(--green-800);"></span>
           <span class="status-dot" style="background:var(--red-700);"></span>
-          <button class="copy-btn"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><rect x="5" y="5" width="9" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3 11V3a1 1 0 011-1h8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+          <button class="copy-btn"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13 2H6C5.44772 2 5 2.44772 5 3V10C5 10.5523 5.44772 11 6 11H13C13.5523 11 14 10.5523 14 10V3C14 2.44772 13.5523 2 13 2Z"/><path d="M11 12.5V14H3C2.45 14 2 13.55 2 13V5H3.5V12.5H11Z"/></svg></button>
           <span class="av-badge">MetaDefender Core</span>
         </div>
       </div>
