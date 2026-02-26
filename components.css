@@ -145,6 +145,33 @@ select:focus { border-color: var(--primary); outline: none; }
 [data-theme="dark"] .btn-text:hover { color: var(--blue-400); }
 [data-theme="dark"] .btn-text.danger:hover { color: var(--red-400); }
 
+/* --- Menu Button --- */
+.btn-menu {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: transparent;
+  border: 1px solid var(--border-200);
+  border-radius: var(--radius);
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 15.96px;
+  color: var(--text-strong);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-menu:hover { border-color: var(--neutral-500); }
+.btn-menu svg { width: 16px; height: 16px; }
+.btn-menu.active { border-color: var(--primary); }
+.btn-menu.active:hover { border-color: var(--primary); }
+
+[data-theme="dark"] .btn-menu:hover { border-color: var(--neutral-400); }
+[data-theme="dark"] .btn-menu.active { border-color: var(--blue-400); }
+[data-theme="dark"] .btn-menu.active:hover { border-color: var(--blue-400); }
+
 /* --- Brand (Gradient) Button --- */
 .btn-brand {
   padding: 0 16px;
@@ -243,6 +270,7 @@ select:focus { border-color: var(--primary); outline: none; }
 .btn-outline:disabled, .btn-outline.disabled,
 .btn-danger:disabled, .btn-danger.disabled,
 .btn-text:disabled, .btn-text.disabled,
+.btn-menu:disabled, .btn-menu.disabled,
 .btn-brand:disabled, .btn-brand.disabled,
 .btn-icon:disabled, .btn-icon.disabled {
   opacity: 0.5;
@@ -255,6 +283,7 @@ select:focus { border-color: var(--primary); outline: none; }
 .btn-outline:focus-visible,
 .btn-danger:focus-visible,
 .btn-text:focus-visible,
+.btn-menu:focus-visible,
 .btn-brand:focus-visible,
 .btn-icon:focus-visible {
   outline: 2px solid var(--blue-300);
@@ -283,6 +312,7 @@ select:focus { border-color: var(--primary); outline: none; }
 }
 .btn-outline.btn-loading::after,
 .btn-text.btn-loading::after,
+.btn-menu.btn-loading::after,
 .btn-icon.btn-loading::after {
   border-color: rgba(29,107,252,0.2);
   border-top-color: var(--primary);
@@ -293,6 +323,7 @@ select:focus { border-color: var(--primary); outline: none; }
 
 [data-theme="dark"] .btn-outline.btn-loading::after,
 [data-theme="dark"] .btn-text.btn-loading::after,
+[data-theme="dark"] .btn-menu.btn-loading::after,
 [data-theme="dark"] .btn-icon.btn-loading::after { border-color: rgba(111,163,255,0.2); border-top-color: var(--text-link); }
 
 /* --- Skeleton State (text buttons) --- */
@@ -304,6 +335,16 @@ select:focus { border-color: var(--primary); outline: none; }
 }
 .btn-text.skeleton svg { visibility: hidden; }
 [data-theme="dark"] .btn-text.skeleton { background: var(--neutral-800); }
+
+/* --- Skeleton State (menu buttons) --- */
+.btn-menu.skeleton {
+  color: transparent;
+  pointer-events: none;
+  background: var(--neutral-100);
+  border-color: transparent;
+}
+.btn-menu.skeleton svg { visibility: hidden; }
+[data-theme="dark"] .btn-menu.skeleton { background: var(--neutral-800); }
 
 /* ========================================================================
    FORMS
