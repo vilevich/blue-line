@@ -2294,24 +2294,59 @@ html { scroll-behavior: smooth; }
   <p class="ds-section-desc">Banners, status dots, copy buttons, AV badges, and header navigation icons.</p>
 
   <div class="ds-subsection">
-    <p class="ds-label">Warning Banner</p>
+    <p class="ds-label">Info Banner — All States</p>
     <div class="ds-component-block" id="block-misc-banner">
       <div class="ds-tabs-bar">
         <button class="active" data-tab="preview" onclick="switchTab(this,'block-misc-banner')">Preview</button>
         <button data-tab="code" onclick="switchTab(this,'block-misc-banner')">Code</button>
       </div>
-      <div class="ds-preview">
-        <div class="banner"><div class="banner-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8.58 1.39a.67.67 0 00-1.16 0l-6.5 11.24A.67.67 0 001.5 13.67h13a.67.67 0 00.58-1.04L8.58 1.39z"/></svg></div><div class="banner-content"><div class="banner-title">Warning</div><div class="banner-desc">This is a warning banner message.</div></div></div>
+      <div class="ds-preview" style="display:flex; flex-direction:column; gap:12px;">
+        <div class="banner banner-info">
+          <div class="banner-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="3"/></svg></div>
+          <div class="banner-content">
+            <div class="banner-text"><span class="banner-title">Info</span><span class="banner-desc">This is an informational banner message.</span></div>
+            <div class="banner-actions"><a class="banner-link" href="#">Learn More</a></div>
+          </div>
+        </div>
+        <div class="banner banner-alert">
+          <div class="banner-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="3"/></svg></div>
+          <div class="banner-content">
+            <div class="banner-text"><span class="banner-title">Alert</span><span class="banner-desc">This is an alert banner message.</span></div>
+            <div class="banner-actions"><a class="banner-link" href="#">Learn More</a></div>
+          </div>
+        </div>
+        <div class="banner banner-neutral">
+          <div class="banner-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="3"/></svg></div>
+          <div class="banner-content">
+            <div class="banner-text"><span class="banner-title">Neutral</span><span class="banner-desc">This is a neutral banner message.</span></div>
+            <div class="banner-actions"><a class="banner-link" href="#">Learn More</a></div>
+          </div>
+        </div>
+        <div class="banner banner-warn">
+          <div class="banner-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="3"/></svg></div>
+          <div class="banner-content">
+            <div class="banner-text"><span class="banner-title">Warning</span><span class="banner-desc">This is a warning banner message.</span></div>
+            <div class="banner-actions"><a class="banner-link" href="#">Action 1</a><a class="banner-link" href="#">Action 2</a></div>
+          </div>
+        </div>
       </div>
       <div class="ds-code" style="display:none">
         <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-        <pre><code class="language-html">&lt;div class="banner"&gt;
+        <pre><code class="language-html">&lt;div class="banner banner-info"&gt;
   &lt;div class="banner-icon"&gt;&lt;svg ...&gt;&lt;/svg&gt;&lt;/div&gt;
   &lt;div class="banner-content"&gt;
-    &lt;div class="banner-title"&gt;Warning&lt;/div&gt;
-    &lt;div class="banner-desc"&gt;This is a warning banner message.&lt;/div&gt;
+    &lt;div class="banner-text"&gt;
+      &lt;span class="banner-title"&gt;Title&lt;/span&gt;
+      &lt;span class="banner-desc"&gt;Description&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="banner-actions"&gt;
+      &lt;a class="banner-link" href="#"&gt;Learn More&lt;/a&gt;
+    &lt;/div&gt;
   &lt;/div&gt;
-&lt;/div&gt;</code></pre>
+&lt;/div&gt;
+
+&lt;!-- States: .banner-info | .banner-alert | .banner-neutral | .banner-warn --&gt;
+&lt;!-- Multiple actions: 12px gap between links --&gt;</code></pre>
       </div>
     </div>
   </div>
