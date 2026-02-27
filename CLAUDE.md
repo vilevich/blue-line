@@ -66,6 +66,15 @@ Products load all three via `<link>` tags. Product-specific styles go in an inli
 - Component-level dark overrides are colocated in components.css (not a separate file)
 - Always test both themes when adding/changing components
 
+### Buttons
+- All buttons are **32px height** — use explicit `height: 32px` with `padding: 0 Xpx` and flexbox centering. Never use vertical padding to derive height.
+- Gap between buttons: **8px**
+- Internal icon-text gap: **8px**
+- Naming: `.btn-primary`, `.btn-outline`, `.btn-text`, `.btn-menu`, `.btn-icon`, `.btn-brand`, `.btn-danger`
+
+### Page Title Row Rules
+- If the `.page-title-row` has **3 buttons** on the right and one is Refresh, make Refresh an **icon-only button** (`.btn-icon`)
+
 ### Padding & Spacing
 - Card body padding: `var(--space-std)` (20px)
 - Table first/last column outer padding: 20px
@@ -77,6 +86,12 @@ Products load all three via `<link>` tags. Product-specific styles go in an inli
 - Brand font: `var(--font-brand)` → Simplon Norm (sidebar footer, branding only)
 - Buttons, labels, inputs: 14px, weight 500
 - Body text: 14px, weight 400
+- **Font sizes must be rounded** — no decimals. Figma outputs like `15.96px` must be rounded to `16px`.
+
+### Token Pitfalls
+- `--text-link` equals `--blue-800` (#1854c3) — don't use `--blue-800` for hover states, use `--blue-900` (#123d8b)
+- Dark mode hover for `.btn-text`: use `--blue-400`
+- Dark mode hover for `.btn-menu`: border `--neutral-400`
 
 ## Adding New Components
 
