@@ -199,6 +199,17 @@
   --text-strong: var(--neutral-1200);
   --text-subtle: var(--neutral-800);
   --text-muted: var(--neutral-600);
+  --text-light: var(--neutral-500);
+  --text-white: var(--neutral-white);
+  --text-dark: var(--neutral-1200);
+  --icon-strong: var(--neutral-1200);
+  --icon-subtle: var(--neutral-800);
+  --icon-muted: var(--neutral-600);
+  --icon-light: var(--neutral-500);
+  --icon-extra-light: var(--neutral-200);
+  --icon-white: var(--neutral-white);
+  --icon-dark: var(--neutral-1200);
+  --icon-empty: transparent;
   --surface-bg: var(--neutral-100);
   --surface-card: var(--neutral-white);
   --border-200: var(--neutral-300);
@@ -280,7 +291,13 @@ body {
   --text-strong: #ffffff;
   --text-subtle: var(--neutral-500);
   --text-muted: var(--neutral-600);
+  --text-light: var(--neutral-700);
   --text-muted-accessible: #7b8da6; /* WCAG: passes 4.5:1 on dark surfaces */
+  --icon-strong: #ffffff;
+  --icon-subtle: var(--neutral-500);
+  --icon-muted: var(--neutral-600);
+  --icon-light: var(--neutral-700);
+  --icon-extra-light: var(--neutral-900);
   --primary: #4d8dff;
   --primary-hover: #3a7df5;
 

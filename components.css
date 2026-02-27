@@ -604,6 +604,7 @@ select:focus { border-color: var(--primary); outline: none; }
 .audit-card-actions { display: flex; align-items: center; gap: 8px; }
 /* Bulk action bar: hidden by default, shown when header is .selected */
 .audit-card-header .card-bulk-actions { display: none; }
+.audit-card-header.selected { background: var(--blue-100); }
 .audit-card-header.selected .audit-card-title { display: none; }
 .audit-card-header.selected .audit-card-actions { display: none; }
 .audit-card-header.selected .card-bulk-actions { display: flex; }
@@ -659,7 +660,6 @@ select:focus { border-color: var(--primary); outline: none; }
   font-size: 13px; font-weight: 500; color: var(--primary);
   white-space: nowrap;
 }
-.card-bulk-actions .btn-text { font-size: 13px; }
 .card-bulk-divider {
   width: 1px; height: 20px; background: var(--border-200);
   margin: 0 4px; flex-shrink: 0;
@@ -2304,6 +2304,11 @@ td:has(+ .col-action) { padding-right: 20px !important; }
   align-items: center;
   gap: 8px;
   flex-shrink: 0;
+}
+.banner-actions-divider {
+  width: 1px;
+  height: 12px;
+  background: var(--neutral-800);
 }
 .banner-link {
   font-size: 14px;
