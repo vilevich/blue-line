@@ -13,13 +13,16 @@ Tables display structured data in rows and columns. Blue Line uses a two-type ta
 - **`<tbody>` / `<td>`** -- Data cells (56px tall, 14px regular weight, text truncation)
 - **`.audit-pagination`** -- Pagination bar at the card bottom
 
+### Sticky columns (all tables)
+
+- **`.col-cb`** -- Checkbox column, sticky left. Auto-width (`1%`) in small tables, fixed 48px in big tables.
+- **`.col-action`** -- Action column, sticky right (56px). Gets a left border separator only in big tables.
+
 ### Big table additions
 
 - **`.table-scroll`** -- Overflow wrapper around the `<table>` enabling horizontal scroll
-- **`.table-fixed`** -- Added to `.data-table` to enable `table-layout: fixed` and pinned columns
-- **`.col-cb`** -- Checkbox column, sticky left (48px)
-- **`.col-pinned`** -- Name/identifier column, sticky left (after checkbox if present)
-- **`.col-action`** -- Action column, sticky right (56px)
+- **`.table-fixed`** -- Added to `.data-table` to enable `table-layout: fixed`, fixed column widths, and border separators
+- **`.col-pinned`** -- Name/identifier column, sticky left (after checkbox if present). Big tables only.
 
 ### Card header variants
 
@@ -45,9 +48,9 @@ Tables display structured data in rows and columns. Blue Line uses a two-type ta
 | Column | Class | Behavior |
 |--------|-------|----------|
 | Standard | (none) | Default padding and text truncation |
-| Checkbox | `.col-cb` | 48px, sticky left, center-aligned. Contains a `.cb` checkbox. |
-| Pinned | `.col-pinned` | Sticky left (offset 48px when preceded by `.col-cb`). Has right border separator. |
-| Action | `.col-action` | 56px, sticky right (in big tables) or fixed-width (in small tables). Center-aligned. |
+| Checkbox | `.col-cb` | Sticky left for all tables. Auto-width in small tables, 48px in big tables. Contains a `.cb` checkbox. |
+| Pinned | `.col-pinned` | Sticky left (offset 48px when preceded by `.col-cb`). Has right border separator. Big tables only. |
+| Action | `.col-action` | 56px, sticky right for all tables. Gets left border separator only in big tables. Center-aligned. |
 
 ### Row action patterns
 
@@ -112,7 +115,7 @@ When `[data-theme="dark"]` is set:
 - Borders use `var(--border-card)` (dark variant)
 - Row hover uses `var(--surface-hover)` (dark overlay)
 - Selected rows use `rgba(29,107,252,0.10)`, selected+hover uses `rgba(29,107,252,0.16)`
-- Pinned columns (`.col-cb`, `.col-pinned`, `.col-action`) maintain their backgrounds through dark mode sticky overrides
+- Sticky columns (`.col-cb`, `.col-pinned`, `.col-action`) inherit correct backgrounds from `td`/`th` dark mode rules automatically
 - Bulk selection header uses `rgba(29,107,252,0.12)` background
 - Row action menus get dark surface and border colors
 
@@ -160,7 +163,7 @@ When `[data-theme="dark"]` is set:
 - Don't use `.table-fixed` without wrapping in `.table-scroll` -- the table will overflow its card
 - Don't use auto-layout (small table) for 6+ columns -- it will compress columns unreadably
 - Don't place interactive elements inside truncated cells -- they may become unreachable
-- Don't forget to update pinned column backgrounds on hover/select states if adding custom columns
+- Don't set explicit `background` on sticky columns -- it conflicts with hover/selected state rules. Let the `td`/`th` base rules handle it
 - Don't use `.audit-table` for non-audit data -- use `.data-table` with appropriate column classes
 
 ## Code Examples

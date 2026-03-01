@@ -9,6 +9,11 @@ This project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Changed
+- **Tables**: `.col-cb` and `.col-action` are now sticky (left/right) for all `.data-table` tables, not just `.table-fixed`. Hover, selected, and dark mode states handled automatically by existing `td`/`th` rules — no explicit overrides needed.
+- **Tables**: `.table-fixed .col-cb` simplified to width override only; `.table-fixed .col-action` simplified to border-left only. Removed 16 lines of redundant hover/selected/dark-mode overrides.
+- **Layout**: `.table-page .table-scroll` now gets flex fill alongside `.audit-table-scroll`, so table pages can use either scroll wrapper class.
+
 ### Added
 - GitHub issue templates (bug report, component request, accessibility issue)
 - Pull request template with review checklist

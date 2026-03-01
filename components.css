@@ -841,17 +841,23 @@ select:focus { border-color: var(--primary); outline: none; }
 [data-theme="dark"] .data-table tbody tr.selected td { background: rgba(29,107,252,0.10); }
 [data-theme="dark"] .data-table tbody tr.selected:hover td { background: rgba(29,107,252,0.16); }
 
-/* Checkbox column — fits to content for all tables */
-.col-cb { width: 1%; white-space: nowrap; padding: 0 12px 0 20px !important; }
+/* Checkbox column — fits to content, sticky left for all tables */
+.col-cb {
+  width: 1%; white-space: nowrap; padding: 0 12px 0 20px !important;
+  position: sticky; left: 0; z-index: 2;
+}
 .col-cb + th, .col-cb + td { padding-left: 12px !important; }
+.data-table thead th.col-cb { z-index: 3; }
 
-/* Action column — always fixed width, not pinned by default */
+/* Action column — fixed width, sticky right for all tables */
 .col-action,
 .data-table .col-action {
   width: 56px; min-width: 56px; max-width: 56px;
   text-align: center; padding: 0 !important;
   overflow: visible;
+  position: sticky; right: 0; z-index: 2;
 }
+.data-table thead th.col-action { z-index: 3; }
 /* Column before action gets 20px right to match card edge inset */
 td:has(+ .col-action) { padding-right: 20px !important; }
 
@@ -862,28 +868,16 @@ td:has(+ .col-action) { padding-right: 20px !important; }
  */
 .data-table.table-fixed { table-layout: fixed; }
 
-/* Checkbox column — pinned left */
+/* Checkbox column — fixed width in big tables */
 .table-fixed .col-cb {
   width: 48px; min-width: 48px; max-width: 48px;
-  padding: 0 12px 0 20px; text-align: center;
-  overflow: visible; background: var(--surface-card);
-  position: sticky; left: 0; z-index: 2;
+  text-align: center; overflow: visible;
 }
-.table-fixed thead th.col-cb { padding-right: 12px; z-index: 3; }
-.table-fixed tbody tr:hover .col-cb { background: var(--surface-hover); }
-.table-fixed tbody tr.selected .col-cb { background: var(--blue-100); }
-.table-fixed tbody tr.selected:hover .col-cb { background: var(--blue-200); }
 
-/* Action column — pinned right, border-left only in big tables */
+/* Action column — border-left separator only in big tables */
 .table-fixed .col-action {
-  position: sticky; right: 0; z-index: 2;
-  background: var(--surface-card);
   border-left: 1px solid var(--border-card);
 }
-.table-fixed thead th.col-action { z-index: 3; }
-.table-fixed tbody tr:hover .col-action { background: var(--surface-hover); }
-.table-fixed tbody tr.selected .col-action { background: var(--blue-100); }
-.table-fixed tbody tr.selected:hover .col-action { background: var(--blue-200); }
 
 /* Actions cell layout (multiple action icons) */
 .data-table .col-actions-cell {
@@ -932,15 +926,9 @@ td:has(+ .col-action) { padding-right: 20px !important; }
 [data-theme="dark"] .data-table thead th { background: var(--surface-card); color: var(--text-subtle); border-color: var(--border-card); }
 [data-theme="dark"] .data-table tbody td { background: var(--surface-card); border-color: var(--border-card); color: var(--text-subtle); }
 [data-theme="dark"] .data-table tbody tr:hover td { background: var(--surface-hover); }
-/* Dark mode: pinned columns in big tables */
-[data-theme="dark"] .table-fixed .col-cb { background: var(--surface-card); }
-[data-theme="dark"] .table-fixed tbody tr:hover .col-cb { background: var(--surface-hover); }
-[data-theme="dark"] .table-fixed tbody tr.selected .col-cb { background: rgba(29,107,252,0.10); }
-[data-theme="dark"] .table-fixed tbody tr.selected:hover .col-cb { background: rgba(29,107,252,0.16); }
-[data-theme="dark"] .table-fixed .col-action { background: var(--surface-card); border-left-color: var(--border-card); }
-[data-theme="dark"] .table-fixed tbody tr:hover .col-action { background: var(--surface-hover); }
-[data-theme="dark"] .table-fixed tbody tr.selected .col-action { background: rgba(29,107,252,0.10); }
-[data-theme="dark"] .table-fixed tbody tr.selected:hover .col-action { background: rgba(29,107,252,0.16); }
+/* Dark mode: sticky columns inherit backgrounds from .data-table td/th dark rules.
+   Hover/selected states covered by .data-table tbody tr:hover td etc.
+   Only border tokens need explicit dark override for .table-fixed separator. */
 
 /* --- Audit Table --- */
 .audit-table { width: 100%; border-collapse: separate; border-spacing: 0; }
@@ -1340,7 +1328,8 @@ td:has(+ .col-action) { padding-right: 20px !important; }
 .page-view.table-page { display: none; flex-direction: column; height: calc(100vh - 56px - 40px); }
 .page-view.table-page.active { display: flex; }
 .table-page .audit-card { flex: 1; display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
-.table-page .audit-table-scroll { flex: 1; overflow: auto; min-height: 0; }
+.table-page .audit-table-scroll,
+.table-page .table-scroll { flex: 1; overflow: auto; min-height: 0; }
 .table-page .audit-pagination { flex-shrink: 0; min-height: 72px; }
 
 /* --- Segmented Toggle --- */
