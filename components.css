@@ -804,7 +804,10 @@ select:focus { border-color: var(--primary); outline: none; }
 .col-dropdown-item:hover { background: var(--surface-bg); }
 .col-dropdown-item.active { color: var(--primary); font-weight: 500; }
 .col-dropdown-item svg { width: 16px; height: 16px; flex-shrink: 0; }
+.col-dropdown-item.disabled { opacity: 0.35; pointer-events: none; }
 .col-dropdown-divider { height: 1px; background: var(--border-200); margin: 4px 0; }
+.col-dropdown-pin-header { display: flex; justify-content: space-between; align-items: center; padding: 6px 12px; font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+.col-dropdown-pin-count { font-weight: 500; color: var(--text-subtle); }
 
 /* --- Custom Checkbox --- */
 .cb {
@@ -837,6 +840,12 @@ select:focus { border-color: var(--primary); outline: none; }
 
 /* --- Table Scroll Wrapper --- */
 .table-scroll { overflow-x: auto; }
+
+/* --- Thead compact on vertical scroll (JS toggles .compact on thead) --- */
+.audit-table-scroll thead th,
+.table-scroll thead th { transition: height 0.2s ease; }
+.audit-table-scroll thead.compact th,
+.table-scroll thead.compact th { height: 40px; }
 
 /* --- Data Table (base — shared by all tables) --- */
 .data-table {
@@ -903,7 +912,11 @@ select:focus { border-color: var(--primary); outline: none; }
 }
 .data-table thead th.col-action { z-index: 3; }
 /* Column before action gets 20px right to match card edge inset */
-td:has(+ .col-action) { padding-right: 20px !important; }
+td:has(+ .col-action),
+th:has(+ .col-action) { padding-right: 20px !important; }
+/* Last content cell when no col-action present (e.g. audit-style tables) */
+td:last-child:not(.col-action):not(.col-expand):not(.col-cb):not(.col-details),
+th:last-child:not(.col-action):not(.col-expand):not(.col-cb):not(:empty) { padding-right: 20px !important; }
 
 /*
  * Big Table (.table-fixed)
@@ -1035,6 +1048,20 @@ td:has(+ .col-action) { padding-right: 20px !important; }
 [data-theme="dark"] .table-fixed tbody tr:hover .col-pinned { background: var(--surface-hover); }
 [data-theme="dark"] .table-fixed tbody tr.selected .col-pinned { background: rgba(29,107,252,0.10); }
 [data-theme="dark"] .table-fixed tbody tr.selected:hover .col-pinned { background: rgba(29,107,252,0.16); }
+
+/* --- User-Pinned Columns (big tables — dynamic via JS) --- */
+.table-fixed .col-user-pinned {
+  position: sticky; z-index: 2; background: var(--surface-card);
+  border-right: 1px solid var(--border-card);
+}
+.table-fixed thead th.col-user-pinned { z-index: 3; }
+.table-fixed tbody tr:hover .col-user-pinned { background: var(--surface-hover); }
+.table-fixed tbody tr.selected .col-user-pinned { background: var(--blue-100); }
+.table-fixed tbody tr.selected:hover .col-user-pinned { background: var(--blue-200); }
+[data-theme="dark"] .table-fixed .col-user-pinned { background: var(--surface-card); border-right-color: var(--border-card); }
+[data-theme="dark"] .table-fixed tbody tr:hover .col-user-pinned { background: var(--surface-hover); }
+[data-theme="dark"] .table-fixed tbody tr.selected .col-user-pinned { background: rgba(29,107,252,0.10); }
+[data-theme="dark"] .table-fixed tbody tr.selected:hover .col-user-pinned { background: rgba(29,107,252,0.16); }
 
 /* --- Table User Cell --- */
 .audit-user { display: flex; align-items: center; gap: 8px; }
