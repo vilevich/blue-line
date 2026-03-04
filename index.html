@@ -2064,15 +2064,159 @@ html { scroll-behavior: smooth; }
     </div>
   </div>
 
+  <div class="ds-subsection">
+    <p class="ds-label">Content Card — Full Table (with pagination)</p>
+    <div class="ds-component-block" id="block-tables-content-card">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-tables-content-card')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-tables-content-card')">Code</button>
+      </div>
+      <div class="ds-preview" style="padding:20px; background:var(--surface-bg);">
+        <div class="audit-card">
+          <div class="audit-card-header">
+            <div class="audit-card-title"><h3>Accounts</h3><span class="count">48</span></div>
+            <div class="audit-card-actions">
+              <div class="audit-search"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6.5" cy="6.5" r="5.5"/><path d="M11 11l4 4"/></svg><input type="text" placeholder="Search accounts..."></div>
+              <button class="audit-filter-btn"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M1 2h14l-5 6v5l-4 2V8z"/></svg> Filters</button>
+              <button class="btn-primary"><span class="icon icon-add icon-sm"></span> Add Account</button>
+            </div>
+          </div>
+          <div class="table-scroll">
+            <table class="data-table table-fixed" style="min-width:700px;">
+              <thead><tr>
+                <th class="col-cb"><div class="cb"><svg class="cb-check" viewBox="0 0 16 16" fill="none"><path d="M6.75 11.75c-.26 0-.51-.1-.71-.29l-2.75-2.75a1.003 1.003 0 011.41-1.41l2.04 2.04 5.05-5.05a1.003 1.003 0 011.41 1.41l-5.75 5.75c-.2.2-.45.29-.71.29z" fill="white"/></svg></div></th>
+                <th class="col-pinned" style="width:30%;">Name</th>
+                <th style="width:15%;">Status</th>
+                <th style="width:20%;">Provider</th>
+                <th style="width:25%;">Last Scan</th>
+                <th class="col-action"></th>
+              </tr></thead>
+              <tbody>
+                <tr><td class="col-cb"><div class="cb"><svg class="cb-check" viewBox="0 0 16 16" fill="none"><path d="M6.75 11.75c-.26 0-.51-.1-.71-.29l-2.75-2.75a1.003 1.003 0 011.41-1.41l2.04 2.04 5.05-5.05a1.003 1.003 0 011.41 1.41l-5.75 5.75c-.2.2-.45.29-.71.29z" fill="white"/></svg></div></td><td class="col-pinned">Production AWS</td><td><span class="tag tag-success">Connected</span></td><td>Amazon S3</td><td>2026-01-15 14:32</td><td class="col-action"><button class="row-action-btn"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="3" r="1.5"/><circle cx="8" cy="8" r="1.5"/><circle cx="8" cy="13" r="1.5"/></svg></button></td></tr>
+                <tr><td class="col-cb"><div class="cb"><svg class="cb-check" viewBox="0 0 16 16" fill="none"><path d="M6.75 11.75c-.26 0-.51-.1-.71-.29l-2.75-2.75a1.003 1.003 0 011.41-1.41l2.04 2.04 5.05-5.05a1.003 1.003 0 011.41 1.41l-5.75 5.75c-.2.2-.45.29-.71.29z" fill="white"/></svg></div></td><td class="col-pinned">Staging SharePoint</td><td><span class="tag tag-alert">Issues Found</span></td><td>SharePoint</td><td>2026-01-14 09:11</td><td class="col-action"><button class="row-action-btn"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="3" r="1.5"/><circle cx="8" cy="8" r="1.5"/><circle cx="8" cy="13" r="1.5"/></svg></button></td></tr>
+                <tr><td class="col-cb"><div class="cb"><svg class="cb-check" viewBox="0 0 16 16" fill="none"><path d="M6.75 11.75c-.26 0-.51-.1-.71-.29l-2.75-2.75a1.003 1.003 0 011.41-1.41l2.04 2.04 5.05-5.05a1.003 1.003 0 011.41 1.41l-5.75 5.75c-.2.2-.45.29-.71.29z" fill="white"/></svg></div></td><td class="col-pinned">Dev Alibaba</td><td><span class="tag tag-success">Connected</span></td><td>Alibaba Cloud</td><td>2026-01-13 22:05</td><td class="col-action"><button class="row-action-btn"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="3" r="1.5"/><circle cx="8" cy="8" r="1.5"/><circle cx="8" cy="13" r="1.5"/></svg></button></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="audit-pagination">
+            <div class="audit-pagination-left">
+              <select style="height:28px; font-size:13px;"><option>20</option><option>50</option><option>100</option></select>
+              <span style="font-size:13px; color:var(--text-muted);">items per page</span>
+            </div>
+            <div class="audit-pagination-right">
+              <button class="audit-page-btn" disabled><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M10 3L5 8l5 5"/></svg></button>
+              <select class="audit-page-select" style="height:28px; font-size:13px;"><option>1 of 3</option></select>
+              <button class="audit-page-btn"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6 3l5 5-5 5"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;!-- Content Card: header + table + pagination --&gt;
+&lt;div class="audit-card"&gt;
+  &lt;div class="audit-card-header"&gt;
+    &lt;div class="audit-card-title"&gt;
+      &lt;h3&gt;Accounts&lt;/h3&gt;&lt;span class="count"&gt;48&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="audit-card-actions"&gt;
+      &lt;div class="audit-search"&gt;...&lt;/div&gt;
+      &lt;button class="audit-filter-btn"&gt;Filters&lt;/button&gt;
+      &lt;button class="btn-primary"&gt;Add Account&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="table-scroll"&gt;
+    &lt;table class="data-table table-fixed" style="min-width:900px;"&gt;
+      &lt;thead&gt;...&lt;/thead&gt;
+      &lt;tbody&gt;...&lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/div&gt;
+  &lt;div class="audit-pagination"&gt;
+    &lt;div class="audit-pagination-left"&gt;
+      &lt;select&gt;&lt;option&gt;20&lt;/option&gt;&lt;option&gt;50&lt;/option&gt;&lt;option&gt;100&lt;/option&gt;&lt;/select&gt;
+      &lt;span&gt;items per page&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="audit-pagination-right"&gt;
+      &lt;button class="audit-page-btn"&gt;...&lt;/button&gt;
+      &lt;select class="audit-page-select"&gt;&lt;option&gt;1 of 3&lt;/option&gt;&lt;/select&gt;
+      &lt;button class="audit-page-btn"&gt;...&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-subsection">
+    <p class="ds-label">Content Card — Small Table (no footer, &le;10 items)</p>
+    <div class="ds-component-block" id="block-tables-content-card-nf">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-tables-content-card-nf')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-tables-content-card-nf')">Code</button>
+      </div>
+      <div class="ds-preview" style="padding:20px; background:var(--surface-bg);">
+        <div class="audit-card no-footer">
+          <div class="audit-card-header">
+            <div class="audit-card-title"><h3>Scan Pools</h3><span class="count">3</span></div>
+            <div class="audit-card-actions">
+              <button class="btn-outline">Add Pool</button>
+            </div>
+          </div>
+          <div class="table-scroll">
+            <table class="data-table">
+              <thead><tr>
+                <th>Pool Name</th>
+                <th>Engines</th>
+                <th>Status</th>
+                <th class="col-action"></th>
+              </tr></thead>
+              <tbody>
+                <tr><td>Default Pool</td><td>12</td><td><span class="tag tag-success">Active</span></td><td class="col-action"><button class="row-action-btn"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="3" r="1.5"/><circle cx="8" cy="8" r="1.5"/><circle cx="8" cy="13" r="1.5"/></svg></button></td></tr>
+                <tr><td>High Priority</td><td>8</td><td><span class="tag tag-success">Active</span></td><td class="col-action"><button class="row-action-btn"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="3" r="1.5"/><circle cx="8" cy="8" r="1.5"/><circle cx="8" cy="13" r="1.5"/></svg></button></td></tr>
+                <tr><td>Archive Scan</td><td>4</td><td><span class="tag tag-inactive">Inactive</span></td><td class="col-action"><button class="row-action-btn"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="3" r="1.5"/><circle cx="8" cy="8" r="1.5"/><circle cx="8" cy="13" r="1.5"/></svg></button></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="audit-pagination"><!-- hidden by .no-footer --></div>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;!-- Content Card: no footer when ≤10 items --&gt;
+&lt;div class="audit-card no-footer"&gt;
+  &lt;div class="audit-card-header"&gt;
+    &lt;div class="audit-card-title"&gt;
+      &lt;h3&gt;Scan Pools&lt;/h3&gt;&lt;span class="count"&gt;3&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="audit-card-actions"&gt;
+      &lt;button class="btn-outline"&gt;Add Pool&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="table-scroll"&gt;
+    &lt;table class="data-table"&gt;
+      &lt;thead&gt;...&lt;/thead&gt;
+      &lt;tbody&gt;...&lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </div>
+  </div>
+
   <table class="ds-table">
     <thead><tr><th>Class</th><th>Description</th></tr></thead>
     <tbody>
+      <tr><td><code>.audit-card</code></td><td>Card wrapper — background, border, radius, shadow, overflow hidden</td></tr>
+      <tr><td><code>.audit-card-header</code></td><td>Card header — title, count, search, filter, actions (56px)</td></tr>
+      <tr><td><code>.audit-card-actions</code></td><td>Right-aligned header action buttons</td></tr>
+      <tr><td><code>.no-footer</code></td><td>Modifier on <code>.audit-card</code> — hides pagination when &le;10 items</td></tr>
       <tr><td><code>.data-table</code></td><td>Base table — auto layout, even column widths (small tables)</td></tr>
       <tr><td><code>.table-fixed</code></td><td>Modifier — enables <code>table-layout: fixed</code>, pinned columns, horizontal scroll (big tables)</td></tr>
       <tr><td><code>.table-scroll</code></td><td>Horizontal scroll wrapper — required around all tables</td></tr>
-      <tr><td><code>.col-cb</code></td><td>48px checkbox column — sticky left in <code>.table-fixed</code></td></tr>
+      <tr><td><code>.col-cb</code></td><td>48px checkbox column — sticky left</td></tr>
       <tr><td><code>.col-pinned</code></td><td>Sticky left name column with right border — only in <code>.table-fixed</code></td></tr>
-      <tr><td><code>.col-action</code></td><td>56px action column — sticky right with left border in <code>.table-fixed</code></td></tr>
+      <tr><td><code>.col-action</code></td><td>56px action column — sticky right</td></tr>
+      <tr><td><code>.audit-pagination</code></td><td>Table footer — page size selector + page navigation (56px)</td></tr>
       <tr><td><code>.filter-icon</code></td><td>Sort/filter icon next to column header</td></tr>
       <tr><td><code>.row-action-btn</code></td><td>Three-dot action menu button in table rows</td></tr>
       <tr><td><code>.audit-user</code></td><td>User avatar + name cell layout</td></tr>

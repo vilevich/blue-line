@@ -12,6 +12,7 @@ This project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Changed
 - **Tables**: `.col-cb` and `.col-action` are now sticky (left/right) for all `.data-table` tables, not just `.table-fixed`. Hover, selected, and dark mode states handled automatically by existing `td`/`th` rules — no explicit overrides needed.
 - **Pagination**: Default items per page changed from 10 to **20** for single-table pages. Added `.no-footer` modifier on `.audit-card` to hide pagination when ≤10 items (also rounds bottom corners of table scroll area). Documented in pagination guideline and tables.md.
+- **Tables**: Added assembled Content Card demos — full card with header/search/filter/table/pagination, and small card with `.no-footer` (≤10 items). Expanded class reference table with card-level and pagination classes.
 - **Tables**: `.table-fixed .col-cb` simplified to width override only; `.table-fixed .col-action` simplified to border-left only. Removed 16 lines of redundant hover/selected/dark-mode overrides.
 - **Layout**: `.table-page .table-scroll` now gets flex fill alongside `.audit-table-scroll`, so table pages can use either scroll wrapper class.
 
