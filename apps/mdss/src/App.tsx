@@ -1,7 +1,55 @@
 import { useState } from 'react'
+import {
+  Icon,
+  Button,
+  Checkbox,
+  Toggle,
+  ToggleRow,
+  RadioGroup,
+  RadioOption,
+  Tag,
+  TagGroup,
+  BadgeDot,
+  BadgeNumber,
+  Chip,
+  Skeleton,
+  Tooltip,
+} from '@opswat/blue-line'
+import type { IconName, MultiColorIconName } from '@opswat/blue-line'
+
+const singleColorIcons: IconName[] = [
+  'chevron-down', 'chevron-up', 'chevron-left', 'chevron-right',
+  'filter', 'search', 'action', 'add', 'check', 'minus',
+  'edit', 'control-h', 'control-v', 'close', 'drag-v',
+]
+
+const multiColorIcons: MultiColorIconName[] = [
+  'signal-0', 'signal-1', 'signal-2', 'signal-3', 'signal-4',
+  'fb-info', 'fb-success', 'fb-error',
+]
+
+const semanticVariants = ['neutral', 'inactive', 'secure', 'success', 'accent', 'guide', 'alert', 'warn', 'caution'] as const
+const keywordColors = ['inactive', 'secure', 'success', 'accent', 'guide', 'alert', 'warn', 'caution'] as const
 
 export function App() {
   const [dark, setDark] = useState(false)
+
+  // Checkbox state
+  const [cb1, setCb1] = useState(false)
+  const [cb2, setCb2] = useState(true)
+  const [cb3, setCb3] = useState(false)
+
+  // Toggle state
+  const [tog1, setTog1] = useState(false)
+  const [tog2, setTog2] = useState(true)
+  const [togRow, setTogRow] = useState(false)
+
+  // Radio state
+  const [radio1, setRadio1] = useState('a')
+  const [radio2, setRadio2] = useState('x')
+
+  // Chip removable
+  const [chipVisible, setChipVisible] = useState(true)
 
   function toggleTheme() {
     setDark(!dark)
@@ -11,16 +59,241 @@ export function App() {
   return (
     <div className="min-h-screen bg-[var(--surface-bg)] text-[var(--text-strong)] p-std">
       <header className="flex items-center justify-between mb-xl">
-        <h1 className="text-h2 font-medium">Blue Line Token Verification</h1>
-        <button
-          onClick={toggleTheme}
-          className="h-8 px-3 rounded bg-[var(--primary)] text-[var(--text-on-fill)] font-medium text-label cursor-pointer"
-        >
+        <h1 className="text-h2 font-medium">Blue Line Component Verification</h1>
+        <Button variant="primary" onClick={toggleTheme}>
           {dark ? 'Light Mode' : 'Dark Mode'}
-        </button>
+        </Button>
       </header>
 
-      {/* Color Palette — uses inline styles because Tailwind cannot detect dynamic class names */}
+      {/* ──────────── COMPONENT SECTIONS ──────────── */}
+
+      {/* Icons */}
+      <section className="mb-xl">
+        <h2 className="text-h3 font-medium mb-sm">Icons</h2>
+
+        <p className="text-note text-[var(--text-muted)] mb-xs">Single-color (md)</p>
+        <div className="flex flex-wrap gap-sm mb-sm">
+          {singleColorIcons.map(name => (
+            <div key={name} className="flex flex-col items-center gap-tiny">
+              <Icon name={name} size="md" />
+              <span className="text-inset text-[var(--text-muted)]">{name}</span>
+            </div>
+          ))}
+        </div>
+
+        <p className="text-note text-[var(--text-muted)] mb-xs">Multi-color</p>
+        <div className="flex flex-wrap gap-sm mb-sm">
+          {multiColorIcons.map(name => (
+            <div key={name} className="flex flex-col items-center gap-tiny">
+              <Icon name={name} size="md" />
+              <span className="text-inset text-[var(--text-muted)]">{name}</span>
+            </div>
+          ))}
+        </div>
+
+        <p className="text-note text-[var(--text-muted)] mb-xs">Size scale (chevron-down)</p>
+        <div className="flex items-end gap-sm">
+          {(['sm', 'md', 'lg', 'xl'] as const).map(size => (
+            <div key={size} className="flex flex-col items-center gap-tiny">
+              <Icon name="chevron-down" size={size} />
+              <span className="text-inset text-[var(--text-muted)]">{size}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Buttons */}
+      <section className="mb-xl">
+        <h2 className="text-h3 font-medium mb-sm">Buttons</h2>
+
+        <p className="text-note text-[var(--text-muted)] mb-xs">All variants</p>
+        <div className="flex flex-wrap items-center gap-xs mb-sm">
+          <Button variant="primary">Primary</Button>
+          <Button variant="outline">Outline</Button>
+          <Button variant="text">Text</Button>
+          <Button variant="menu">Menu</Button>
+          <Button variant="icon" icon="edit" />
+          <Button variant="brand">Brand</Button>
+          <Button variant="danger">Danger</Button>
+        </div>
+
+        <p className="text-note text-[var(--text-muted)] mb-xs">Danger modifier</p>
+        <div className="flex flex-wrap items-center gap-xs mb-sm">
+          <Button variant="outline" danger>Outline Danger</Button>
+          <Button variant="text" danger>Text Danger</Button>
+        </div>
+
+        <p className="text-note text-[var(--text-muted)] mb-xs">Disabled</p>
+        <div className="flex flex-wrap items-center gap-xs mb-sm">
+          <Button variant="primary" disabled>Primary</Button>
+          <Button variant="outline" disabled>Outline</Button>
+          <Button variant="text" disabled>Text</Button>
+          <Button variant="menu" disabled>Menu</Button>
+          <Button variant="danger" disabled>Danger</Button>
+        </div>
+
+        <p className="text-note text-[var(--text-muted)] mb-xs">Loading</p>
+        <div className="flex flex-wrap items-center gap-xs">
+          <Button variant="primary" loading>Primary</Button>
+          <Button variant="outline" loading>Outline</Button>
+          <Button variant="text" loading>Text</Button>
+          <Button variant="danger" loading>Danger</Button>
+        </div>
+      </section>
+
+      {/* Checkbox */}
+      <section className="mb-xl">
+        <h2 className="text-h3 font-medium mb-sm">Checkbox</h2>
+        <div className="flex items-center gap-sm">
+          <Checkbox checked={cb1} onChange={() => setCb1(!cb1)} label="Unchecked" />
+          <Checkbox checked={cb2} onChange={() => setCb2(!cb2)} label="Checked" />
+          <Checkbox checked={cb3} indeterminate onChange={() => setCb3(!cb3)} label="Indeterminate" />
+          <Checkbox checked disabled label="Disabled" />
+        </div>
+      </section>
+
+      {/* Toggle */}
+      <section className="mb-xl">
+        <h2 className="text-h3 font-medium mb-sm">Toggle</h2>
+        <div className="flex items-center gap-sm mb-sm">
+          <div className="flex items-center gap-xs">
+            <Toggle checked={tog1} onChange={setTog1} />
+            <span className="text-label">{tog1 ? 'On' : 'Off'}</span>
+          </div>
+          <div className="flex items-center gap-xs">
+            <Toggle checked={tog2} onChange={setTog2} />
+            <span className="text-label">{tog2 ? 'On' : 'Off'}</span>
+          </div>
+          <div className="flex items-center gap-xs">
+            <Toggle disabled />
+            <span className="text-label text-[var(--text-muted)]">Disabled</span>
+          </div>
+        </div>
+        <ToggleRow label="Enable notifications" checked={togRow} onChange={setTogRow} />
+      </section>
+
+      {/* Radio */}
+      <section className="mb-xl">
+        <h2 className="text-h3 font-medium mb-sm">Radio</h2>
+        <div className="flex gap-xl">
+          <div>
+            <p className="text-note text-[var(--text-muted)] mb-xs">Vertical</p>
+            <RadioGroup value={radio1} onChange={setRadio1}>
+              <RadioOption value="a" label="Option A" />
+              <RadioOption value="b" label="Option B" />
+              <RadioOption value="c" label="Option C" />
+            </RadioGroup>
+          </div>
+          <div>
+            <p className="text-note text-[var(--text-muted)] mb-xs">Inline</p>
+            <RadioGroup value={radio2} onChange={setRadio2} inline>
+              <RadioOption value="x" label="Alpha" />
+              <RadioOption value="y" label="Beta" />
+              <RadioOption value="z" label="Gamma" />
+            </RadioGroup>
+          </div>
+        </div>
+      </section>
+
+      {/* Tags */}
+      <section className="mb-xl">
+        <h2 className="text-h3 font-medium mb-sm">Tags</h2>
+        <p className="text-note text-[var(--text-muted)] mb-xs">Semantic variants</p>
+        <TagGroup className="mb-sm">
+          {semanticVariants.map(v => (
+            <Tag key={v} variant={v}>{v}</Tag>
+          ))}
+        </TagGroup>
+        <p className="text-note text-[var(--text-muted)] mb-xs">Keyword tags with color</p>
+        <TagGroup>
+          {keywordColors.map(c => (
+            <Tag key={c} keyword keywordColor={c}>{c}</Tag>
+          ))}
+        </TagGroup>
+      </section>
+
+      {/* Badges */}
+      <section className="mb-xl">
+        <h2 className="text-h3 font-medium mb-sm">Badges</h2>
+        <p className="text-note text-[var(--text-muted)] mb-xs">BadgeDot</p>
+        <div className="flex items-center gap-sm mb-sm">
+          {semanticVariants.map(c => (
+            <div key={c} className="flex flex-col items-center gap-tiny">
+              <BadgeDot color={c} />
+              <span className="text-inset text-[var(--text-muted)]">{c}</span>
+            </div>
+          ))}
+        </div>
+        <p className="text-note text-[var(--text-muted)] mb-xs">BadgeNumber</p>
+        <div className="flex items-center gap-sm">
+          {semanticVariants.map((c, i) => (
+            <div key={c} className="flex flex-col items-center gap-tiny">
+              <BadgeNumber value={i + 1} color={c} />
+              <span className="text-inset text-[var(--text-muted)]">{c}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Chips */}
+      <section className="mb-xl">
+        <h2 className="text-h3 font-medium mb-sm">Chips</h2>
+        <div className="flex flex-wrap items-center gap-xs mb-sm">
+          <Chip color="default">Default</Chip>
+          <Chip color="accent">Accent</Chip>
+          <Chip color="success">Success</Chip>
+          <Chip color="alert">Alert</Chip>
+          <Chip color="warn">Warn</Chip>
+          {chipVisible && (
+            <Chip color="secure" removable onRemove={() => setChipVisible(false)}>Removable</Chip>
+          )}
+          <Chip skeleton>Loading</Chip>
+        </div>
+      </section>
+
+      {/* Skeleton */}
+      <section className="mb-xl">
+        <h2 className="text-h3 font-medium mb-sm">Skeleton</h2>
+        <div className="flex items-center gap-sm">
+          <div className="flex flex-col items-center gap-tiny">
+            <Skeleton variant="text" />
+            <span className="text-inset text-[var(--text-muted)]">text</span>
+          </div>
+          <div className="flex flex-col items-center gap-tiny">
+            <Skeleton variant="block" />
+            <span className="text-inset text-[var(--text-muted)]">block</span>
+          </div>
+          <div className="flex flex-col items-center gap-tiny">
+            <Skeleton variant="button" />
+            <span className="text-inset text-[var(--text-muted)]">button</span>
+          </div>
+        </div>
+      </section>
+
+      {/* Tooltip */}
+      <section className="mb-xl">
+        <h2 className="text-h3 font-medium mb-sm">Tooltip</h2>
+        <div className="flex items-center gap-sm">
+          <Tooltip content="Top tooltip" position="top">
+            <Button variant="outline">Top</Button>
+          </Tooltip>
+          <Tooltip content="Bottom tooltip" position="bottom">
+            <Button variant="outline">Bottom</Button>
+          </Tooltip>
+          <Tooltip content="Left tooltip" position="left">
+            <Button variant="outline">Left</Button>
+          </Tooltip>
+          <Tooltip content="Right tooltip" position="right">
+            <Button variant="outline">Right</Button>
+          </Tooltip>
+        </div>
+      </section>
+
+      <hr className="border-[var(--border-default)] my-xl" />
+
+      {/* ──────────── TOKEN VERIFICATION SECTIONS ──────────── */}
+
+      {/* Color Palette */}
       <section className="mb-xl">
         <h2 className="text-h3 font-medium mb-sm">Color Palette</h2>
         <div className="flex flex-wrap gap-xs">
