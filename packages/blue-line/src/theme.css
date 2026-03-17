@@ -1,0 +1,187 @@
+/*
+ * Blue Line Design System — Tailwind v4 Theme
+ * All design tokens from Blue Line 2.2.2 (Figma source of truth).
+ * Products import this file: @import "@opswat/blue-line/theme.css";
+ */
+
+@theme {
+  /* ===== FONTS ===== */
+  --font-sans: 'Roboto', sans-serif;
+  --font-brand: 'Simplon Norm', sans-serif;
+
+  /* ===== COLOR PALETTE ===== */
+
+  /* Neutral scale (12 steps + white) */
+  --color-neutral-100: #f8f9f9;
+  --color-neutral-200: #ebecee;
+  --color-neutral-300: #dee0e4;
+  --color-neutral-400: #c7ccd5;
+  --color-neutral-500: #a9b2c4;
+  --color-neutral-600: #607497;
+  --color-neutral-700: #475b81;
+  --color-neutral-800: #344565;
+  --color-neutral-900: #24324b;
+  --color-neutral-1000: #172234;
+  --color-neutral-1100: #141b27;
+  --color-neutral-1200: #0c121d;
+  --color-neutral-white: #ffffff;
+
+  /* Blue / Primary (11 steps) */
+  --color-blue-100: #e8f0ff;
+  --color-blue-200: #c6dafe;
+  --color-blue-300: #a5c4fe;
+  --color-blue-400: #77a6fd;
+  --color-blue-500: #5690fd;
+  --color-blue-600: #357bfc;
+  --color-blue-700: #1d6bfc;
+  --color-blue-800: #1854c3;
+  --color-blue-900: #123d8b;
+  --color-blue-1000: #0d2654;
+  --color-blue-1100: #091b3b;
+
+  /* Red / Alert (10 steps) */
+  --color-red-100: #ffdfdb;
+  --color-red-200: #ffbab7;
+  --color-red-300: #ff9392;
+  --color-red-400: #ff6e75;
+  --color-red-500: #ff495e;
+  --color-red-600: #ff254a;
+  --color-red-700: #ff003d;
+  --color-red-800: #d40031;
+  --color-red-900: #a90027;
+  --color-red-1000: #7e001d;
+
+  /* Green (12 steps) */
+  --color-green-100: #dffff5;
+  --color-green-200: #b3ffe8;
+  --color-green-300: #86ffdb;
+  --color-green-400: #59ffcd;
+  --color-green-500: #2dffc0;
+  --color-green-600: #00ffb2;
+  --color-green-700: #00da99;
+  --color-green-800: #00b67f;
+  --color-green-900: #009165;
+  --color-green-1000: #006c4c;
+  --color-green-1100: #004832;
+  --color-green-1200: #002318;
+
+  /* Orange (11 steps) */
+  --color-orange-100: #ffebde;
+  --color-orange-200: #ffd6b9;
+  --color-orange-300: #ffc094;
+  --color-orange-400: #ffab6f;
+  --color-orange-500: #ff954a;
+  --color-orange-600: #ff8025;
+  --color-orange-700: #ff6b00;
+  --color-orange-800: #d55300;
+  --color-orange-900: #aa3e00;
+  --color-orange-1000: #802b00;
+  --color-orange-1100: #551a00;
+
+  /* Yellow (12 steps) */
+  --color-yellow-100: #fff8d5;
+  --color-yellow-200: #fff1aa;
+  --color-yellow-300: #ffea80;
+  --color-yellow-400: #ffe355;
+  --color-yellow-500: #ffdc2b;
+  --color-yellow-600: #ffd600;
+  --color-yellow-700: #dbb600;
+  --color-yellow-800: #b69700;
+  --color-yellow-900: #927800;
+  --color-yellow-1000: #6d5a00;
+  --color-yellow-1100: #493c00;
+  --color-yellow-1200: #251e00;
+
+  /* Teal (12 steps) */
+  --color-teal-100: #e8feff;
+  --color-teal-200: #b8fbfe;
+  --color-teal-300: #88f8fe;
+  --color-teal-400: #58f5fd;
+  --color-teal-500: #28f2fd;
+  --color-teal-600: #03e7f5;
+  --color-teal-700: #02c5cf;
+  --color-teal-800: #02a3ac;
+  --color-teal-900: #018288;
+  --color-teal-1000: #016065;
+  --color-teal-1100: #013e42;
+  --color-teal-1200: #001d1e;
+
+  /* Purple (10 steps) */
+  --color-purple-100: #f7e5f8;
+  --color-purple-200: #ecc2ef;
+  --color-purple-300: #e09fe6;
+  --color-purple-400: #d57cdd;
+  --color-purple-500: #ca59d4;
+  --color-purple-600: #bf36cb;
+  --color-purple-700: #9f2caa;
+  --color-purple-800: #7f2387;
+  --color-purple-900: #5e1a64;
+  --color-purple-1000: #3e1142;
+
+  /* ===== SPACING SCALE (Base 4) ===== */
+  --spacing-none: 0px;
+  --spacing-tiny: 2px;
+  --spacing-tight: 4px;
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-std: 20px;
+  --spacing-md: 24px;
+  --spacing-lg: 32px;
+  --spacing-xl: 40px;
+  --spacing-2xl: 48px;
+  --spacing-gutter: 12px;
+  --spacing-gutter-compact: 8px;
+
+  /* ===== CORNER RADIUS ===== */
+  --radius-none: 0px;
+  --radius-DEFAULT: 4px;
+  --radius-graphics: 8px;
+  --radius-modal: 12px;
+  --radius-circular: 9999px;
+
+  /* ===== FONT WEIGHTS ===== */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+
+  /* ===== TYPOGRAPHY SCALE ===== */
+  --text-h1: 28px;
+  --text-h1--line-height: 32px;
+  --text-h2: 24px;
+  --text-h2--line-height: 27px;
+  --text-h3: 20px;
+  --text-h3--line-height: 23px;
+  --text-h4: 16px;
+  --text-h4--line-height: 18px;
+  --text-label: 14px;
+  --text-label--line-height: 16px;
+  --text-paragraph: 14px;
+  --text-paragraph--line-height: 19px;
+  --text-note: 12px;
+  --text-note--line-height: 14px;
+  --text-note-paragraph--line-height: 16px;
+  --text-inset: 10px;
+  --text-inset--line-height: 11px;
+
+  /* ===== SHADOWS / ELEVATION ===== */
+  --shadow-1: 0 1px 2px rgba(12, 18, 29, 0.04);
+  --shadow-2: 0 2px 4px rgba(12, 18, 29, 0.08);
+  --shadow-3: 0 4px 8px rgba(12, 18, 29, 0.12);
+  --shadow-4: 0 8px 16px rgba(12, 18, 29, 0.16);
+  --shadow-card: 1px 3px 4px -2px rgba(12, 18, 29, 0.04), 2px 2px 4px 0px rgba(12, 18, 29, 0.04);
+  --shadow-dropdown: 0 4px 16px rgba(12, 18, 29, 0.12), 0 1px 4px rgba(12, 18, 29, 0.08);
+  --shadow-modal: 0 8px 32px rgba(12, 18, 29, 0.18);
+  --shadow-panel: -4px 0 24px rgba(12, 18, 29, 0.12);
+  --shadow-toast: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+  /* ===== BREAKPOINTS ===== */
+  --breakpoint-tb: 768px;
+  --breakpoint-sm: 1024px;
+  --breakpoint-md: 1440px;
+  --breakpoint-lg: 1920px;
+
+  /* ===== ELEMENT SIZES ===== */
+  --size-dot-sm: 6px;
+  --size-dot-lg: 8px;
+  --size-avatar-sm: 20px;
+  --size-avatar-lg: 32px;
+}
