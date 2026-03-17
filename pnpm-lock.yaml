@@ -46,6 +46,10 @@ importers:
         version: 6.4.1(jiti@2.6.1)(lightningcss@1.31.1)
 
   packages/blue-line:
+    dependencies:
+      clsx:
+        specifier: ^2.1.0
+        version: 2.1.1
     devDependencies:
       react:
         specifier: ^19.0.0
@@ -590,6 +594,10 @@ packages:
 
   caniuse-lite@1.0.30001780:
     resolution: {integrity: sha512-llngX0E7nQci5BPJDqoZSbuZ5Bcs9F5db7EtgfwBerX9XGtkkiO4NwfDDIRzHTTwcYC8vC7bmeUEPGrKlR/TkQ==}
+
+  clsx@2.1.1:
+    resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
+    engines: {node: '>=6'}
 
   convert-source-map@2.0.0:
     resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
@@ -1287,6 +1295,8 @@ snapshots:
       update-browserslist-db: 1.2.3(browserslist@4.28.1)
 
   caniuse-lite@1.0.30001780: {}
+
+  clsx@2.1.1: {}
 
   convert-source-map@2.0.0: {}
 
