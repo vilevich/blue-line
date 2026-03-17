@@ -1,0 +1,299 @@
+/*
+ * Blue Line Design System — Base Styles
+ * Semantic tokens, dark mode overrides, font-face declarations, reset.
+ * Products import this file: @import "@opswat/blue-line/base.css";
+ */
+
+/* ===== FONT-FACE ===== */
+@font-face {
+  font-family: 'Simplon Norm';
+  src: url('./fonts/simplonnorm-regular-webfont.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Simplon Norm';
+  src: url('./fonts/simplonnorm-medium-webfont.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Simplon Norm';
+  src: url('./fonts/simplonnorm-bold-webfont.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ===== DARK MODE VARIANT ===== */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ===== SEMANTIC TOKENS (light mode defaults) ===== */
+:root {
+  /* Text */
+  --text-strong: var(--color-neutral-1200);
+  --text-subtle: var(--color-neutral-800);
+  --text-muted: var(--color-neutral-600);
+  --text-light: var(--color-neutral-500);
+  --text-white: var(--color-neutral-white);
+  --text-dark: var(--color-neutral-1200);
+  --text-link: var(--color-blue-800);
+  --text-on-fill: var(--color-neutral-white);
+  --text-muted-accessible: #566479;
+
+  /* Icons */
+  --icon-strong: var(--color-neutral-1200);
+  --icon-subtle: var(--color-neutral-800);
+  --icon-muted: var(--color-neutral-600);
+  --icon-light: var(--color-neutral-500);
+  --icon-extra-light: var(--color-neutral-200);
+  --icon-white: var(--color-neutral-white);
+  --icon-dark: var(--color-neutral-1200);
+  --icon-empty: transparent;
+
+  /* Surfaces */
+  --surface-bg: var(--color-neutral-100);
+  --surface-card: var(--color-neutral-white);
+  --surface-hover: var(--color-neutral-100);
+
+  /* Borders */
+  --border-default: var(--color-neutral-300);
+  --border-card: var(--color-neutral-200);
+  --border-bg: var(--color-neutral-200);
+
+  /* Primary / Interaction */
+  --primary: var(--color-blue-700);
+  --primary-hover: var(--color-blue-800);
+  --danger: var(--color-red-800);
+  --danger-hover: #b0002a;
+
+  /* Toggle */
+  --toggle-active: var(--color-blue-700);
+  --toggle-inactive: var(--color-neutral-400);
+  --toggle-border-hover: var(--color-neutral-600);
+  --toggle-fill-disabled: var(--color-neutral-200);
+  --toggle-border-disabled: var(--color-neutral-300);
+  --toggle-thumb-disabled: var(--color-neutral-500);
+
+  /* Tab */
+  --tab-bg: var(--color-neutral-200);
+  --tab-active-bg: #1a2138;
+  --tab-text: var(--color-neutral-800);
+  --tab-active-text: var(--color-neutral-white);
+
+  /* Layout */
+  --sidebar-width: 260px;
+  --sidebar-collapsed: 60px;
+  --header-bg: #1a2138;
+
+  /* Interaction states */
+  --hover-subtle: rgba(0, 0, 0, 0.03);
+  --hover-default: rgba(0, 0, 0, 0.06);
+  --focus-ring: 0 0 0 3px rgba(29, 107, 252, 0.15);
+
+  /* Overlays */
+  --overlay-heavy: rgba(12, 18, 29, 0.45);
+  --overlay-medium: rgba(12, 18, 29, 0.3);
+
+  /* Constants */
+  --constant-empty: rgba(255, 255, 255, 0);
+  --constant-fade: rgba(255, 255, 255, 0.8);
+  --constant-overlay: rgba(96, 116, 151, 0.6);
+
+  /* Feedback */
+  --feedback-success: #34a853;
+  --feedback-warning: #e6a817;
+  --feedback-warning-text: #8a6400;
+  --feedback-error: #ea4335;
+
+  /* DS Semantic families — light */
+  --ds-neutral-100: var(--color-neutral-100);
+  --ds-neutral-text: var(--color-neutral-1200);
+  --ds-neutral-700: var(--color-neutral-700);
+
+  --ds-inactive-100: var(--color-neutral-100);
+  --ds-inactive-text: var(--color-neutral-600);
+  --ds-inactive-700: var(--color-neutral-500);
+
+  --ds-secure-100: var(--color-green-100);
+  --ds-secure-text: var(--color-green-1200);
+  --ds-secure-700: var(--color-green-1000);
+  --ds-secure-fill: var(--color-green-1000);
+
+  --ds-success-100: var(--color-green-100);
+  --ds-success-text: var(--color-green-1200);
+  --ds-success-700: var(--color-green-800);
+  --ds-success-fill: var(--color-green-800);
+
+  --ds-accent-100: var(--color-blue-100);
+  --ds-accent-text: var(--color-blue-1000);
+  --ds-accent-700: var(--color-blue-700);
+  --ds-accent-fill: var(--color-blue-700);
+
+  --ds-guide-100: #ede8ff;
+  --ds-guide-text: #2d1a6e;
+  --ds-guide-700: var(--color-purple-700);
+  --ds-guide-fill: var(--color-purple-700);
+
+  --ds-alert-100: var(--color-red-100);
+  --ds-alert-text: var(--color-red-1000);
+  --ds-alert-700: var(--color-red-700);
+  --ds-alert-fill: var(--color-red-700);
+
+  --ds-warn-100: var(--color-orange-100);
+  --ds-warn-text: var(--color-orange-1000);
+  --ds-warn-700: var(--color-orange-700);
+  --ds-warn-fill: var(--color-orange-700);
+
+  --ds-caution-100: var(--color-yellow-100);
+  --ds-caution-text: var(--color-yellow-1000);
+  --ds-caution-700: var(--color-yellow-700);
+  --ds-caution-fill: var(--color-yellow-700);
+
+  /* Table */
+  --table-pad-left: 20px;
+  --table-pad-right: 12px;
+  --table-pad-left-mid: 12px;
+  --table-pad-right-last: 20px;
+}
+
+/* ===== DARK MODE OVERRIDES ===== */
+.dark {
+  /* Surfaces */
+  --surface-bg: var(--color-neutral-1200);
+  --surface-card: var(--color-neutral-1100);
+  --surface-hover: rgba(255, 255, 255, 0.03);
+  --header-bg: var(--color-neutral-1200);
+
+  /* Borders */
+  --border-default: var(--color-neutral-800);
+  --border-card: var(--color-neutral-900);
+  --border-bg: var(--color-neutral-1100);
+
+  /* Text */
+  --text-strong: #ffffff;
+  --text-subtle: var(--color-neutral-500);
+  --text-muted: var(--color-neutral-600);
+  --text-light: var(--color-neutral-700);
+  --text-link: #6fa3ff;
+  --text-muted-accessible: #7b8da6;
+
+  /* Icons */
+  --icon-strong: #ffffff;
+  --icon-subtle: var(--color-neutral-500);
+  --icon-muted: var(--color-neutral-600);
+  --icon-light: var(--color-neutral-700);
+  --icon-extra-light: var(--color-neutral-900);
+
+  /* Primary */
+  --primary: #4d8dff;
+  --primary-hover: #3a7df5;
+
+  /* Interaction states */
+  --hover-subtle: rgba(255, 255, 255, 0.04);
+  --hover-default: rgba(255, 255, 255, 0.08);
+
+  /* Overlays */
+  --overlay-heavy: rgba(0, 0, 0, 0.55);
+  --overlay-medium: rgba(0, 0, 0, 0.4);
+
+  /* Shadows */
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.16);
+  --shadow-2: 0 2px 4px rgba(0, 0, 0, 0.20);
+  --shadow-3: 0 4px 8px rgba(0, 0, 0, 0.24);
+  --shadow-4: 0 8px 16px rgba(0, 0, 0, 0.32);
+  --shadow-card: 1px 3px 4px -2px rgba(0, 0, 0, 0.16), 2px 2px 4px 0px rgba(0, 0, 0, 0.12);
+  --shadow-dropdown: 0 4px 16px rgba(0, 0, 0, 0.24), 0 1px 4px rgba(0, 0, 0, 0.16);
+  --shadow-modal: 0 8px 32px rgba(0, 0, 0, 0.36);
+  --shadow-panel: -4px 0 24px rgba(0, 0, 0, 0.24);
+  --shadow-toast: 0 4px 12px rgba(0, 0, 0, 0.3);
+
+  /* Tab */
+  --tab-bg: var(--color-neutral-1100);
+
+  /* Toggle */
+  --toggle-active: var(--color-blue-400);
+  --toggle-inactive: var(--color-neutral-700);
+  --toggle-border-hover: var(--color-neutral-500);
+  --toggle-fill-disabled: var(--color-neutral-900);
+  --toggle-border-disabled: var(--color-neutral-800);
+  --toggle-thumb-disabled: var(--color-neutral-800);
+
+  /* DS Semantic families — dark */
+  --ds-neutral-100: var(--color-neutral-1000);
+  --ds-neutral-text: #ffffff;
+  --ds-neutral-700: var(--color-neutral-600);
+
+  --ds-inactive-100: var(--color-neutral-1000);
+  --ds-inactive-text: var(--color-neutral-600);
+  --ds-inactive-700: var(--color-neutral-700);
+
+  --ds-secure-100: #003d2b;
+  --ds-secure-text: var(--color-green-200);
+  --ds-secure-700: var(--color-green-800);
+  --ds-secure-fill: var(--color-green-1000);
+
+  --ds-success-100: #003d2b;
+  --ds-success-text: var(--color-green-200);
+  --ds-success-700: var(--color-green-800);
+  --ds-success-fill: var(--color-green-1000);
+
+  --ds-accent-100: var(--color-blue-1000);
+  --ds-accent-text: var(--color-blue-200);
+  --ds-accent-700: #4d8dff;
+  --ds-accent-fill: var(--color-blue-1000);
+
+  --ds-guide-100: #1e1250;
+  --ds-guide-text: #c8b8ff;
+  --ds-guide-700: #a78bfa;
+  --ds-guide-fill: var(--color-purple-700);
+
+  --ds-alert-100: #4d0011;
+  --ds-alert-text: var(--color-red-200);
+  --ds-alert-700: #ff6b6b;
+  --ds-alert-fill: var(--color-red-1000);
+
+  --ds-warn-100: #4d1a00;
+  --ds-warn-text: var(--color-orange-400);
+  --ds-warn-700: var(--color-orange-400);
+  --ds-warn-fill: var(--color-orange-1000);
+
+  --ds-caution-100: #3d3200;
+  --ds-caution-text: var(--color-yellow-200);
+  --ds-caution-700: var(--color-yellow-200);
+  --ds-caution-fill: var(--color-yellow-1000);
+}
+
+/* ===== BASE BODY ===== */
+body {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-strong);
+  background: var(--surface-bg);
+  min-height: 100vh;
+}
+
+.dark body {
+  background: var(--surface-bg);
+  color: var(--text-subtle);
+}
+
+/* ===== RESET ===== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
