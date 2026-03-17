@@ -7,6 +7,9 @@
     "build": "pnpm --filter @opswat/mdss build",
     "lint": "pnpm -r lint"
   },
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild"]
+  },
   "engines": {
     "node": ">=20",
     "pnpm": ">=9"
