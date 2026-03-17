@@ -1,0 +1,34 @@
+/* ===== BUTTON LOADING SPINNER ===== */
+@keyframes btn-spin {
+  to { transform: rotate(360deg); }
+}
+
+.btn-loading {
+  position: relative;
+  color: transparent !important;
+  pointer-events: none;
+}
+
+.btn-loading::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 50%;
+  left: 50%;
+  margin: -8px 0 0 -8px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: var(--text-on-fill);
+  border-radius: 50%;
+  animation: btn-spin 0.6s linear infinite;
+}
+
+.btn-loading-subtle::after {
+  border-color: rgba(29, 107, 252, 0.2);
+  border-top-color: var(--primary);
+}
+
+:where(.dark, .dark *) .btn-loading-subtle::after {
+  border-color: rgba(111, 163, 255, 0.2);
+  border-top-color: var(--text-link);
+}
