@@ -85,7 +85,7 @@ export function App() {
         <div className="flex flex-wrap gap-sm mb-sm">
           {multiColorIcons.map(name => (
             <div key={name} className="flex flex-col items-center gap-tiny">
-              <Icon name={name} size="md" />
+              <Icon multiColor={name} size="md" />
               <span className="text-inset text-[var(--text-muted)]">{name}</span>
             </div>
           ))}
