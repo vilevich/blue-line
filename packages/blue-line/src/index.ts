@@ -93,3 +93,9 @@ export type { ModalProps } from './components/Modal'
 
 export { SlidePanel } from './components/SlidePanel'
 export type { SlidePanelProps } from './components/SlidePanel'
+
+export { Card, CardHeader, CardTitle } from './components/Card'
+export type { CardProps, CardHeaderProps, CardTitleProps } from './components/Card'
+
+export { Pagination } from './components/Pagination'
+export type { PaginationProps } from './components/Pagination'

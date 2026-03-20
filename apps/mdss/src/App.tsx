@@ -34,6 +34,10 @@ import {
   SectionTitle,
   Modal,
   SlidePanel,
+  Card,
+  CardHeader,
+  CardTitle,
+  Pagination,
 } from '@opswat/blue-line'
 import type { IconName, MultiColorIconName } from '@opswat/blue-line'
 
@@ -87,6 +91,10 @@ export function App() {
   // Overlay state
   const [modalOpen, setModalOpen] = useState(false)
   const [panelOpen, setPanelOpen] = useState(false)
+
+  // Pagination state
+  const [page, setPage] = useState(1)
+  const [pageSize, setPageSize] = useState(10)
 
   function toggleTheme() {
     setDark(!dark)
@@ -575,6 +583,25 @@ export function App() {
             </SelectField>
           </FormRow>
         </SlidePanel>
+      </section>
+
+      {/* Cards & Layout */}
+      <section className="mb-xl">
+        <h2 className="text-h3 font-medium mb-sm">Cards & Layout</h2>
+
+        <p className="text-note text-[var(--text-muted)] mb-xs">Card with header, title, and pagination</p>
+        <Card className="mb-sm">
+          <CardHeader>
+            <CardTitle title="Job Summary" count="3 Past" countAccent="(+2 Running)" actions={<Button variant="text">View Reports</Button>} />
+          </CardHeader>
+          <div className="p-5 text-label text-[var(--text-subtle)]">Card body content goes here.</div>
+          <Pagination page={page} totalPages={5} pageSize={pageSize} onPageChange={setPage} onPageSizeChange={setPageSize} />
+        </Card>
+
+        <p className="text-note text-[var(--text-muted)] mb-xs">Simple card</p>
+        <Card>
+          <div className="p-5 text-label text-[var(--text-subtle)]">A simple card with no header or pagination.</div>
+        </Card>
       </section>
 
       <hr className="border-[var(--border-default)] my-xl" />
