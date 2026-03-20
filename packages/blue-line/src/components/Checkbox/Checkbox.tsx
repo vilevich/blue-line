@@ -1,11 +1,11 @@
-import { forwardRef, useEffect, useRef, type InputHTMLAttributes, type ReactNode } from 'react'
+import { forwardRef, useEffect, useRef, type InputHTMLAttributes } from 'react'
 import { cn } from '../../lib/cn'
 
 export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
   checked?: boolean
   indeterminate?: boolean
   disabled?: boolean
-  label?: ReactNode
+  label?: string
 }
 
 const checkSvg = (

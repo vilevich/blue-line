@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react'
+import { useId, useState, type ReactNode } from 'react'
 import { cn } from '../../lib/cn'
 
 export type TooltipPosition = 'top' | 'bottom' | 'left' | 'right'
@@ -20,6 +20,7 @@ const positionStyles: Record<TooltipPosition, string> = {
 
 export function Tooltip({ content, position = 'top', maxWidth, children, className }: TooltipProps) {
   const [visible, setVisible] = useState(false)
+  const id = useId()
 
   return (
     <span
@@ -28,10 +29,12 @@ export function Tooltip({ content, position = 'top', maxWidth, children, classNa
       onMouseLeave={() => setVisible(false)}
       onFocus={() => setVisible(true)}
       onBlur={() => setVisible(false)}
+      aria-describedby={visible ? id : undefined}
     >
       {children}
       {visible && (
         <span
+          id={id}
           className={cn(
             'absolute z-[10000] pointer-events-none',
             'bg-[var(--surface-card)] border border-[var(--border-default)] rounded-[6px]',

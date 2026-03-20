@@ -20,15 +20,19 @@ export interface RadioGroupProps {
   name?: string
   disabled?: boolean
   inline?: boolean
+  'aria-label'?: string
+  'aria-labelledby'?: string
   children: ReactNode
   className?: string
 }
 
-export function RadioGroup({ value, onChange, name, disabled, inline, children, className }: RadioGroupProps) {
+export function RadioGroup({ value, onChange, name, disabled, inline, children, className, ...ariaProps }: RadioGroupProps) {
   return (
     <RadioContext.Provider value={{ name, value, onChange, disabled }}>
       <div
         role="radiogroup"
+        aria-label={ariaProps['aria-label']}
+        aria-labelledby={ariaProps['aria-labelledby']}
         className={cn(
           inline ? 'flex items-center gap-4' : 'flex flex-col gap-3',
           className,

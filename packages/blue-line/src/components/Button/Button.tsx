@@ -13,7 +13,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: ReactNode
 }
 
-const base = 'inline-flex items-center justify-center h-8 rounded cursor-pointer font-sans text-label shrink-0 transition-colors duration-150'
+const base = 'inline-flex items-center justify-center h-8 rounded cursor-pointer font-sans text-label shrink-0 transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-[var(--primary)] focus-visible:outline-offset-2'
 
 const variants: Record<ButtonVariant, string> = {
   primary: 'px-4 font-medium bg-[var(--primary)] text-[var(--text-on-fill)] border-none hover:bg-[var(--primary-hover)]',
