@@ -53,3 +53,19 @@
   mask-repeat: no-repeat;
   background-color: var(--text-muted);
 }
+
+/* FormRow responsive stacking */
+@media (max-width: 768px) {
+  .form-row-layout {
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-start;
+  }
+  .form-row-label {
+    width: auto;
+    min-height: auto;
+  }
+  .form-row-value {
+    width: 100%;
+  }
+}
