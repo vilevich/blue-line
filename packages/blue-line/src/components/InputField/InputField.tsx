@@ -42,7 +42,7 @@ export const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
     return (
       <div
         className={cn(
-          'inline-flex items-center gap-2 h-8 px-3 border rounded bg-[var(--surface-card)] dark:bg-[var(--surface-bg)] font-sans text-label text-[var(--text-strong)] transition-colors duration-150',
+          'inline-flex items-center gap-2 h-8 px-3 border rounded bg-[var(--surface-card)] dark:bg-[var(--surface-bg)] font-sans text-label transition-colors duration-150',
           statusBorder[status],
           statusFocusBorder[status],
           statusFocusShadow[status],

@@ -28,6 +28,7 @@ const singleColorIcons: IconName[] = [
   'chevron-down', 'chevron-up', 'chevron-left', 'chevron-right',
   'filter', 'search', 'action', 'add', 'check', 'minus',
   'edit', 'control-h', 'control-v', 'close', 'drag-v',
+  'eye', 'eye-off', 'upload', 'help',
 ]
 
 const multiColorIcons: MultiColorIconName[] = [

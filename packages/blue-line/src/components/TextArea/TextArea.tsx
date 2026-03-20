@@ -14,6 +14,12 @@ const statusBorder: Record<TextAreaStatus, string> = {
   success: 'border-[var(--feedback-success)]',
 }
 
+const statusFocusShadow: Record<TextAreaStatus, string> = {
+  default: 'focus:shadow-[var(--focus-ring)]',
+  error: 'focus:shadow-[0_0_0_3px_rgba(212,0,49,0.15)]',
+  success: 'focus:shadow-[0_0_0_3px_rgba(52,168,83,0.15)]',
+}
+
 const statusFocusBorder: Record<TextAreaStatus, string> = {
   default: 'focus:border-[var(--primary)]',
   error: 'focus:border-[var(--danger)]',
@@ -29,9 +35,9 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         className={cn(
           'w-full px-3 py-2 border rounded bg-[var(--surface-card)] dark:bg-[var(--surface-bg)] font-sans text-label text-[var(--text-subtle)] resize-y transition-colors duration-150',
           'placeholder:text-[var(--text-muted-accessible)] outline-none',
-          'focus:shadow-[var(--focus-ring)]',
           statusBorder[status],
           statusFocusBorder[status],
+          statusFocusShadow[status],
           disabled && 'opacity-50 cursor-not-allowed resize-none',
           className,
         )}
