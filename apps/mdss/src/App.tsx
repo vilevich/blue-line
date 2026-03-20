@@ -32,6 +32,8 @@ import {
   Breadcrumb,
   PageHeader,
   SectionTitle,
+  Modal,
+  SlidePanel,
 } from '@opswat/blue-line'
 import type { IconName, MultiColorIconName } from '@opswat/blue-line'
 
@@ -81,6 +83,10 @@ export function App() {
 
   // Navigation state
   const [navTab, setNavTab] = useState('overview')
+
+  // Overlay state
+  const [modalOpen, setModalOpen] = useState(false)
+  const [panelOpen, setPanelOpen] = useState(false)
 
   function toggleTheme() {
     setDark(!dark)
@@ -544,6 +550,31 @@ export function App() {
           <SectionTitle title="Recommended integrations" description="Enhance your storage capabilities and security with recommended integrations." />
           <SectionTitle title="Simple heading (no description)" />
         </div>
+      </section>
+
+      {/* Overlays */}
+      <section className="mb-xl">
+        <h2 className="text-h3 font-medium mb-sm">Overlays</h2>
+        <div className="flex items-center gap-xs">
+          <Button variant="outline" onClick={() => setModalOpen(true)}>Open Modal</Button>
+          <Button variant="outline" onClick={() => setPanelOpen(true)}>Open Slide Panel</Button>
+        </div>
+        <Modal open={modalOpen} onClose={() => setModalOpen(false)} title="Activate License" footer={<><Button variant="outline" onClick={() => setModalOpen(false)}>Cancel</Button><Button variant="primary" onClick={() => setModalOpen(false)}>Activate</Button></>}>
+          <FormRow label="License Key">
+            <InputField type="password" placeholder="Enter your license key" />
+          </FormRow>
+        </Modal>
+        <SlidePanel open={panelOpen} onClose={() => setPanelOpen(false)} title="Create Workflow" footer={<><Button variant="outline" onClick={() => setPanelOpen(false)}>Cancel</Button><Button variant="primary" onClick={() => setPanelOpen(false)}>Save</Button></>}>
+          <FormRow label="Workflow Name">
+            <InputField placeholder="e.g. Weekly Scan" />
+          </FormRow>
+          <FormRow label="Scan Pool">
+            <SelectField>
+              <option>Default Pool</option>
+              <option>High Priority</option>
+            </SelectField>
+          </FormRow>
+        </SlidePanel>
       </section>
 
       <hr className="border-[var(--border-default)] my-xl" />

@@ -87,3 +87,9 @@ export type { PageHeaderProps } from './components/PageHeader'
 
 export { SectionTitle } from './components/SectionTitle'
 export type { SectionTitleProps } from './components/SectionTitle'
+
+export { Modal } from './components/Modal'
+export type { ModalProps } from './components/Modal'
+
+export { SlidePanel } from './components/SlidePanel'
+export type { SlidePanelProps } from './components/SlidePanel'
