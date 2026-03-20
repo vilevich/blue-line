@@ -11,7 +11,7 @@ export interface VerdictProps {
 }
 
 const dotColor: Record<VerdictVariant, string> = {
-  'neutral': 'bg-[var(--color-neutral-700)] dark:bg-[var(--color-neutral-600)]',
+  'neutral': 'bg-[var(--color-neutral-700)] dark:bg-[var(--color-neutral-400)]',
   'not-active': 'bg-[var(--color-neutral-200)] dark:bg-[var(--color-neutral-900)]',
   'secure': 'bg-[var(--color-blue-700)] dark:bg-[var(--color-blue-400)]',
   'success': 'bg-[var(--color-green-700)] dark:bg-[var(--color-green-400)]',

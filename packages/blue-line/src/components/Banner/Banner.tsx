@@ -32,7 +32,7 @@ export function Banner({ variant = 'info', icon, title, description, actions, cl
         variantBg[variant],
         className,
       )}
-      role="alert"
+      role={variant === 'alert' || variant === 'warn' ? 'alert' : 'status'}
     >
       {icon && (
         <div className="w-4 h-4 shrink-0 flex items-center justify-center text-[var(--text-strong)]">
@@ -46,13 +46,13 @@ export function Banner({ variant = 'info', icon, title, description, actions, cl
         </div>
         {actions && actions.length > 0 && (
           <div className="flex items-center gap-2 shrink-0">
-            <div className="w-px h-3 bg-[var(--color-neutral-800)]" />
+            <div className="w-px h-3 bg-[var(--border-default)]" />
             {actions.map((action, i) => (
               <button
                 key={i}
                 type="button"
                 onClick={action.onClick}
-                className="text-label font-medium text-[var(--primary)] whitespace-nowrap cursor-pointer bg-transparent border-none p-0 font-sans leading-[16px] hover:underline"
+                className="text-label font-medium text-[var(--primary)] whitespace-nowrap cursor-pointer bg-transparent border-none p-0 leading-[16px] hover:underline focus-visible:outline-2 focus-visible:outline-[var(--primary)] focus-visible:outline-offset-2"
               >
                 {action.label}
               </button>

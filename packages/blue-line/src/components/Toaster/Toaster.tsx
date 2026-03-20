@@ -33,7 +33,6 @@ export function Toaster({ variant = 'info', visible, title, description, icon, o
         className,
       )}
       role="alert"
-      aria-live="assertive"
     >
       {icon && <div className="shrink-0">{icon}</div>}
       <div className="flex-1 min-w-0 flex flex-col gap-3">
@@ -49,7 +48,7 @@ export function Toaster({ variant = 'info', visible, title, description, icon, o
         <button
           type="button"
           onClick={onClose}
-          className="inline-flex items-center justify-center w-4 h-4 shrink-0 bg-transparent border-none p-0 cursor-pointer text-[var(--text-muted)] hover:text-[var(--text-strong)] focus-visible:outline-2 focus-visible:outline-[var(--primary)] focus-visible:outline-offset-2 focus-visible:rounded-sm"
+          className="inline-flex items-center justify-center w-4 h-4 shrink-0 bg-transparent border-none p-0 cursor-pointer text-[var(--text-muted)] hover:text-[var(--text-strong)] focus-visible:outline-2 focus-visible:outline-[var(--primary)] focus-visible:outline-offset-2"
           aria-label="Close notification"
         >
           <Icon name="close" size="md" />

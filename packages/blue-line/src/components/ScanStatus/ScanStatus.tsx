@@ -21,7 +21,7 @@ export function ScanStatus({ variant, children, className }: ScanStatusProps) {
   return (
     <span
       className={cn(
-        'inline-flex items-center justify-center p-2 text-label font-regular leading-[16px] whitespace-nowrap font-sans',
+        'inline-flex items-center justify-center px-2 py-0.5 rounded text-label font-regular leading-[16px] whitespace-nowrap font-sans',
         variantStyles[variant],
         className,
       )}
