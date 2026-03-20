@@ -15,6 +15,8 @@ export type IconName =
   | 'control-v'
   | 'close'
   | 'drag-v'
+  | 'eye'
+  | 'eye-off'
 
 // Multi-color icons (rendered via background-image, colors baked into SVG)
 export type MultiColorIconName =
@@ -58,6 +60,10 @@ export const icons: Record<IconName, string> = {
     "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M12.5303 4.53033C12.8232 4.23744 12.8232 3.76256 12.5303 3.46967C12.2374 3.17678 11.7626 3.17678 11.4697 3.46967L8 6.93934L4.53033 3.46967C4.23744 3.17678 3.76256 3.17678 3.46967 3.46967C3.17678 3.76256 3.17678 4.23744 3.46967 4.53033L6.93934 8L3.46967 11.4697C3.17678 11.7626 3.17678 12.2374 3.46967 12.5303C3.76256 12.8232 4.23744 12.8232 4.53033 12.5303L8 9.06066L11.4697 12.5303C11.7626 12.8232 12.2374 12.8232 12.5303 12.5303C12.8232 12.2374 12.8232 11.7626 12.5303 11.4697L9.06066 8L12.5303 4.53033Z' fill='black'/%3E%3C/svg%3E\")",
   'drag-v':
     "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M10.5 14C11.3284 14 12 13.3284 12 12.5C12 11.6716 11.3284 11 10.5 11C9.67157 11 9 11.6716 9 12.5C9 13.3284 9.67157 14 10.5 14Z' fill='black'/%3E%3Cpath d='M10.5 5C11.3284 5 12 4.32843 12 3.5C12 2.67157 11.3284 2 10.5 2C9.67157 2 9 2.67157 9 3.5C9 4.32843 9.67157 5 10.5 5Z' fill='black'/%3E%3Cpath d='M10.5 9.5C11.3284 9.5 12 8.82843 12 8C12 7.17157 11.3284 6.5 10.5 6.5C9.67157 6.5 9 7.17157 9 8C9 8.82843 9.67157 9.5 10.5 9.5Z' fill='black'/%3E%3Cpath d='M5.5 14C6.32843 14 7 13.3284 7 12.5C7 11.6716 6.32843 11 5.5 11C4.67157 11 4 11.6716 4 12.5C4 13.3284 4.67157 14 5.5 14Z' fill='black'/%3E%3Cpath d='M5.5 5C6.32843 5 7 4.32843 7 3.5C7 2.67157 6.32843 2 5.5 2C4.67157 2 4 2.67157 4 3.5C4 4.32843 4.67157 5 5.5 5Z' fill='black'/%3E%3Cpath d='M5.5 9.5C6.32843 9.5 7 8.82843 7 8C7 7.17157 6.32843 6.5 5.5 6.5C4.67157 6.5 4 7.17157 4 8C4 8.82843 4.67157 9.5 5.5 9.5Z' fill='black'/%3E%3C/svg%3E\")",
+  'eye':
+    "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M1.5 8C1.5 8 3.5 3.5 8 3.5C12.5 3.5 14.5 8 14.5 8C14.5 8 12.5 12.5 8 12.5C3.5 12.5 1.5 8 1.5 8Z' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='8' cy='8' r='2.5' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E\")",
+  'eye-off':
+    "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M1.5 8C1.5 8 3.5 3.5 8 3.5C12.5 3.5 14.5 8 14.5 8C14.5 8 12.5 12.5 8 12.5C3.5 12.5 1.5 8 1.5 8Z' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='8' cy='8' r='2.5' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M2.5 2.5L13.5 13.5' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E\")",
 }
 
 export const multiColorIcons: Record<MultiColorIconName, string> = {
