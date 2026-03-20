@@ -27,6 +27,11 @@ import {
   Verdict,
   ScanStatus,
   Severity,
+  Tabs,
+  TabPanel,
+  Breadcrumb,
+  PageHeader,
+  SectionTitle,
 } from '@opswat/blue-line'
 import type { IconName, MultiColorIconName } from '@opswat/blue-line'
 
@@ -73,6 +78,9 @@ export function App() {
   const [toastVisible, setToastVisible] = useState(false)
   const [toasterVisible, setToasterVisible] = useState(false)
   const [toasterVariant, setToasterVariant] = useState<'info' | 'success' | 'error'>('info')
+
+  // Navigation state
+  const [navTab, setNavTab] = useState('overview')
 
   function toggleTheme() {
     setDark(!dark)
@@ -468,6 +476,73 @@ export function App() {
           {(['none', 'low', 'medium', 'high', 'critical'] as const).map(level => (
             <Severity key={level} level={level} />
           ))}
+        </div>
+      </section>
+
+      {/* Navigation */}
+      <section className="mb-xl">
+        <h2 className="text-h3 font-medium mb-sm">Navigation</h2>
+
+        {/* Tabs */}
+        <p className="text-note text-[var(--text-muted)] mb-xs">Tabs</p>
+        <div className="mb-sm">
+          <Tabs
+            tabs={[
+              { id: 'overview', label: 'Overview' },
+              { id: 'details', label: 'Details' },
+              { id: 'settings', label: 'Settings' },
+            ]}
+            activeTab={navTab}
+            onTabChange={setNavTab}
+          >
+            <TabPanel id="overview" activeTab={navTab}>
+              <div className="text-label text-[var(--text-subtle)] p-3 bg-[var(--surface-card)] rounded">Overview content</div>
+            </TabPanel>
+            <TabPanel id="details" activeTab={navTab}>
+              <div className="text-label text-[var(--text-subtle)] p-3 bg-[var(--surface-card)] rounded">Details content</div>
+            </TabPanel>
+            <TabPanel id="settings" activeTab={navTab}>
+              <div className="text-label text-[var(--text-subtle)] p-3 bg-[var(--surface-card)] rounded">Settings content</div>
+            </TabPanel>
+          </Tabs>
+        </div>
+
+        {/* Breadcrumb */}
+        <p className="text-note text-[var(--text-muted)] mb-xs">Breadcrumb</p>
+        <div className="mb-sm">
+          <Breadcrumb items={[
+            { label: 'Inventory', onClick: () => {} },
+            { label: 'Accounts', onClick: () => {} },
+            { label: 'Amazon S3' },
+          ]} />
+        </div>
+
+        {/* PageHeader */}
+        <p className="text-note text-[var(--text-muted)] mb-xs">PageHeader</p>
+        <div className="mb-sm bg-[var(--surface-card)] p-4 rounded">
+          <PageHeader
+            breadcrumb={
+              <Breadcrumb items={[
+                { label: 'Inventory', onClick: () => {} },
+                { label: 'Accounts', onClick: () => {} },
+              ]} />
+            }
+            title="Amazon S3 — Production"
+            actions={
+              <>
+                <Button variant="icon" icon="edit" />
+                <Button variant="outline">Export</Button>
+                <Button variant="primary">Add Account</Button>
+              </>
+            }
+          />
+        </div>
+
+        {/* SectionTitle */}
+        <p className="text-note text-[var(--text-muted)] mb-xs">SectionTitle</p>
+        <div className="mb-sm">
+          <SectionTitle title="Recommended integrations" description="Enhance your storage capabilities and security with recommended integrations." />
+          <SectionTitle title="Simple heading (no description)" />
         </div>
       </section>
 

@@ -75,3 +75,15 @@ export type { ScanStatusProps, ScanStatusVariant } from './components/ScanStatus
 
 export { Severity } from './components/Severity'
 export type { SeverityProps, SeverityLevel } from './components/Severity'
+
+export { Tabs, TabPanel } from './components/Tabs'
+export type { TabsProps, TabPanelProps, TabItem } from './components/Tabs'
+
+export { Breadcrumb } from './components/Breadcrumb'
+export type { BreadcrumbProps, BreadcrumbItem } from './components/Breadcrumb'
+
+export { PageHeader } from './components/PageHeader'
+export type { PageHeaderProps } from './components/PageHeader'
+
+export { SectionTitle } from './components/SectionTitle'
+export type { SectionTitleProps } from './components/SectionTitle'
