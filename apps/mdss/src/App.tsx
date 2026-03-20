@@ -21,6 +21,12 @@ import {
   InputWithSuffix,
   FormRow,
   ValidationMessage,
+  Toast,
+  Toaster,
+  Banner,
+  Verdict,
+  ScanStatus,
+  Severity,
 } from '@opswat/blue-line'
 import type { IconName, MultiColorIconName } from '@opswat/blue-line'
 
@@ -62,6 +68,11 @@ export function App() {
   // Form inputs state
   const [clearableValue, setClearableValue] = useState('clearable text')
   const [uploadFileName, setUploadFileName] = useState<string | undefined>(undefined)
+
+  // Feedback state
+  const [toastVisible, setToastVisible] = useState(false)
+  const [toasterVisible, setToasterVisible] = useState(false)
+  const [toasterVariant, setToasterVariant] = useState<'info' | 'success' | 'error'>('info')
 
   function toggleTheme() {
     setDark(!dark)
@@ -392,6 +403,71 @@ export function App() {
         <div className="flex flex-col gap-xs">
           <ValidationMessage type="error">This field is required.</ValidationMessage>
           <ValidationMessage type="success">Settings saved successfully.</ValidationMessage>
+        </div>
+      </section>
+
+      {/* Feedback & Status */}
+      <section className="mb-xl">
+        <h2 className="text-h3 font-medium mb-sm">Feedback & Status</h2>
+
+        {/* Toast */}
+        <p className="text-note text-[var(--text-muted)] mb-xs">Toast</p>
+        <div className="flex items-center gap-xs mb-sm">
+          <Button variant="outline" onClick={() => setToastVisible(!toastVisible)}>
+            {toastVisible ? 'Hide Toast' : 'Show Toast'}
+          </Button>
+        </div>
+        <Toast visible={toastVisible}>Operation completed successfully.</Toast>
+
+        {/* Toaster */}
+        <p className="text-note text-[var(--text-muted)] mb-xs">Toaster</p>
+        <div className="flex items-center gap-xs mb-sm">
+          {(['info', 'success', 'error'] as const).map(v => (
+            <Button key={v} variant="outline" onClick={() => { setToasterVariant(v); setToasterVisible(true) }}>
+              {v}
+            </Button>
+          ))}
+        </div>
+        <Toaster
+          variant={toasterVariant}
+          visible={toasterVisible}
+          title={`${toasterVariant.charAt(0).toUpperCase() + toasterVariant.slice(1)} Notification`}
+          description="This is a sample notification with a description."
+          icon={<Icon multiColor={toasterVariant === 'info' ? 'fb-info' : toasterVariant === 'success' ? 'fb-success' : 'fb-error'} size="xl" />}
+          onClose={() => setToasterVisible(false)}
+        />
+
+        {/* Banner */}
+        <p className="text-note text-[var(--text-muted)] mb-xs">Banner</p>
+        <div className="flex flex-col gap-xs mb-sm">
+          <Banner variant="info" icon={<Icon multiColor="fb-info" size="md" />} title="Info:" description="Storage account connected successfully." actions={[{ label: 'View Details', onClick: () => {} }]} />
+          <Banner variant="alert" icon={<Icon multiColor="fb-error" size="md" />} title="Alert:" description="3 threats detected during the latest scan." />
+          <Banner variant="neutral" title="Neutral:" description="No action required at this time." />
+          <Banner variant="warn" title="Warning:" description="License expires in 7 days." actions={[{ label: 'Renew', onClick: () => {} }]} />
+        </div>
+
+        {/* Verdict */}
+        <p className="text-note text-[var(--text-muted)] mb-xs">Verdict</p>
+        <div className="flex flex-wrap items-center gap-sm mb-sm">
+          {(['neutral', 'not-active', 'secure', 'success', 'accent', 'guide', 'alert', 'warn', 'caution'] as const).map(v => (
+            <Verdict key={v} variant={v}>{v}</Verdict>
+          ))}
+        </div>
+
+        {/* ScanStatus */}
+        <p className="text-note text-[var(--text-muted)] mb-xs">ScanStatus</p>
+        <div className="flex flex-wrap items-center gap-xs mb-sm">
+          {(['allowed', 'blocked', 'complete', 'failed', 'skipped', 'pending'] as const).map(v => (
+            <ScanStatus key={v} variant={v}>{v.charAt(0).toUpperCase() + v.slice(1)}</ScanStatus>
+          ))}
+        </div>
+
+        {/* Severity */}
+        <p className="text-note text-[var(--text-muted)] mb-xs">Severity</p>
+        <div className="flex flex-wrap items-center gap-sm">
+          {(['none', 'low', 'medium', 'high', 'critical'] as const).map(level => (
+            <Severity key={level} level={level} />
+          ))}
         </div>
       </section>
 
