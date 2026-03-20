@@ -39,6 +39,8 @@ import {
   CardTitle,
   Pagination,
   DataTable,
+  StatCard,
+  StatCardRow,
 } from '@opswat/blue-line'
 import type { IconName, MultiColorIconName } from '@opswat/blue-line'
 
@@ -629,6 +631,41 @@ export function App() {
             ]}
           />
         </Card>
+      </section>
+
+      {/* Stat Cards */}
+      <section className="mb-xl">
+        <h2 className="text-h3 font-medium mb-sm">Stat Cards</h2>
+        <StatCardRow>
+          <StatCard
+            label="Threats Detected"
+            value="2,001"
+            trend="up"
+            trendText="+100 (+1%)"
+            headerAction={<Button variant="text">View Reports</Button>}
+            legend={[
+              { color: 'var(--color-blue-900)', label: 'Known Malware', value: '1,834' },
+              { color: 'var(--color-blue-700)', label: 'Suspicious', value: '142' },
+              { color: 'var(--color-blue-300)', label: 'PUP', value: '25' },
+            ]}
+          />
+          <StatCard
+            label="Data Loss Prevented"
+            value="847"
+            trend="down"
+            trendText="-12 (-1.4%)"
+            legend={[
+              { color: 'var(--color-green-700)', label: 'PII Detected', value: '523' },
+              { color: 'var(--color-green-400)', label: 'Financial Data', value: '324' },
+            ]}
+          />
+          <StatCard
+            label="Files Sanitized"
+            value="3,459"
+            trend="up"
+            trendText="+230 (+7%)"
+          />
+        </StatCardRow>
       </section>
 
       <hr className="border-[var(--border-default)] my-xl" />

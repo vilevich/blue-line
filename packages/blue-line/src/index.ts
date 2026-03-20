@@ -102,3 +102,6 @@ export type { PaginationProps } from './components/Pagination'
 
 export { DataTable } from './components/DataTable'
 export type { DataTableProps, DataTableColumn } from './components/DataTable'
+
+export { StatCard, StatCardRow } from './components/StatCard'
+export type { StatCardProps, StatCardRowProps, StatCardLegendItem } from './components/StatCard'
