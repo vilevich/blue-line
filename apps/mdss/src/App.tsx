@@ -38,6 +38,7 @@ import {
   CardHeader,
   CardTitle,
   Pagination,
+  DataTable,
 } from '@opswat/blue-line'
 import type { IconName, MultiColorIconName } from '@opswat/blue-line'
 
@@ -601,6 +602,32 @@ export function App() {
         <p className="text-note text-[var(--text-muted)] mb-xs">Simple card</p>
         <Card>
           <div className="p-5 text-label text-[var(--text-subtle)]">A simple card with no header or pagination.</div>
+        </Card>
+      </section>
+
+      {/* Data Table */}
+      <section className="mb-xl">
+        <h2 className="text-h3 font-medium mb-sm">Data Table</h2>
+        <Card>
+          <CardHeader>
+            <CardTitle title="Jobs" count="5 items" />
+          </CardHeader>
+          <DataTable
+            columns={[
+              { key: 'name', header: 'Job Name' },
+              { key: 'status', header: 'Status', render: (row) => <Tag variant={row.status === 'Running' ? 'success' : row.status === 'Failed' ? 'alert' : 'neutral'}>{row.status as string}</Tag> },
+              { key: 'type', header: 'Type' },
+              { key: 'files', header: 'Files', align: 'right' },
+              { key: 'date', header: 'Start Time' },
+            ]}
+            data={[
+              { name: 'AWS Full Scan', status: 'Running', type: 'Scan Now', files: '45,231', date: 'Feb 26, 2026 08:14 AM' },
+              { name: 'Azure Weekly', status: 'Complete', type: 'Scheduled', files: '12,004', date: 'Feb 25, 2026 02:00 AM' },
+              { name: 'GCP Storage', status: 'Failed', type: 'Scan Now', files: '0', date: 'Feb 24, 2026 11:30 AM' },
+              { name: 'S3 Bucket Scan', status: 'Pending', type: 'Scheduled', files: '-', date: 'Feb 27, 2026 06:00 AM' },
+              { name: 'OneDrive Audit', status: 'Complete', type: 'On Demand', files: '8,912', date: 'Feb 23, 2026 09:45 AM' },
+            ]}
+          />
         </Card>
       </section>
 

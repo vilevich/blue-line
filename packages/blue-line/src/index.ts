@@ -99,3 +99,6 @@ export type { CardProps, CardHeaderProps, CardTitleProps } from './components/Ca
 
 export { Pagination } from './components/Pagination'
 export type { PaginationProps } from './components/Pagination'
+
+export { DataTable } from './components/DataTable'
+export type { DataTableProps, DataTableColumn } from './components/DataTable'
