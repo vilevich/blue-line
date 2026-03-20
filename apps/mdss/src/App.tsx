@@ -14,6 +14,13 @@ import {
   Chip,
   Skeleton,
   Tooltip,
+  InputField,
+  SelectField,
+  TextArea,
+  FileUpload,
+  InputWithSuffix,
+  FormRow,
+  ValidationMessage,
 } from '@opswat/blue-line'
 import type { IconName, MultiColorIconName } from '@opswat/blue-line'
 
@@ -50,6 +57,10 @@ export function App() {
 
   // Chip removable
   const [chipVisible, setChipVisible] = useState(true)
+
+  // Form inputs state
+  const [clearableValue, setClearableValue] = useState('clearable text')
+  const [uploadFileName, setUploadFileName] = useState<string | undefined>(undefined)
 
   function toggleTheme() {
     setDark(!dark)
@@ -286,6 +297,100 @@ export function App() {
           <Tooltip content="Right tooltip" position="right">
             <Button variant="outline">Right</Button>
           </Tooltip>
+        </div>
+      </section>
+
+      {/* Form Inputs */}
+      <section className="mb-xl">
+        <h2 className="text-h3 font-medium mb-sm">Form Inputs</h2>
+
+        {/* InputField */}
+        <p className="text-note text-[var(--text-muted)] mb-xs">InputField — variants</p>
+        <div className="flex flex-wrap items-start gap-xs mb-sm">
+          <InputField placeholder="Default placeholder" style={{ width: 200 }} />
+          <InputField
+            value={clearableValue}
+            clearable
+            onChange={e => setClearableValue(e.target.value)}
+            onClear={() => setClearableValue('')}
+            style={{ width: 200 }}
+          />
+          <InputField type="password" placeholder="Password" style={{ width: 200 }} />
+          <InputField status="error" placeholder="Error state" style={{ width: 200 }} />
+          <InputField status="success" placeholder="Success state" style={{ width: 200 }} />
+          <InputField disabled placeholder="Disabled" style={{ width: 200 }} />
+        </div>
+
+        {/* SelectField */}
+        <p className="text-note text-[var(--text-muted)] mb-xs">SelectField — variants</p>
+        <div className="flex flex-wrap items-start gap-xs mb-sm">
+          <SelectField style={{ width: 200 }}>
+            <option value="">Choose option</option>
+            <option value="a">Option A</option>
+            <option value="b">Option B</option>
+            <option value="c">Option C</option>
+          </SelectField>
+          <SelectField status="error" style={{ width: 200 }}>
+            <option value="">Error state</option>
+          </SelectField>
+          <SelectField disabled style={{ width: 200 }}>
+            <option value="">Disabled</option>
+          </SelectField>
+        </div>
+
+        {/* TextArea */}
+        <p className="text-note text-[var(--text-muted)] mb-xs">TextArea — variants</p>
+        <div className="flex flex-wrap items-start gap-xs mb-sm">
+          <TextArea placeholder="Default placeholder" style={{ width: 240 }} />
+          <TextArea status="error" placeholder="Error state" style={{ width: 240 }} />
+          <TextArea disabled placeholder="Disabled" style={{ width: 240 }} />
+        </div>
+
+        {/* FileUpload */}
+        <p className="text-note text-[var(--text-muted)] mb-xs">FileUpload — variants</p>
+        <div className="flex flex-wrap items-center gap-xs mb-sm">
+          <div style={{ width: 240 }}>
+            <FileUpload
+              onChange={e => setUploadFileName(e.target.files?.[0]?.name)}
+              fileName={uploadFileName}
+              className="w-full"
+            />
+          </div>
+          <div style={{ width: 240 }}>
+            <FileUpload fileName="certificate.pem" className="w-full" />
+          </div>
+          <div style={{ width: 240 }}>
+            <FileUpload disabled className="w-full" />
+          </div>
+        </div>
+
+        {/* InputWithSuffix */}
+        <p className="text-note text-[var(--text-muted)] mb-xs">InputWithSuffix</p>
+        <div className="flex flex-wrap items-center gap-xs mb-sm">
+          <InputWithSuffix suffix="days" placeholder="30" maxWidth={160} />
+          <InputWithSuffix suffix="MB" placeholder="512" maxWidth={160} />
+        </div>
+
+        {/* FormRow */}
+        <p className="text-note text-[var(--text-muted)] mb-xs">FormRow</p>
+        <div className="flex flex-col gap-xs mb-sm max-w-xl">
+          <FormRow label="Session timeout">
+            <InputField placeholder="Enter value" />
+          </FormRow>
+          <FormRow label="Default region" help="Select the AWS region for your storage accounts">
+            <SelectField>
+              <option value="">Choose region</option>
+              <option value="us-east-1">us-east-1</option>
+              <option value="eu-west-1">eu-west-1</option>
+            </SelectField>
+          </FormRow>
+        </div>
+
+        {/* ValidationMessage */}
+        <p className="text-note text-[var(--text-muted)] mb-xs">ValidationMessage</p>
+        <div className="flex flex-col gap-xs">
+          <ValidationMessage type="error">This field is required.</ValidationMessage>
+          <ValidationMessage type="success">Settings saved successfully.</ValidationMessage>
         </div>
       </section>
 
