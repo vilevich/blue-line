@@ -17,6 +17,7 @@ import {
   InputField,
   Breadcrumb,
   type BreadcrumbItem,
+  type TagVariant,
 } from '@opswat/blue-line'
 
 // ─── Constants ────────────────────────────────────────────────────────────────
@@ -55,7 +56,7 @@ const JOB_TYPES = ['Scheduled', 'Real-Time', 'On-Demand']
 const JOB_STATUSES = [
   { s: 'Completed', tag: 'success' as const },
   { s: 'In Progress', tag: 'accent' as const },
-  { s: 'Failed', tag: 'danger' as const },
+  { s: 'Failed', tag: 'alert' as const },
   { s: 'Queued', tag: 'warn' as const },
 ]
 const JOB_NAMES = [
@@ -106,7 +107,7 @@ const ADDITIONAL_INTEGRATIONS: IntegrationCard[] = [
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type TagVariant = 'success' | 'alert' | 'warn' | 'accent' | 'neutral'
+// TagVariant imported from @opswat/blue-line
 
 interface UnitData {
   name: string
@@ -273,7 +274,7 @@ function generateAccountsData(): AccountData[] {
     }
     let acctStatus = 'Operational', acctTag: TagVariant = 'success'
     if (issCount > 0) { acctStatus = 'Issues Found'; acctTag = 'alert' }
-    if (units.some(u => u.status === 'Error')) { acctStatus = 'Error'; acctTag = 'danger' }
+    if (units.some(u => u.status === 'Error')) { acctStatus = 'Error'; acctTag = 'alert' }
 
     const jobs: JobData[] = []
     const jobCount = rand(3, 12)
@@ -1037,13 +1038,13 @@ function AccountDetailView({ account, onBack }: {
                 <div className="text-[14px] font-medium text-[var(--text-strong)] mb-1">Latest Job Summary</div>
                 {account.jobs.length > 0 ? (
                   <>
-                    <div className="text-[13px] text-[var(--text-subtle)]">
+                    <div className="text-[12px] text-[var(--text-subtle)]">
                       {account.jobs[0].type} · {account.jobs[0].date}
                     </div>
                     <a className="acct-settings-link mt-2 inline-block">View Details</a>
                   </>
                 ) : (
-                  <div className="text-[13px] text-[var(--text-subtle)]">No jobs found</div>
+                  <div className="text-[12px] text-[var(--text-subtle)]">No jobs found</div>
                 )}
               </div>
             </Card>

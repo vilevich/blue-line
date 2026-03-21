@@ -52,7 +52,7 @@ export function App() {
       />
       <main
         className={cn(
-          'pt-[60px] min-h-screen transition-[margin-left] duration-200',
+          'pt-[56px] min-h-screen transition-[margin-left] duration-200',
           sidebarCollapsed ? 'ml-14' : 'ml-[244px]',
         )}
       >

@@ -96,7 +96,7 @@ export function Sidebar({ activePage, onNavigate, collapsed }: SidebarProps) {
   return (
     <nav
       className={cn(
-        'fixed top-[60px] left-0 bottom-0 z-10 flex flex-col justify-between bg-[var(--surface-bg)] border-r border-[var(--border-card)] font-sans transition-[width] duration-200 overflow-hidden',
+        'fixed top-[56px] left-0 bottom-0 z-10 flex flex-col justify-between bg-[var(--surface-bg)] border-r border-[var(--border-card)] font-sans transition-[width] duration-200 overflow-hidden',
         collapsed ? 'w-14' : 'w-[244px]',
       )}
     >

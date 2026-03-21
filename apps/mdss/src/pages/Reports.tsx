@@ -360,7 +360,7 @@ export function ReportsPage() {
           }
         />
 
-        <div className="text-[13px] text-[var(--text-muted)] -mt-2 mb-4">Analysis Details</div>
+        <div className="text-[12px] text-[var(--text-muted)] -mt-2 mb-4">Analysis Details</div>
 
         <Tabs tabs={DETAIL_TABS} activeTab={detailTab} onTabChange={setDetailTab}>
           {/* ──── Overview ──── */}
@@ -534,7 +534,7 @@ export function ReportsPage() {
                 <div className="audit-card-title"><h3>MetaScan™ Results</h3></div>
                 <div className="rpt-scan-header-stats">
                   <span className="rpt-scan-header-value danger">5</span>
-                  <span className="text-[13px] text-[var(--text-muted)]">/ 16 engines detected threats</span>
+                  <span className="text-[12px] text-[var(--text-muted)]">/ 16 engines detected threats</span>
                 </div>
               </div>
               <div className="table-scroll" style={{ maxHeight: 300 }}>
@@ -562,7 +562,7 @@ export function ReportsPage() {
               <div className="rpt-sandbox-verdict">
                 <WarnTriangle />
                 <span className="verdict-text">Malicious</span>
-                <span className="text-[13px] text-[var(--text-muted)] ml-auto">Confidence: 98%</span>
+                <span className="text-[12px] text-[var(--text-muted)] ml-auto">Confidence: 98%</span>
               </div>
               <div className="p-4 px-5">
                 <div className="rpt-section-title" style={{ marginBottom: 12, padding: 0 }}>Threat Indicators</div>
@@ -601,16 +601,16 @@ export function ReportsPage() {
                 <div className="audit-card-title"><h3>Proactive DLP™</h3></div>
                 <div className="rpt-scan-header-stats">
                   <span className="rpt-scan-header-value warn">16</span>
-                  <span className="text-[13px] text-[var(--text-muted)]">sensitive data objects detected</span>
+                  <span className="text-[12px] text-[var(--text-muted)]">sensitive data objects detected</span>
                 </div>
               </div>
               <div className="rpt-cat-grid">
-                <div className="rpt-cat-cell"><span className="rpt-cat-icon" style={{ color: 'var(--color-red-700)' }}>●</span><div><div className="text-[13px] font-medium">Credit Card Numbers</div><div className="text-[12px] text-[var(--text-muted)]">5 instances found</div></div></div>
-                <div className="rpt-cat-cell"><span className="rpt-cat-icon" style={{ color: 'var(--color-yellow-700)' }}>●</span><div><div className="text-[13px] font-medium">Social Security Numbers</div><div className="text-[12px] text-[var(--text-muted)]">4 instances found</div></div></div>
-                <div className="rpt-cat-cell"><span className="rpt-cat-icon" style={{ color: 'var(--color-yellow-700)' }}>●</span><div><div className="text-[13px] font-medium">Email Addresses</div><div className="text-[12px] text-[var(--text-muted)]">3 instances found</div></div></div>
-                <div className="rpt-cat-cell"><span className="rpt-cat-icon" style={{ color: 'var(--color-blue-700)' }}>●</span><div><div className="text-[13px] font-medium">Phone Numbers</div><div className="text-[12px] text-[var(--text-muted)]">2 instances found</div></div></div>
-                <div className="rpt-cat-cell"><span className="rpt-cat-icon" style={{ color: 'var(--color-blue-700)' }}>●</span><div><div className="text-[13px] font-medium">API Keys</div><div className="text-[12px] text-[var(--text-muted)]">1 instance found</div></div></div>
-                <div className="rpt-cat-cell"><span className="rpt-cat-icon" style={{ color: 'var(--text-muted)' }}>●</span><div><div className="text-[13px] font-medium">IP Addresses</div><div className="text-[12px] text-[var(--text-muted)]">1 instance found</div></div></div>
+                <div className="rpt-cat-cell"><span className="rpt-cat-icon" style={{ color: 'var(--color-red-700)' }}>●</span><div><div className="text-[12px] font-medium">Credit Card Numbers</div><div className="text-[12px] text-[var(--text-muted)]">5 instances found</div></div></div>
+                <div className="rpt-cat-cell"><span className="rpt-cat-icon" style={{ color: 'var(--color-yellow-700)' }}>●</span><div><div className="text-[12px] font-medium">Social Security Numbers</div><div className="text-[12px] text-[var(--text-muted)]">4 instances found</div></div></div>
+                <div className="rpt-cat-cell"><span className="rpt-cat-icon" style={{ color: 'var(--color-yellow-700)' }}>●</span><div><div className="text-[12px] font-medium">Email Addresses</div><div className="text-[12px] text-[var(--text-muted)]">3 instances found</div></div></div>
+                <div className="rpt-cat-cell"><span className="rpt-cat-icon" style={{ color: 'var(--color-blue-700)' }}>●</span><div><div className="text-[12px] font-medium">Phone Numbers</div><div className="text-[12px] text-[var(--text-muted)]">2 instances found</div></div></div>
+                <div className="rpt-cat-cell"><span className="rpt-cat-icon" style={{ color: 'var(--color-blue-700)' }}>●</span><div><div className="text-[12px] font-medium">API Keys</div><div className="text-[12px] text-[var(--text-muted)]">1 instance found</div></div></div>
+                <div className="rpt-cat-cell"><span className="rpt-cat-icon" style={{ color: 'var(--text-muted)' }}>●</span><div><div className="text-[12px] font-medium">IP Addresses</div><div className="text-[12px] text-[var(--text-muted)]">1 instance found</div></div></div>
               </div>
             </div>
 
@@ -639,15 +639,15 @@ export function ReportsPage() {
                 <div className="audit-card-title"><h3>Deep CDR™ Sanitization</h3></div>
                 <div className="rpt-scan-header-stats">
                   <span className="rpt-scan-header-value success">11</span>
-                  <span className="text-[13px] text-[var(--text-muted)]">objects sanitized</span>
+                  <span className="text-[12px] text-[var(--text-muted)]">objects sanitized</span>
                 </div>
               </div>
               <div className="rpt-cat-grid">
-                <div className="rpt-cat-cell"><span className="rpt-cat-icon" style={{ color: 'var(--color-green-800)' }}>●</span><div><div className="text-[13px] font-medium">Macros</div><div className="text-[12px] text-[var(--text-muted)]">4 removed</div></div></div>
-                <div className="rpt-cat-cell"><span className="rpt-cat-icon" style={{ color: 'var(--color-green-800)' }}>●</span><div><div className="text-[13px] font-medium">Embedded Objects</div><div className="text-[12px] text-[var(--text-muted)]">3 sanitized</div></div></div>
-                <div className="rpt-cat-cell"><span className="rpt-cat-icon" style={{ color: 'var(--color-green-800)' }}>●</span><div><div className="text-[13px] font-medium">Active Content</div><div className="text-[12px] text-[var(--text-muted)]">2 disabled</div></div></div>
-                <div className="rpt-cat-cell"><span className="rpt-cat-icon" style={{ color: 'var(--color-blue-700)' }}>●</span><div><div className="text-[13px] font-medium">Hyperlinks</div><div className="text-[12px] text-[var(--text-muted)]">1 neutralized</div></div></div>
-                <div className="rpt-cat-cell"><span className="rpt-cat-icon" style={{ color: 'var(--color-blue-700)' }}>●</span><div><div className="text-[13px] font-medium">JavaScript</div><div className="text-[12px] text-[var(--text-muted)]">1 removed</div></div></div>
+                <div className="rpt-cat-cell"><span className="rpt-cat-icon" style={{ color: 'var(--color-green-800)' }}>●</span><div><div className="text-[12px] font-medium">Macros</div><div className="text-[12px] text-[var(--text-muted)]">4 removed</div></div></div>
+                <div className="rpt-cat-cell"><span className="rpt-cat-icon" style={{ color: 'var(--color-green-800)' }}>●</span><div><div className="text-[12px] font-medium">Embedded Objects</div><div className="text-[12px] text-[var(--text-muted)]">3 sanitized</div></div></div>
+                <div className="rpt-cat-cell"><span className="rpt-cat-icon" style={{ color: 'var(--color-green-800)' }}>●</span><div><div className="text-[12px] font-medium">Active Content</div><div className="text-[12px] text-[var(--text-muted)]">2 disabled</div></div></div>
+                <div className="rpt-cat-cell"><span className="rpt-cat-icon" style={{ color: 'var(--color-blue-700)' }}>●</span><div><div className="text-[12px] font-medium">Hyperlinks</div><div className="text-[12px] text-[var(--text-muted)]">1 neutralized</div></div></div>
+                <div className="rpt-cat-cell"><span className="rpt-cat-icon" style={{ color: 'var(--color-blue-700)' }}>●</span><div><div className="text-[12px] font-medium">JavaScript</div><div className="text-[12px] text-[var(--text-muted)]">1 removed</div></div></div>
               </div>
             </div>
 

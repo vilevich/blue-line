@@ -11,7 +11,7 @@ export function Header({ onToggleSidebar, onToggleTheme, dark }: HeaderProps) {
   const [avatarOpen, setAvatarOpen] = useState(false)
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-20 flex items-center justify-between h-[60px] pl-3 pr-5 bg-[var(--surface-bg)] border-b border-[var(--border-card)] font-sans">
+    <header className="fixed top-0 left-0 right-0 z-20 flex items-center justify-between h-[56px] pl-3 pr-5 bg-[var(--surface-bg)] border-b border-[var(--border-card)] font-sans">
       {/* Left: toggle + product name */}
       <div className="flex items-center gap-3">
         <button

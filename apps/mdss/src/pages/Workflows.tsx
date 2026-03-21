@@ -338,7 +338,7 @@ function CreateWorkflowPanel({ open, onClose }: { open: boolean; onClose: () => 
         </>
       }
     >
-      <p className="text-[13px] text-[var(--text-subtle)] mb-3">
+      <p className="text-[12px] text-[var(--text-subtle)] mb-3">
         Create a new workflow to automate your processes. It can be used when instantiating a scan.{' '}
         <a href="#" className="text-[var(--primary)]" onClick={(e) => e.preventDefault()}>Learn more</a>
       </p>
@@ -392,11 +392,11 @@ function DiscoveryPanel({ open, onClose }: { open: boolean; onClose: () => void 
         </>
       }
     >
-      <p className="text-[13px] text-[var(--text-subtle)] mb-4">
+      <p className="text-[12px] text-[var(--text-subtle)] mb-4">
         File discovery continuously scans your storage to detect files that need processing. This is always enabled to ensure all files are identified for remediation.
       </p>
       <div className="text-[14px] font-medium text-[var(--text-strong)] mb-2">Discovery</div>
-      <p className="text-[13px] text-[var(--text-subtle)] mb-3">
+      <p className="text-[12px] text-[var(--text-subtle)] mb-3">
         Identity scanning uses file metadata to identify files that have already been processed. When enabled, MDSS reuses previous scan results for unchanged files instead of re-scanning them, significantly improving performance for backup datasets and subsequent scans.
       </p>
       <div className="flex items-center gap-2 mb-1">
@@ -425,7 +425,7 @@ function ScanConfigPanel({ open, onClose }: { open: boolean; onClose: () => void
         Changes made to the workflow in MetaDefender Core, Cloud or Cluster will affect the functionality of MetaDefender Storage Security<br />
         <a href="#" onClick={(e) => e.preventDefault()} className="text-[var(--primary)]">Dismiss</a>
       </WarningBanner>
-      <p className="text-[13px] text-[var(--text-subtle)] mb-4">
+      <p className="text-[12px] text-[var(--text-subtle)] mb-4">
         MetaDefender for Secure Storage uses scan pools to group MetaDefender Core or Cloud instances.
       </p>
       <div className="flex flex-col gap-4">
@@ -433,7 +433,7 @@ function ScanConfigPanel({ open, onClose }: { open: boolean; onClose: () => void
           <label className="text-[14px] font-medium text-[var(--text-strong)]">Scan Pool</label>
           <SelectField options={[{ label: 'MetaDefender Core Demo', value: 'core' }, { label: 'MetaDefender Cloud Demo', value: 'cloud' }]} value="core" />
         </div>
-        <label className="radio-option text-[13px]"><input type="checkbox" /><span>Failover to secondary scan pool</span></label>
+        <label className="radio-option text-[12px]"><input type="checkbox" /><span>Failover to secondary scan pool</span></label>
         <div className="flex flex-col gap-1">
           <label className="text-[14px] font-medium text-[var(--primary)]">Failover Scan Pool</label>
           <SelectField options={[{ label: 'Not Available', value: 'na' }]} value="na" />
@@ -489,11 +489,11 @@ function TechnologiesPanel({ open, onClose }: { open: boolean; onClose: () => vo
             {t.variant ? (
               <Tag variant={t.variant}>{t.status}</Tag>
             ) : (
-              <span className="text-[13px] text-[var(--text-muted)]">{t.status}</span>
+              <span className="text-[12px] text-[var(--text-muted)]">{t.status}</span>
             )}
           </div>
           {t.note && <p className="text-[12px] text-[var(--text-subtle)] mt-1">{t.note}</p>}
-          {t.link && <a href="#" className="text-[13px] text-[var(--primary)]" onClick={(e) => e.preventDefault()}>{t.link}</a>}
+          {t.link && <a href="#" className="text-[12px] text-[var(--primary)]" onClick={(e) => e.preventDefault()}>{t.link}</a>}
         </div>
       ))}
     </SlidePanel>
@@ -579,7 +579,7 @@ function FileTaggingPanel({ open, onClose }: { open: boolean; onClose: () => voi
         </div>
       </div>
 
-      <div className="flex items-center gap-1.5 mt-3 cursor-pointer text-[var(--text-subtle)] text-[13px]">
+      <div className="flex items-center gap-1.5 mt-3 cursor-pointer text-[var(--text-subtle)] text-[12px]">
         <svg viewBox="0 0 16 16" fill="currentColor" style={{ width: 14, height: 14 }}>
           <path d="M8 3a5 5 0 100 10A5 5 0 008 3zM2 8a6 6 0 1112 0A6 6 0 012 8zm4.5-1.5l3 1.5-3 1.5v-3z" />
         </svg>
@@ -602,7 +602,7 @@ function DeepCdrPanel({ open, onClose }: { open: boolean; onClose: () => void })
         </>
       }
     >
-      <p className="text-[13px] text-[var(--text-subtle)] mb-4">
+      <p className="text-[12px] text-[var(--text-subtle)] mb-4">
         File regeneration that protects from evasive malware and zero-day exploits.
       </p>
       <div className="flex items-center gap-2 mb-2">
@@ -646,12 +646,12 @@ function FileDefPanel({ open, onClose }: { open: boolean; onClose: () => void })
               Override Core verdicts by category. Enable or disable blocking for malicious files, sensitive data violations, and vulnerability detections independently.
             </p>
             <div className="mt-3 flex flex-col gap-2 pl-1">
-              <label className="radio-option opacity-50"><input type="checkbox" disabled /><span className="text-[13px]">Files with malicious content</span></label>
+              <label className="radio-option opacity-50"><input type="checkbox" disabled /><span className="text-[12px]">Files with malicious content</span></label>
               <p className="text-[11px] text-[var(--text-muted)] ml-6">
                 Any file marked Infected, Suspicious or Blocklisted by MetaDefender Core / Distributed Cluster will be considered malicious in MetaDefender Storage Security
               </p>
-              <label className="radio-option opacity-50"><input type="checkbox" disabled /><span className="text-[13px]">Treat files with sensitive data as blocked</span></label>
-              <label className="radio-option opacity-50"><input type="checkbox" disabled /><span className="text-[13px]">Treat files with vulnerabilities as blocked</span></label>
+              <label className="radio-option opacity-50"><input type="checkbox" disabled /><span className="text-[12px]">Treat files with sensitive data as blocked</span></label>
+              <label className="radio-option opacity-50"><input type="checkbox" disabled /><span className="text-[12px]">Treat files with vulnerabilities as blocked</span></label>
             </div>
           </div>
         </label>
@@ -680,7 +680,7 @@ function RemediationsPanel({ open, onClose }: { open: boolean; onClose: () => vo
         <div className="wf-rem-option py-3 border-b border-[var(--border-card)]">
           <label className="radio-option"><input type="radio" name="wfRem" defaultChecked /><span>Copy</span></label>
           <div className="mt-3 pl-6">
-            <div className="text-[13px] text-[var(--text-subtle)] mb-2">Selected storage unit</div>
+            <div className="text-[12px] text-[var(--text-subtle)] mb-2">Selected storage unit</div>
             <div className="flex flex-wrap items-center gap-2 mb-3">
               <span className="inline-flex items-center gap-1 px-2 py-1 text-[12px] bg-[var(--color-neutral-100)] dark:bg-[var(--color-neutral-900)] rounded text-[var(--text-strong)]">
                 Storage Unit 1 <span className="cursor-pointer text-[var(--text-muted)]">&#x2715;</span>
@@ -693,10 +693,10 @@ function RemediationsPanel({ open, onClose }: { open: boolean; onClose: () => vo
             <WarningBanner>
               <span className="text-[12px]">You can only configure a maximum of 5 storage units as destinations</span>
             </WarningBanner>
-            <div className="text-[13px] font-medium text-[var(--text-strong)] mt-3 mb-2">Keep folder structure</div>
+            <div className="text-[12px] font-medium text-[var(--text-strong)] mt-3 mb-2">Keep folder structure</div>
             {['Storage Unit 1', 'Storage Unit 2', 'Storage Unit 3', 'Storage Unit 4', 'Storage Unit 5'].map((u) => (
               <div key={u} className="flex items-center justify-between py-1">
-                <label className="text-[13px] text-[var(--text-strong)]">{u}</label>
+                <label className="text-[12px] text-[var(--text-strong)]">{u}</label>
                 <input type="checkbox" defaultChecked />
               </div>
             ))}
