@@ -74,7 +74,7 @@ export function TagGroup({ children, maxVisible, className }: TagGroupProps) {
     <div className={cn('flex flex-wrap gap-2 items-center', className)}>
       {visible}
       {hasOverflow && (
-        <span className="inline-flex items-center justify-center px-1 py-0.5 rounded bg-[var(--surface-badge-number,#344565)] text-white text-[12px] font-regular leading-[14px] whitespace-nowrap">
+        <span className="inline-flex items-center justify-center h-4 px-1 rounded bg-[var(--surface-badge-number,#344565)] text-white text-[12px] font-regular leading-[14px] whitespace-nowrap">
           +{overflowCount}
         </span>
       )}
