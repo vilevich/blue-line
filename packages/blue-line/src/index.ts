@@ -105,3 +105,9 @@ export type { DataTableProps, DataTableColumn } from './components/DataTable'
 
 export { StatCard, StatCardRow } from './components/StatCard'
 export type { StatCardProps, StatCardRowProps, StatCardLegendItem } from './components/StatCard'
+
+export { KeyValueBar } from './components/KeyValueBar'
+export type { KeyValueBarProps, KeyValueBarItem } from './components/KeyValueBar'
+
+export { ColDropdown, ColHeader } from './components/ColDropdown'
+export type { ColDropdownProps, ColHeaderProps, ColFilterConfig } from './components/ColDropdown'

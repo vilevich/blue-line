@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardTitle, Button, StatCard, StatCardRow } from '@opswat/blue-line'
+import { Card, CardHeader, CardTitle, Button, StatCard, StatCardRow, KeyValueBar } from '@opswat/blue-line'
 import { Section, Subsection, ComponentBlock, PropsTable, InlineCode } from '../components/ComponentBlock'
 
 export function CardsPage() {
@@ -70,6 +70,40 @@ export function CardsPage() {
         />
       </Subsection>
 
+      <Subsection title="Key-Value Bar">
+        <ComponentBlock
+          preview={
+            <Card>
+              <CardHeader>
+                <CardTitle title="Job" actions={<Button variant="text">Job Details</Button>} />
+              </CardHeader>
+              <KeyValueBar items={[
+                { label: 'Storage Unit', value: 'AWS Drive' },
+                { label: 'Scan Type', value: 'Scheduled' },
+                { label: 'Status', value: 'Complete' },
+                { label: 'Workflow', value: 'Default Workflow' },
+                { label: 'Started', value: '27/05/25 11:45' },
+                { label: 'Priority', value: 'Low' },
+              ]} />
+            </Card>
+          }
+          code={`<Card>
+  <CardHeader>
+    <CardTitle title="Job" actions={<Button variant="text">Job Details</Button>} />
+  </CardHeader>
+  <KeyValueBar items={[
+    { label: 'Storage Unit', value: 'AWS Drive' },
+    { label: 'Scan Type', value: 'Scheduled' },
+    { label: 'Status', value: 'Complete' },
+    { label: 'Workflow', value: 'Default Workflow' },
+    { label: 'Started', value: '27/05/25 11:45' },
+    { label: 'Priority', value: 'Low' },
+  ]} />
+</Card>`}
+          language="tsx"
+        />
+      </Subsection>
+
       <Subsection title="Stat Cards">
         <ComponentBlock
           preview={
@@ -126,6 +160,7 @@ export function CardsPage() {
             [<InlineCode>StatCard</InlineCode>, <InlineCode>legend</InlineCode>, <InlineCode>{'{ color: string; label: string; value: number }[]'}</InlineCode>, 'Legend items with color, label, and value'],
             [<InlineCode>StatCard</InlineCode>, <InlineCode>headerAction</InlineCode>, <InlineCode>ReactNode</InlineCode>, 'Action element in the stat card header'],
             [<InlineCode>StatCardRow</InlineCode>, <InlineCode>columns</InlineCode>, <InlineCode>number</InlineCode>, 'Number of columns in the stat card grid'],
+            [<InlineCode>KeyValueBar</InlineCode>, <InlineCode>items</InlineCode>, <InlineCode>{'{ label: string; value: string }[]'}</InlineCode>, 'Array of label/value pairs to display horizontally'],
           ]}
         />
       </Subsection>
