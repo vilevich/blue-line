@@ -6,6 +6,12 @@
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["--filter", "@opswat/mdss", "dev"],
       "port": 5173
+    },
+    {
+      "name": "md-icap-dev",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "@opswat/md-icap", "dev", "--port", "5178"],
+      "port": 5178
     }
   ]
 }
