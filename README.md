@@ -41,4 +41,5 @@ pnpm --filter @opswat/bl-docs build # Docs
 ## Links
 
 - **Blue Line Docs:** https://vilevich.github.io/blue-line/
+- **MDSS Prototype:** https://vilevich.github.io/blue-line/mdss/
 - **Figma:** https://www.figma.com/design/TkdLHVmqTZ9eAXbIBuuDul/Blue-Line-2.2.3

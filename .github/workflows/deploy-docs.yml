@@ -38,11 +38,22 @@ jobs:
         env:
           BASE_URL: /blue-line/
 
+      - run: pnpm --filter @opswat/mdss build
+        env:
+          BASE_URL: /blue-line/mdss/
+
+      - name: Merge dist folders
+        run: |
+          mkdir -p _site
+          cp -r apps/bl-docs/dist/* _site/
+          mkdir -p _site/mdss
+          cp -r apps/mdss/dist/* _site/mdss/
+
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: apps/bl-docs/dist
+          path: _site
 
       - id: deployment
         uses: actions/deploy-pages@v4
