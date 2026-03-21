@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react'
+import { type ReactNode, Children } from 'react'
 import { cn } from '../../lib/cn'
 
 export type TagVariant = 'neutral' | 'inactive' | 'secure' | 'success' | 'accent' | 'guide' | 'alert' | 'warn' | 'caution'
@@ -14,6 +14,7 @@ export interface TagProps {
 
 export interface TagGroupProps {
   children: ReactNode
+  maxVisible?: number
   className?: string
 }
 
@@ -63,10 +64,25 @@ export function Tag({ variant, keyword, keywordColor, children, className }: Tag
   )
 }
 
-export function TagGroup({ children, className }: TagGroupProps) {
+export function TagGroup({ children, maxVisible, className }: TagGroupProps) {
+  const items = Children.toArray(children)
+  const hasOverflow = maxVisible != null && items.length > maxVisible
+  const visible = hasOverflow ? items.slice(0, maxVisible) : items
+  const overflowCount = hasOverflow ? items.length - maxVisible : 0
+
   return (
     <div className={cn('flex flex-wrap gap-2 items-center', className)}>
-      {children}
+      {visible}
+      {hasOverflow && (
+        <span
+          className={cn(
+            base,
+            'bg-[var(--ds-neutral-100)] text-[var(--ds-neutral-text)] font-medium',
+          )}
+        >
+          +{overflowCount}
+        </span>
+      )}
     </div>
   )
 }
