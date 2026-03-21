@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import {
   PageHeader,
   Breadcrumb,
@@ -10,8 +10,13 @@ import {
   TabPanel,
   Modal,
   Pagination,
+  Card,
+  CardHeader,
+  CardTitle,
+  KeyValueBar,
+  ColHeader,
 } from '@opswat/blue-line'
-import type { TagVariant } from '@opswat/blue-line'
+import type { TagVariant, ColFilterConfig } from '@opswat/blue-line'
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -101,6 +106,48 @@ const XIcon = () => (
   </svg>
 )
 
+// ─── Chart Components ────────────────────────────────────────────────────────
+
+function MiniDonut({ value, total, color }: { value: number; total: number; color: string }) {
+  const r = 20, C = 2 * Math.PI * r
+  const pct = total > 0 ? value / total : 0
+  return (
+    <svg className="rpt-proc-donut" viewBox="0 0 52 52">
+      <circle cx="26" cy="26" r={r} fill="none" stroke="var(--color-neutral-100)" strokeWidth="6" />
+      <circle cx="26" cy="26" r={r} fill="none" stroke={color} strokeWidth="6"
+        strokeDasharray={`${pct * C} ${C}`} strokeLinecap="round"
+        transform="rotate(-90 26 26)" />
+    </svg>
+  )
+}
+
+function ProgressRing({ pct, color }: { pct: number; color?: string }) {
+  const r = 20, C = 2 * Math.PI * r
+  const stroke = color || 'var(--primary)'
+  return (
+    <div className="dash-rem-ring-wrap">
+      <svg className="dash-rem-ring-svg" viewBox="0 0 52 52">
+        <circle className="dash-rem-ring-track" cx="26" cy="26" r={r} />
+        <circle className="dash-rem-ring-fill" cx="26" cy="26" r={r}
+          stroke={stroke} strokeDasharray={`${(pct / 100) * C} ${C}`} />
+      </svg>
+      <span className="dash-rem-ring-pct">{pct}%</span>
+    </div>
+  )
+}
+
+const ChevronDownIcon = () => (
+  <svg viewBox="0 0 16 16" fill="currentColor" className="w-3 h-3">
+    <path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+)
+
+const WarnTriangleSmall = () => (
+  <svg viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 text-[var(--color-yellow-700)]">
+    <path d="M8.982 1.566a1.13 1.13 0 00-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 01-1.1 0L7.1 5.995A.905.905 0 018 5zm.002 6a1 1 0 110 2 1 1 0 010-2z" />
+  </svg>
+)
+
 // ─── Data ───────────────────────────────────────────────────────────────────
 
 const REPORTS: ReportRow[] = [
@@ -152,20 +199,19 @@ function VerdictCellClean({ value, detected, clean }: { value: string; detected:
   return <span className="rpt-verdict none"><span className="rpt-dot" /> {value}</span>
 }
 
-function ColHeader({ children }: { children: string }) {
-  return (
-    <span className="flex items-center gap-1.5">
-      {children}
-      <span className="filter-icon">
-        <svg viewBox="0 0 16 16" fill="currentColor" className="w-3.5 h-3.5">
-          <path d="M3.835 8.77C3.635 8.77 3.455 8.7 3.315 8.56C3.175 8.42 3.105 8.25 3.105 8.05C3.105 7.85 3.175 7.68 3.315 7.54C3.455 7.4 3.625 7.33 3.825 7.33H12.155C12.355 7.33 12.535 7.4 12.675 7.54C12.815 7.68 12.885 7.85 12.885 8.05C12.885 8.25 12.815 8.42 12.675 8.56C12.535 8.7 12.365 8.77 12.165 8.77H3.835Z" />
-          <path d="M1.715 5.44C1.515 5.44 1.345 5.37 1.205 5.23C1.065 5.09 0.994995 4.92 0.994995 4.72C0.994995 4.52 1.065 4.35 1.205 4.21C1.345 4.07 1.515 4 1.715 4H14.275C14.475 4 14.645 4.07 14.785 4.21C14.925 4.35 14.995 4.52 14.995 4.72C14.995 4.92 14.925 5.09 14.785 5.23C14.645 5.37 14.475 5.44 14.275 5.44H1.715Z" />
-          <path d="M5.515 12.09C5.315 12.09 5.14499 12.02 5.00499 11.88C4.86499 11.74 4.795 11.57 4.795 11.37C4.795 11.17 4.86499 11 5.00499 10.86C5.14499 10.72 5.315 10.65 5.515 10.65H10.475C10.675 10.65 10.845 10.72 10.985 10.86C11.125 11 11.195 11.17 11.195 11.37C11.195 11.57 11.125 11.74 10.985 11.88C10.845 12.02 10.675 12.09 10.475 12.09H5.515Z" />
-        </svg>
-      </span>
-    </span>
-  )
+const TIME_COLS = new Set(['dateTime', 'scanDate', 'started', 'completed'])
+
+const COL_FILTERS: Record<string, ColFilterConfig> = {
+  status: { label: 'Status Filtering', options: ['All', 'Pending', 'Allowed', 'Blocked', 'Failed'] },
+  jobType: { label: 'Job Type', options: ['All', 'Scheduled Scan', 'Real-Time Scan', 'On-Demand Scan'] },
+  workflow: { label: 'Workflow', options: ['All', 'Default Workflow', 'Security Scan', 'DLP Scan', 'Compliance Check', 'Malware Deep Scan', 'Quick Scan', 'Full Analysis'] },
+  storage: { label: 'Storage Unit', options: ['All', 'AWS Drive', 'Azure Blob', 'Google Cloud', 'S3 Bucket A', 'S3 Bucket B', 'On-Premise NAS', 'Dropbox Enterprise'] },
 }
+
+const RPT_COL_ORDER = ['name','status','storage','totalFiles','threats','dlp','sanitized','jobType','workflow','tagged','kept','copied','moved','deleted','otherRem','partition']
+const RPT_FIXED_PIN = 'name'
+const RPT_CB_WIDTH = 48
+const MAX_USER_PINS = 2
 
 function KvRow({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -184,9 +230,7 @@ function copyText(text: string) {
 
 const DETAIL_TABS = [
   { id: 'overview', label: 'Overview' },
-  { id: 'threats', label: 'Threats Prevented' },
-  { id: 'dlp', label: 'DLP' },
-  { id: 'sanitization', label: 'Sanitization' },
+  { id: 'files', label: 'Files' },
 ]
 
 const SANDBOX_TABS = [
@@ -223,15 +267,76 @@ const YARA_CODE = `rule MALWARE_Trojan_Agent {
 
 export function ReportsPage() {
   const [viewState, setViewState] = useState<ViewState>({ view: 'list' })
+
+  // Reset to list view when sidebar nav is re-clicked
+  useEffect(() => {
+    function onReset(e: Event) {
+      if ((e as CustomEvent).detail === 'reports') setViewState({ view: 'list' })
+    }
+    window.addEventListener('nav-reset', onReset)
+    return () => window.removeEventListener('nav-reset', onReset)
+  }, [])
   const [selectedRows, setSelectedRows] = useState<Set<number>>(new Set())
   const [page, setPage] = useState(1)
   const [detailTab, setDetailTab] = useState('overview')
   const [sandboxTab, setSandboxTab] = useState('file-details')
   const [ruleModalOpen, setRuleModalOpen] = useState(false)
   const [selectedRule, setSelectedRule] = useState('')
+  const [sortCol, setSortCol] = useState<string | null>(null)
+  const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc')
+  const [pinnedCols, setPinnedCols] = useState<string[]>([RPT_FIXED_PIN])
+  const tableRef = useRef<HTMLTableElement>(null)
 
   const pageSize = 20
   const totalPages = Math.ceil(1256 / pageSize)
+
+  const handleSort = useCallback((col: string, dir: 'asc' | 'desc') => {
+    setSortCol(prev => prev === col && sortDir === dir ? null : col)
+    setSortDir(dir)
+  }, [sortDir])
+
+  const handleTogglePin = useCallback((col: string) => {
+    setPinnedCols(prev => {
+      if (col === RPT_FIXED_PIN) return prev
+      if (prev.includes(col)) return prev.filter(c => c !== col)
+      const userPins = prev.filter(c => c !== RPT_FIXED_PIN)
+      if (userPins.length >= MAX_USER_PINS) return prev
+      return [...prev, col]
+    })
+  }, [])
+
+  // Apply pinning positions
+  useEffect(() => {
+    const table = tableRef.current
+    if (!table) return
+    const sorted = [...pinnedCols].sort((a, b) => RPT_COL_ORDER.indexOf(a) - RPT_COL_ORDER.indexOf(b))
+
+    // Clear existing pin classes and inline left
+    table.querySelectorAll('.rpt-pinned').forEach(cell => {
+      ;(cell as HTMLElement).classList.remove('rpt-pinned', 'rpt-pin-edge')
+      ;(cell as HTMLElement).style.left = ''
+    })
+
+    let leftAccum = RPT_CB_WIDTH
+    sorted.forEach((colName, i) => {
+      const th = table.querySelector(`thead th[data-col="${colName}"]`) as HTMLElement | null
+      if (!th) return
+      const colWidth = th.getBoundingClientRect().width
+      const cells = table.querySelectorAll(`[data-col="${colName}"]`)
+      cells.forEach(cell => {
+        ;(cell as HTMLElement).classList.add('rpt-pinned')
+        ;(cell as HTMLElement).style.left = leftAccum + 'px'
+        if (i === sorted.length - 1) {
+          ;(cell as HTMLElement).classList.add('rpt-pin-edge')
+        }
+      })
+      leftAccum += colWidth
+    })
+
+    // Update scrollbar margin CSS var
+    const scrollEl = table.closest('.audit-table-scroll') as HTMLElement | null
+    if (scrollEl) scrollEl.style.setProperty('--rpt-pin-margin', leftAccum + 'px')
+  }, [pinnedCols])
 
   const allSelected = REPORTS.length > 0 && REPORTS.every((_, i) => selectedRows.has(i))
   const someSelected = REPORTS.some((_, i) => selectedRows.has(i)) && !allSelected
@@ -253,13 +358,13 @@ export function ReportsPage() {
 
   if (viewState.view === 'list') {
     return (
-      <div>
+      <div className="table-page">
         <div className="page-title-row">
           <h1 className="page-title">Reports</h1>
           <button className="btn-icon" title="Refresh"><RefreshIcon /></button>
         </div>
 
-        <div className="audit-card" style={{ marginTop: 20 }}>
+        <div className="audit-card table-page-card">
           <div className="audit-card-header">
             <div className="audit-card-title">
               <h3>Recent Jobs</h3>
@@ -275,28 +380,34 @@ export function ReportsPage() {
           </div>
 
           <div className="audit-table-scroll table-scroll">
-            <table className="data-table table-fixed" style={{ display: 'block', overflow: 'visible', minWidth: 2400 }}>
+            <table ref={tableRef} className="data-table table-fixed" style={{ display: 'block', overflow: 'visible', minWidth: 2400 }}>
               <thead>
                 <tr>
                   <th className="col-cb">
                     <Checkbox checked={allSelected} indeterminate={someSelected} onChange={toggleAll} />
                   </th>
-                  <th data-col="name" style={{ width: '15%' }}><ColHeader>Job Name</ColHeader></th>
-                  <th data-col="status" style={{ width: '8%' }}><ColHeader>Status</ColHeader></th>
-                  <th data-col="storage" style={{ width: '14%' }}><ColHeader>Storage Unit</ColHeader></th>
-                  <th data-col="totalFiles" style={{ width: '10%' }}><ColHeader>Total Files</ColHeader></th>
-                  <th data-col="threats" style={{ width: '12%' }}><ColHeader>Threats Detected</ColHeader></th>
-                  <th data-col="dlp" style={{ width: '12%' }}><ColHeader>Data Loss Prevented</ColHeader></th>
-                  <th data-col="sanitized" style={{ width: '10%' }}><ColHeader>Sanitized</ColHeader></th>
-                  <th data-col="jobType" style={{ width: '10%' }}><ColHeader>Job Type</ColHeader></th>
-                  <th data-col="workflow" style={{ width: '10%' }}><ColHeader>Workflow</ColHeader></th>
-                  <th data-col="tagged" style={{ width: '8%' }}><ColHeader>Tagged Files</ColHeader></th>
-                  <th data-col="kept" style={{ width: '8%' }}><ColHeader>Kept Files</ColHeader></th>
-                  <th data-col="copied" style={{ width: '8%' }}><ColHeader>Copied Files</ColHeader></th>
-                  <th data-col="moved" style={{ width: '8%' }}><ColHeader>Moved Files</ColHeader></th>
-                  <th data-col="deleted" style={{ width: '8%' }}><ColHeader>Deleted Files</ColHeader></th>
-                  <th data-col="otherRem" style={{ width: '10%' }}><ColHeader>Other Remediations</ColHeader></th>
-                  <th data-col="partition" style={{ width: '8%' }}><ColHeader>Partition</ColHeader></th>
+                  {([
+                    ['name', '15%', 'Job Name'],
+                    ['status', '8%', 'Status'],
+                    ['storage', '14%', 'Storage Unit'],
+                    ['totalFiles', '10%', 'Total Files'],
+                    ['threats', '12%', 'Threats Detected'],
+                    ['dlp', '12%', 'Data Loss Prevented'],
+                    ['sanitized', '10%', 'Sanitized'],
+                    ['jobType', '10%', 'Job Type'],
+                    ['workflow', '10%', 'Workflow'],
+                    ['tagged', '8%', 'Tagged Files'],
+                    ['kept', '8%', 'Kept Files'],
+                    ['copied', '8%', 'Copied Files'],
+                    ['moved', '8%', 'Moved Files'],
+                    ['deleted', '8%', 'Deleted Files'],
+                    ['otherRem', '10%', 'Other Remediations'],
+                    ['partition', '8%', 'Partition'],
+                  ] as const).map(([col, w, label]) => (
+                    <th key={col} data-col={col} style={{ width: w }}>
+                      <ColHeader col={col} sortCol={sortCol} sortDir={sortDir} pinnedCols={pinnedCols} fixedPin={RPT_FIXED_PIN} maxPins={MAX_USER_PINS} onSort={handleSort} onTogglePin={handleTogglePin} filter={COL_FILTERS[col]} hasDateFilter={TIME_COLS.has(col)}>{label}</ColHeader>
+                    </th>
+                  ))}
                   <th className="col-action" />
                 </tr>
               </thead>
@@ -346,123 +457,189 @@ export function ReportsPage() {
   // ─── DETAIL VIEW ────────────────────────────────────────────────────────
 
   if (viewState.view === 'detail') {
+    const row = REPORTS[viewState.index]
     const breadcrumb: BreadcrumbItem[] = [
       { label: 'Reports', onClick: () => setViewState({ view: 'list' }) },
+      { label: 'Jobs' },
     ]
 
     return (
       <div>
         <PageHeader
-          title="error_log_critical_2023.txt"
+          title={row.name}
           breadcrumb={<Breadcrumb items={breadcrumb} />}
           actions={
-            <Button variant="outline" onClick={() => setViewState({ view: 'list' })}>Back to Reports</Button>
+            <div className="flex items-center gap-2">
+              <Button variant="outline">Delete Report</Button>
+              <Button variant="outline"><span className="flex items-center gap-1.5">Export <ChevronDownIcon /></span></Button>
+              <Button variant="outline">Re-Scan Now</Button>
+            </div>
           }
         />
 
-        <div className="text-[12px] text-[var(--text-muted)] -mt-2 mb-4">Analysis Details</div>
+        {/* Job Info Bar */}
+        <Card className="mt-5 mb-5">
+          <CardHeader>
+            <CardTitle title="Job" actions={<Button variant="text">Job Details</Button>} />
+          </CardHeader>
+          <KeyValueBar items={[
+            { label: 'Storage Unit', value: 'AWS Drive' },
+            { label: 'Scan Type', value: row.jobType === 'Scheduled Scan' ? 'Scheduled' : row.jobType === 'Real-Time Scan' ? 'Real-Time' : 'On-Demand' },
+            { label: 'Status', value: row.status },
+            { label: 'Workflow', value: row.workflow },
+            { label: 'Partition', value: row.partition },
+            { label: 'Started', value: '27/05/25 11:45' },
+            { label: 'Priority', value: 'Low' },
+          ]} />
+        </Card>
 
         <Tabs tabs={DETAIL_TABS} activeTab={detailTab} onTabChange={setDetailTab}>
           {/* ──── Overview ──── */}
           <TabPanel id="overview" activeTab={detailTab}>
-            {/* Results Grid */}
-            <div className="rpt-results">
-              <div className="rpt-results-cell">
-                <div className="rpt-results-title">Metascan™ <InfoCircle /></div>
-                <div className="rpt-results-value danger">5 / 16</div>
-                <div className="rpt-results-desc">Detected Threats</div>
-              </div>
-              <div className="rpt-results-cell">
-                <div className="rpt-results-title">Adaptive Sandbox <InfoCircle /></div>
-                <div className="rpt-results-value danger">Malicious</div>
-                <div className="rpt-results-desc">Verdict</div>
-              </div>
-              <div className="rpt-results-cell">
-                <div className="rpt-results-title">Deep CDR™ <InfoCircle /></div>
-                <div className="rpt-results-value success">11</div>
-                <div className="rpt-results-desc">Objects Sanitized</div>
-              </div>
-              <div className="rpt-results-cell">
-                <div className="rpt-results-title">Proactive DLP™ <InfoCircle /></div>
-                <div className="rpt-results-value warn">16</div>
-                <div className="rpt-results-desc">Objects Detected</div>
-              </div>
-              <div className="rpt-results-cell">
-                <div className="rpt-results-title">Total Files</div>
-                <div className="rpt-results-value">45,887</div>
-                <div className="rpt-results-desc">Scanned Files</div>
-              </div>
-              <div className="rpt-results-cell">
-                <div className="rpt-results-title">Scan Duration</div>
-                <div className="rpt-results-value">2h 34m</div>
-                <div className="rpt-results-desc">Processing Time</div>
-              </div>
-              <div className="rpt-results-cell">
-                <div className="rpt-results-title">Workflow</div>
-                <div className="rpt-results-value" style={{ fontSize: 16 }}>Default Workflow</div>
-                <div className="rpt-results-desc">Applied Rule</div>
-              </div>
-            </div>
-
-            {/* File Details + Remediations */}
-            <div className="rpt-detail-split">
-              <div className="audit-card">
-                <div className="audit-card-header"><div className="audit-card-title"><h3>File Details</h3></div></div>
-                <div className="rpt-kv">
-                  <KvRow label="File Name">error_log_critical_2023.txt</KvRow>
-                  <KvRow label="File Type">Plain Text File (.txt)</KvRow>
-                  <KvRow label="File Size">1.3 GB</KvRow>
-                  <KvRow label="Storage Unit"><div className="inv-provider"><AwsIcon /> Amazon Storage</div></KvRow>
-                  <KvRow label="File Path">/data/logs/2023/error_log_critical_2023.txt</KvRow>
-                  <KvRow label="Status"><Tag variant="alert">Blocked</Tag></KvRow>
-                  <KvRow label="SHA-256">
-                    475a021bbfb6489e54d4...
-                    <span className="copy-icon" onClick={() => copyText('475a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f')}><CopyIcon /></span>
-                  </KvRow>
-                  <KvRow label="MD5">
-                    d41d8cd98f00b204e98...
-                    <span className="copy-icon" onClick={() => copyText('d41d8cd98f00b204e9800998ecf8427e')}><CopyIcon /></span>
-                  </KvRow>
-                </div>
-              </div>
-
-              <div className="audit-card">
-                <div className="audit-card-header"><div className="audit-card-title"><h3>Remediations</h3></div></div>
-                <div className="rpt-rem-list">
-                  <div className="rpt-rem-item">
-                    <div className="rpt-rem-header"><span className="rpt-rem-icon success"><CheckIcon /></span> Tagged</div>
-                    <div className="rpt-rem-desc">File tagged with scan metadata and threat classification</div>
-                    <div className="rpt-rem-tags">
-                      <span className="rpt-rem-tag">threat:malware</span>
-                      <span className="rpt-rem-tag">scan:complete</span>
-                      <span className="rpt-rem-tag">severity:high</span>
+            <div className="rpt-overview-layout">
+              {/* Left column */}
+              <div>
+                {/* Processing Summary */}
+                <div className="audit-card" style={{ marginBottom: 12 }}>
+                  <div className="audit-card-header"><div className="audit-card-title"><h3>Processing Summary</h3></div></div>
+                  <div className="rpt-proc-row">
+                    <div className="rpt-proc-item">
+                      <MiniDonut value={5} total={134785} color="var(--color-red-600)" />
+                      <div className="rpt-proc-stats">
+                        <div className="rpt-proc-stat"><span className="rpt-proc-marker" style={{ background: 'var(--color-neutral-200)' }} /><span className="rpt-proc-label">Total</span><span className="rpt-proc-val">134,785</span></div>
+                        <div className="rpt-proc-stat"><span className="rpt-proc-marker" style={{ background: 'var(--color-red-600)' }} /><span className="rpt-proc-label">Failed</span><span className="rpt-proc-val">5</span></div>
+                      </div>
+                    </div>
+                    <div className="rpt-proc-item">
+                      <MiniDonut value={45234} total={131649} color="var(--color-neutral-800)" />
+                      <div className="rpt-proc-stats">
+                        <div className="rpt-proc-stat"><span className="rpt-proc-marker" style={{ background: 'var(--color-neutral-200)' }} /><span className="rpt-proc-label">Cache</span><span className="rpt-proc-val">86,415</span></div>
+                        <div className="rpt-proc-stat"><span className="rpt-proc-marker" style={{ background: 'var(--color-neutral-800)' }} /><span className="rpt-proc-label">New Scan</span><span className="rpt-proc-val">45,234</span></div>
+                      </div>
+                    </div>
+                    <div className="rpt-proc-item">
+                      <MiniDonut value={2345} total={133780} color="var(--primary)" />
+                      <div className="rpt-proc-stats">
+                        <div className="rpt-proc-stat"><span className="rpt-proc-marker" style={{ background: 'var(--color-neutral-200)' }} /><span className="rpt-proc-label">Allowed</span><span className="rpt-proc-val">131,435</span></div>
+                        <div className="rpt-proc-stat"><span className="rpt-proc-marker" style={{ background: 'var(--primary)' }} /><span className="rpt-proc-label">Blocked</span><span className="rpt-proc-val">2,345</span></div>
+                      </div>
                     </div>
                   </div>
-                  <div className="rpt-rem-item">
-                    <div className="rpt-rem-header"><span className="rpt-rem-icon success"><CheckIcon /></span> Kept Original</div>
-                    <div className="rpt-rem-desc">Original file retained for archival purposes</div>
+                </div>
+
+                {/* Security Summary */}
+                <div className="audit-card" style={{ marginBottom: 12 }}>
+                  <div className="audit-card-header"><div className="audit-card-title"><h3>Security Summary</h3></div></div>
+                  <div className="rpt-security-row">
+                    <div className="rpt-security-item"><div className="rpt-security-label">Threats</div><div className="rpt-security-value">2,001</div></div>
+                    <div className="rpt-security-item"><div className="rpt-security-label">Data Loss</div><div className="rpt-security-value">344</div></div>
+                    <div className="rpt-security-item"><div className="rpt-security-label">Sanitization</div><div className="rpt-security-value">1,578</div></div>
                   </div>
-                  <div className="rpt-rem-item">
-                    <div className="rpt-rem-header"><span className="rpt-rem-icon success"><CheckIcon /></span> Copied</div>
-                    <div className="rpt-rem-desc">Sanitized copy created in quarantine storage</div>
-                    <div className="rpt-rem-dest-list">Destination: <span className="rpt-rem-tag">/quarantine/2023/</span></div>
+                </div>
+
+                {/* Remediations Actions */}
+                <div className="audit-card">
+                  <div className="audit-card-header"><div className="audit-card-title"><h3>Remediations Actions</h3></div></div>
+                  <div className="rpt-rem-actions-grid">
+                    <div className="rpt-rem-action-item"><ProgressRing pct={92} /><div><div className="rpt-rem-action-label">File Tagging</div><div className="rpt-rem-action-count">3,520,454 files</div></div></div>
+                    <div className="rpt-rem-action-item"><ProgressRing pct={45} /><div><div className="rpt-rem-action-label">Keep</div><div className="rpt-rem-action-count">1,584,204 files</div></div></div>
+                    <div className="rpt-rem-action-item"><ProgressRing pct={20} /><div><div className="rpt-rem-action-label">Copy</div><div className="rpt-rem-action-count">704,091 files</div></div></div>
+                    <div className="rpt-rem-action-item"><ProgressRing pct={18} /><div><div className="rpt-rem-action-label">Move</div><div className="rpt-rem-action-count">633,682 files</div></div></div>
+                    <div className="rpt-rem-action-item"><ProgressRing pct={12} /><div><div className="rpt-rem-action-label">Delete</div><div className="rpt-rem-action-count">422,454 files</div></div></div>
+                    <div className="rpt-rem-action-item"><ProgressRing pct={5} /><div><div className="rpt-rem-action-label">Other Remediations</div><div className="rpt-rem-action-count">176,023 actions</div></div></div>
                   </div>
-                  <div className="rpt-rem-item">
-                    <div className="rpt-rem-header"><span className="rpt-rem-icon fail"><XIcon /></span> Move Failed</div>
-                    <div className="rpt-rem-fail-msg">File could not be moved — <a onClick={e => e.preventDefault()}>view full rule</a></div>
+                </div>
+              </div>
+
+              {/* Right column — Remediation Summary */}
+              <div className="audit-card" style={{ alignSelf: 'start' }}>
+                <div className="audit-card-header"><div className="audit-card-title"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 6H13V14C13 14.5523 12.5523 15 12 15H4C3.44772 15 3 14.5523 3 14V2C3 1.44772 3.44772 1 4 1H8V6ZM13 5H9V1L13 5Z" fill="#FF495E"/></svg><h3>Remediation Summary</h3></div></div>
+                <div className="rpt-rem-summary-item">
+                  <div className="rpt-rem-summary-row">
+                    <span className="rpt-rem-summary-label">File Tagging</span>
+                    <span className="rpt-rem-summary-badge">Enabled</span>
                   </div>
-                  <div className="rpt-rem-item">
-                    <div className="rpt-rem-header"><span className="rpt-rem-icon fail"><XIcon /></span> Delete Skipped</div>
-                    <div className="rpt-rem-desc">Deletion not performed — file retained per policy</div>
+                  <div className="rpt-rem-summary-tags">
+                    <span className="rpt-rem-summary-tag">MetaDefenderResult</span>
+                    <span className="rpt-rem-summary-tag">MetaDefenderField</span>
+                    <span className="rpt-rem-summary-tag">MetaDefenderAnalysi...</span>
+                  </div>
+                </div>
+                <div className="rpt-rem-summary-item">
+                  <div className="rpt-rem-summary-row">
+                    <span className="rpt-rem-summary-label">Allowed Original File</span>
+                    <Tag variant="accent">Copy</Tag>
+                  </div>
+                  <div className="rpt-rem-summary-tags">
+                    <span className="rpt-rem-summary-tag">AlexMano OneDrive</span>
+                    <span className="rpt-rem-summary-tag">AWS Testing Bucket</span>
+                    <span className="rpt-rem-summary-tag">AzureFiles Storage Di...</span>
+                    <span className="rpt-rem-summary-tag">Box AD</span>
+                    <span className="rpt-rem-summary-tag">Box Storage</span>
+                  </div>
+                </div>
+                <div className="rpt-rem-summary-item">
+                  <div className="rpt-rem-summary-row">
+                    <span className="rpt-rem-summary-label">Allowed Sanitized File</span>
+                    <span className="rpt-rem-summary-badge">Keep</span>
+                  </div>
+                </div>
+                <div className="rpt-rem-summary-item">
+                  <div className="rpt-rem-summary-row">
+                    <span className="rpt-rem-summary-label">File Versioning <WarnTriangleSmall /></span>
+                    <span className="rpt-rem-summary-badge">Enabled</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* File Versioning Table */}
+            {/* File Type Distribution — full width */}
+            <div className="audit-card dash-card" style={{ marginTop: 12, marginBottom: 20 }}>
+              <div className="audit-card-header"><div className="audit-card-title"><h3>File Type Distribution</h3></div></div>
+              <div className="dash-filetype-body">
+                <div className="dash-treemap">
+                  <div className="dash-treemap-row" style={{ flex: 2 }}>
+                    <div className="dash-treemap-cell dash-tm-archive" style={{ flex: 2 }}><span className="dash-tm-name">Archive</span><span className="dash-tm-count">436</span></div>
+                    <div className="dash-treemap-cell dash-tm-application" style={{ flex: 3 }}><span className="dash-tm-name">Application</span><span className="dash-tm-count">322</span></div>
+                  </div>
+                  <div className="dash-treemap-row" style={{ flex: 1.2 }}>
+                    <div className="dash-treemap-cell dash-tm-executable" style={{ flex: 2 }}><span className="dash-tm-name">Executables</span><span className="dash-tm-count">289</span></div>
+                    <div className="dash-treemap-cell dash-tm-graphical" style={{ flex: 1.2 }}><span className="dash-tm-name">Graphical</span><span className="dash-tm-count">177</span></div>
+                    <div className="dash-treemap-cell dash-tm-diskimage" style={{ flex: 1 }}><span className="dash-tm-name">Disk Image</span><span className="dash-tm-count">120</span></div>
+                  </div>
+                  <div className="dash-treemap-row" style={{ flex: 0.5 }}>
+                    <div className="dash-treemap-cell dash-tm-openssl" style={{ flex: 1 }}><span className="dash-tm-name">OpenSSL Encrypted Files</span><span className="dash-tm-count">89</span></div>
+                    <div className="dash-treemap-cell dash-tm-pdf" style={{ flex: 0.6 }}><span className="dash-tm-name">PDF</span><span className="dash-tm-count">63</span></div>
+                    <div className="dash-treemap-cell dash-tm-text" style={{ flex: 0.5 }}><span className="dash-tm-name">Text</span><span className="dash-tm-count">54</span></div>
+                    <div className="dash-treemap-cell dash-tm-other" style={{ flex: 1 }}><span className="dash-tm-name">Other</span><span className="dash-tm-count">99</span></div>
+                  </div>
+                </div>
+                <div className="dash-filetype-legend">
+                  <div className="dash-filetype-legend-header">
+                    <span className="dash-filetype-legend-title">Detections</span>
+                    <span className="dash-filetype-legend-total">562</span>
+                  </div>
+                  <div className="dash-filetype-legend-rows">
+                    <div className="dash-filetype-legend-row"><div className="dash-ftl-icon dash-ftl-app"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="3" width="10" height="10" rx="1" /></svg></div><div className="dash-ftl-info"><span className="dash-ftl-name"><strong>Application Files</strong></span></div><span className="dash-ftl-val" /></div>
+                    <div className="dash-filetype-legend-row" style={{ paddingLeft: 16 }}><div className="dash-ftl-info"><span className="dash-ftl-name">XLS</span></div><span className="dash-ftl-val">301</span></div>
+                    <div className="dash-filetype-legend-row" style={{ paddingLeft: 16 }}><div className="dash-ftl-info"><span className="dash-ftl-name">Doc</span></div><span className="dash-ftl-val">21</span></div>
+                    <div className="dash-filetype-legend-row"><div className="dash-ftl-icon dash-ftl-img"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="3" width="10" height="10" rx="1" /></svg></div><div className="dash-ftl-info"><span className="dash-ftl-name"><strong>Graphical Files</strong></span></div><span className="dash-ftl-val" /></div>
+                    <div className="dash-filetype-legend-row" style={{ paddingLeft: 16 }}><div className="dash-ftl-info"><span className="dash-ftl-name">JPG</span></div><span className="dash-ftl-val">50</span></div>
+                    <div className="dash-filetype-legend-row" style={{ paddingLeft: 16 }}><div className="dash-ftl-info"><span className="dash-ftl-name">PNG</span></div><span className="dash-ftl-val">12</span></div>
+                    <div className="dash-filetype-legend-row" style={{ paddingLeft: 16 }}><div className="dash-ftl-info"><span className="dash-ftl-name">WebP</span></div><span className="dash-ftl-val">115</span></div>
+                    <div className="dash-filetype-legend-row"><div className="dash-ftl-icon dash-ftl-pdf"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="3" width="10" height="10" rx="1" /></svg></div><div className="dash-ftl-info"><span className="dash-ftl-name"><strong>PDF files</strong></span></div><span className="dash-ftl-val" /></div>
+                    <div className="dash-filetype-legend-row" style={{ paddingLeft: 16 }}><div className="dash-ftl-info"><span className="dash-ftl-name">PDF</span></div><span className="dash-ftl-val">63</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </TabPanel>
+
+          {/* ──── Files ──── */}
+          <TabPanel id="files" activeTab={detailTab}>
             <div className="audit-card">
               <div className="audit-card-header">
-                <div className="audit-card-title"><h3>File Versioning</h3><span className="count">10</span></div>
+                <div className="audit-card-title"><h3>Scanned Files</h3><span className="count">10</span></div>
                 <div className="audit-card-actions">
                   <div className="audit-search"><SearchIcon /><input type="text" placeholder="Search files" /></div>
                   <button className="audit-filter-btn" title="Advanced Filters"><FilterIcon /></button>
@@ -473,16 +650,16 @@ export function ReportsPage() {
                   <thead>
                     <tr>
                       <th className="col-cb"><Checkbox /></th>
-                      <th data-col="file" className="col-pinned" style={{ width: '15%' }}><ColHeader>File</ColHeader></th>
-                      <th data-col="fileVersion" style={{ width: '10%' }}><ColHeader>File Version</ColHeader></th>
-                      <th data-col="status" style={{ width: '8%' }}><ColHeader>Status</ColHeader></th>
-                      <th data-col="fileType" style={{ width: '10%' }}><ColHeader>File Type</ColHeader></th>
-                      <th data-col="malware" style={{ width: '10%' }}><ColHeader>Malware</ColHeader></th>
-                      <th data-col="advancedThreats" style={{ width: '12%' }}><ColHeader>Advanced Threats</ColHeader></th>
-                      <th data-col="vulnerabilities" style={{ width: '11%' }}><ColHeader>Vulnerabilities</ColHeader></th>
-                      <th data-col="dataLoss" style={{ width: '10%' }}><ColHeader>Data Loss</ColHeader></th>
-                      <th data-col="sanitization" style={{ width: '10%' }}><ColHeader>Sanitization</ColHeader></th>
-                      <th data-col="dateTime" style={{ width: '12%' }}><ColHeader>Date &amp; Time</ColHeader></th>
+                      <th data-col="file" className="col-pinned" style={{ width: '15%' }}>File</th>
+                      <th data-col="fileVersion" style={{ width: '10%' }}>File Version</th>
+                      <th data-col="status" style={{ width: '8%' }}>Status</th>
+                      <th data-col="fileType" style={{ width: '10%' }}>File Type</th>
+                      <th data-col="malware" style={{ width: '10%' }}>Malware</th>
+                      <th data-col="advancedThreats" style={{ width: '12%' }}>Advanced Threats</th>
+                      <th data-col="vulnerabilities" style={{ width: '11%' }}>Vulnerabilities</th>
+                      <th data-col="dataLoss" style={{ width: '10%' }}>Data Loss</th>
+                      <th data-col="sanitization" style={{ width: '10%' }}>Sanitization</th>
+                      <th data-col="dateTime" style={{ width: '12%' }}>Date &amp; Time</th>
                       <th className="col-action" />
                     </tr>
                   </thead>
@@ -506,166 +683,7 @@ export function ReportsPage() {
                   </tbody>
                 </table>
               </div>
-              <div className="audit-pagination">
-                <div className="audit-pagination-left">
-                  <select defaultValue="10"><option>10</option><option>25</option><option>50</option></select>
-                  <span>items per page</span>
-                  <span style={{ marginLeft: 8, color: 'var(--text-muted)' }}>|</span>
-                  <span style={{ marginLeft: 8 }}>1-10 of 10 items</span>
-                </div>
-                <div className="audit-pagination-right">
-                  <button className="audit-page-btn" disabled>
-                    <svg viewBox="0 0 16 16" fill="currentColor" className="w-3.5 h-3.5"><path d="M9.99994 12.9995C9.80994 12.9995 9.61994 12.9295 9.46994 12.7795L5.21994 8.52945C4.92994 8.23945 4.92994 7.75945 5.21994 7.46945L9.46994 3.21945C9.75994 2.92945 10.2399 2.92945 10.5299 3.21945C10.8199 3.50945 10.8199 3.98945 10.5299 4.27945L6.80994 7.99945L10.5299 11.7195C10.8199 12.0095 10.8199 12.4895 10.5299 12.7795C10.3799 12.9295 10.1899 12.9995 9.99994 12.9995Z" /></svg>
-                  </button>
-                  <select className="audit-page-select" defaultValue="1"><option value="1">Page 1</option></select>
-                  <button className="audit-page-btn" disabled>
-                    <svg viewBox="0 0 16 16" fill="currentColor" className="w-3.5 h-3.5"><path d="M5.99994 12.9995C6.18994 12.9995 6.37994 12.9295 6.52994 12.7795L10.7799 8.52945C11.0699 8.23945 11.0699 7.75945 10.7799 7.46945L6.52994 3.21945C6.23994 2.92945 5.75994 2.92945 5.46994 3.21945C5.17994 3.50945 5.17994 3.98945 5.46994 4.27945L9.18994 7.99945L5.46994 11.7195C5.17994 12.0095 5.17994 12.4895 5.46994 12.7795C5.61994 12.9295 5.80994 12.9995 5.99994 12.9995Z" /></svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </TabPanel>
-
-          {/* ──── Threats Prevented ──── */}
-          <TabPanel id="threats" activeTab={detailTab}>
-            {/* MetaScan */}
-            <div className="audit-card" style={{ marginBottom: 12 }}>
-              <div className="audit-card-header">
-                <div className="audit-card-title"><h3>MetaScan™ Results</h3></div>
-                <div className="rpt-scan-header-stats">
-                  <span className="rpt-scan-header-value danger">5</span>
-                  <span className="text-[12px] text-[var(--text-muted)]">/ 16 engines detected threats</span>
-                </div>
-              </div>
-              <div className="table-scroll" style={{ maxHeight: 300 }}>
-                <table className="data-table">
-                  <thead><tr><th>Engine</th><th>Threat Name</th><th>Severity</th><th>Definition Date</th></tr></thead>
-                  <tbody>
-                    <tr><td>ClamAV</td><td>Win.Trojan.Agent-123456</td><td><Tag variant="alert">Critical</Tag></td><td>2023-12-14</td></tr>
-                    <tr><td>ESET</td><td>Trojan.GenericKD.46789</td><td><Tag variant="alert">Critical</Tag></td><td>2023-12-15</td></tr>
-                    <tr><td>Kaspersky</td><td>HEUR:Trojan.Win32.Generic</td><td><Tag variant="caution">High</Tag></td><td>2023-12-14</td></tr>
-                    <tr><td>Bitdefender</td><td>Gen:Variant.Zusy.44221</td><td><Tag variant="caution">High</Tag></td><td>2023-12-15</td></tr>
-                    <tr><td>Sophos</td><td>Mal/Generic-S</td><td><Tag variant="caution">High</Tag></td><td>2023-12-13</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            {/* Adaptive Sandbox */}
-            <div className="audit-card" style={{ marginBottom: 12 }}>
-              <div className="audit-card-header">
-                <div className="audit-card-title"><h3>Adaptive Sandbox</h3></div>
-                <div className="flex items-center gap-2">
-                  <button className="btn-text" onClick={() => { setSandboxTab('file-details'); setViewState({ view: 'sandbox', index: viewState.index }) }}>View Extended Details</button>
-                </div>
-              </div>
-              <div className="rpt-sandbox-verdict">
-                <WarnTriangle />
-                <span className="verdict-text">Malicious</span>
-                <span className="text-[12px] text-[var(--text-muted)] ml-auto">Confidence: 98%</span>
-              </div>
-              <div className="p-4 px-5">
-                <div className="rpt-section-title" style={{ marginBottom: 12, padding: 0 }}>Threat Indicators</div>
-                <div className="rpt-kv">
-                  <KvRow label="Behavior">Process injection, registry modification, network callback</KvRow>
-                  <KvRow label="Network">C2 communication detected — 185.234.72.x:443</KvRow>
-                  <KvRow label="File System">Created 3 files in %TEMP%, modified registry run keys</KvRow>
-                  <KvRow label="MITRE ATT&CK">T1055 (Process Injection), T1547.001 (Registry Run Keys)</KvRow>
-                </div>
-              </div>
-            </div>
-
-            {/* IoC Table */}
-            <div className="audit-card">
-              <div className="audit-card-header"><div className="audit-card-title"><h3>Indicators of Compromise</h3><span className="count">6</span></div></div>
-              <div className="table-scroll" style={{ maxHeight: 300 }}>
-                <table className="data-table">
-                  <thead><tr><th>Type</th><th>Value</th><th>Description</th><th>Severity</th></tr></thead>
-                  <tbody>
-                    <tr><td>IP Address</td><td>185.234.72.14</td><td>C2 Server</td><td><Tag variant="alert">Critical</Tag></td></tr>
-                    <tr><td>Domain</td><td>malware-c2.example.net</td><td>Command and Control</td><td><Tag variant="alert">Critical</Tag></td></tr>
-                    <tr><td>File Hash</td><td>a1b2c3d4e5f6...</td><td>Dropped payload</td><td><Tag variant="caution">High</Tag></td></tr>
-                    <tr><td>Registry</td><td>HKCU\Software\Microsoft\Windows\Run</td><td>Persistence mechanism</td><td><Tag variant="caution">High</Tag></td></tr>
-                    <tr><td>URL</td><td>https://malware-c2.example.net/beacon</td><td>Beacon endpoint</td><td><Tag variant="alert">Critical</Tag></td></tr>
-                    <tr><td>Mutex</td><td>Global\MTX_8a7b6c</td><td>Infection marker</td><td><Tag variant="accent">Medium</Tag></td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </TabPanel>
-
-          {/* ──── DLP ──── */}
-          <TabPanel id="dlp" activeTab={detailTab}>
-            <div className="audit-card" style={{ marginBottom: 12 }}>
-              <div className="audit-card-header">
-                <div className="audit-card-title"><h3>Proactive DLP™</h3></div>
-                <div className="rpt-scan-header-stats">
-                  <span className="rpt-scan-header-value warn">16</span>
-                  <span className="text-[12px] text-[var(--text-muted)]">sensitive data objects detected</span>
-                </div>
-              </div>
-              <div className="rpt-cat-grid">
-                <div className="rpt-cat-cell"><span className="rpt-cat-icon" style={{ color: 'var(--color-red-700)' }}>●</span><div><div className="text-[12px] font-medium">Credit Card Numbers</div><div className="text-[12px] text-[var(--text-muted)]">5 instances found</div></div></div>
-                <div className="rpt-cat-cell"><span className="rpt-cat-icon" style={{ color: 'var(--color-yellow-700)' }}>●</span><div><div className="text-[12px] font-medium">Social Security Numbers</div><div className="text-[12px] text-[var(--text-muted)]">4 instances found</div></div></div>
-                <div className="rpt-cat-cell"><span className="rpt-cat-icon" style={{ color: 'var(--color-yellow-700)' }}>●</span><div><div className="text-[12px] font-medium">Email Addresses</div><div className="text-[12px] text-[var(--text-muted)]">3 instances found</div></div></div>
-                <div className="rpt-cat-cell"><span className="rpt-cat-icon" style={{ color: 'var(--color-blue-700)' }}>●</span><div><div className="text-[12px] font-medium">Phone Numbers</div><div className="text-[12px] text-[var(--text-muted)]">2 instances found</div></div></div>
-                <div className="rpt-cat-cell"><span className="rpt-cat-icon" style={{ color: 'var(--color-blue-700)' }}>●</span><div><div className="text-[12px] font-medium">API Keys</div><div className="text-[12px] text-[var(--text-muted)]">1 instance found</div></div></div>
-                <div className="rpt-cat-cell"><span className="rpt-cat-icon" style={{ color: 'var(--text-muted)' }}>●</span><div><div className="text-[12px] font-medium">IP Addresses</div><div className="text-[12px] text-[var(--text-muted)]">1 instance found</div></div></div>
-              </div>
-            </div>
-
-            <div className="audit-card">
-              <div className="audit-card-header"><div className="audit-card-title"><h3>Detection Details</h3></div></div>
-              <div className="table-scroll" style={{ maxHeight: 300 }}>
-                <table className="data-table">
-                  <thead><tr><th>Category</th><th>Pattern</th><th>Location</th><th>Confidence</th><th>Action</th></tr></thead>
-                  <tbody>
-                    <tr><td>Credit Card</td><td>VISA ****-****-****-4532</td><td>Line 234</td><td>99%</td><td><Tag variant="success">Redacted</Tag></td></tr>
-                    <tr><td>Credit Card</td><td>MC ****-****-****-8901</td><td>Line 567</td><td>99%</td><td><Tag variant="success">Redacted</Tag></td></tr>
-                    <tr><td>SSN</td><td>***-**-7890</td><td>Line 891</td><td>95%</td><td><Tag variant="success">Redacted</Tag></td></tr>
-                    <tr><td>Email</td><td>j***@example.com</td><td>Line 1205</td><td>98%</td><td><Tag variant="accent">Flagged</Tag></td></tr>
-                    <tr><td>API Key</td><td>sk-****...XyZ9</td><td>Line 2340</td><td>97%</td><td><Tag variant="success">Redacted</Tag></td></tr>
-                    <tr><td>Phone</td><td>(555) ***-**89</td><td>Line 3100</td><td>90%</td><td><Tag variant="accent">Flagged</Tag></td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </TabPanel>
-
-          {/* ──── Sanitization ──── */}
-          <TabPanel id="sanitization" activeTab={detailTab}>
-            <div className="audit-card" style={{ marginBottom: 12 }}>
-              <div className="audit-card-header">
-                <div className="audit-card-title"><h3>Deep CDR™ Sanitization</h3></div>
-                <div className="rpt-scan-header-stats">
-                  <span className="rpt-scan-header-value success">11</span>
-                  <span className="text-[12px] text-[var(--text-muted)]">objects sanitized</span>
-                </div>
-              </div>
-              <div className="rpt-cat-grid">
-                <div className="rpt-cat-cell"><span className="rpt-cat-icon" style={{ color: 'var(--color-green-800)' }}>●</span><div><div className="text-[12px] font-medium">Macros</div><div className="text-[12px] text-[var(--text-muted)]">4 removed</div></div></div>
-                <div className="rpt-cat-cell"><span className="rpt-cat-icon" style={{ color: 'var(--color-green-800)' }}>●</span><div><div className="text-[12px] font-medium">Embedded Objects</div><div className="text-[12px] text-[var(--text-muted)]">3 sanitized</div></div></div>
-                <div className="rpt-cat-cell"><span className="rpt-cat-icon" style={{ color: 'var(--color-green-800)' }}>●</span><div><div className="text-[12px] font-medium">Active Content</div><div className="text-[12px] text-[var(--text-muted)]">2 disabled</div></div></div>
-                <div className="rpt-cat-cell"><span className="rpt-cat-icon" style={{ color: 'var(--color-blue-700)' }}>●</span><div><div className="text-[12px] font-medium">Hyperlinks</div><div className="text-[12px] text-[var(--text-muted)]">1 neutralized</div></div></div>
-                <div className="rpt-cat-cell"><span className="rpt-cat-icon" style={{ color: 'var(--color-blue-700)' }}>●</span><div><div className="text-[12px] font-medium">JavaScript</div><div className="text-[12px] text-[var(--text-muted)]">1 removed</div></div></div>
-              </div>
-            </div>
-
-            <div className="audit-card">
-              <div className="audit-card-header"><div className="audit-card-title"><h3>Sanitization Details</h3></div></div>
-              <div className="table-scroll" style={{ maxHeight: 300 }}>
-                <table className="data-table">
-                  <thead><tr><th>Object Type</th><th>Description</th><th>Location</th><th>Action Taken</th><th>Status</th></tr></thead>
-                  <tbody>
-                    <tr><td>VBA Macro</td><td>Auto_Open macro with shell execution</td><td>Module1</td><td>Removed</td><td><Tag variant="success">Clean</Tag></td></tr>
-                    <tr><td>VBA Macro</td><td>Document_Open with download routine</td><td>ThisDocument</td><td>Removed</td><td><Tag variant="success">Clean</Tag></td></tr>
-                    <tr><td>OLE Object</td><td>Embedded executable (.exe)</td><td>Sheet1</td><td>Removed</td><td><Tag variant="success">Clean</Tag></td></tr>
-                    <tr><td>OLE Object</td><td>Embedded script (.vbs)</td><td>Sheet2</td><td>Removed</td><td><Tag variant="success">Clean</Tag></td></tr>
-                    <tr><td>ActiveX</td><td>Shell.Application control</td><td>UserForm1</td><td>Disabled</td><td><Tag variant="success">Clean</Tag></td></tr>
-                    <tr><td>Hyperlink</td><td>External link to malware-c2.example.net</td><td>Cell A15</td><td>Neutralized</td><td><Tag variant="success">Clean</Tag></td></tr>
-                  </tbody>
-                </table>
-              </div>
+              <Pagination page={1} totalPages={1} pageSize={10} pageSizeOptions={[10, 25, 50]} onPageChange={() => {}} />
             </div>
           </TabPanel>
         </Tabs>

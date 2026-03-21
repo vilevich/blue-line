@@ -29,6 +29,10 @@ export function App() {
   }
 
   function navigate(page: PageId) {
+    if (page === activePage) {
+      window.dispatchEvent(new CustomEvent('nav-reset', { detail: page }))
+      return
+    }
     setActivePage(page)
     setVisited(prev => {
       if (prev.has(page)) return prev
@@ -52,7 +56,7 @@ export function App() {
       />
       <main
         className={cn(
-          'pt-[56px] min-h-screen transition-[margin-left] duration-200',
+          'pt-[56px] flex flex-col h-screen transition-[margin-left] duration-200',
           sidebarCollapsed ? 'ml-14' : 'ml-[244px]',
         )}
       >
@@ -61,7 +65,7 @@ export function App() {
             if (!visited.has(id)) return null
             const PageComponent = pages[id]
             return (
-              <div key={id} className="p-5" style={{ display: id === activePage ? 'block' : 'none' }}>
+              <div key={id} className="p-5 flex-1 flex flex-col min-h-0" style={{ display: id === activePage ? 'flex' : 'none' }}>
                 <PageComponent />
               </div>
             )

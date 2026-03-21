@@ -130,7 +130,7 @@ const LEVEL_LABEL: Record<AuditRow['level'], string> = {
 }
 
 const TOTAL_RECORDS = 1256
-const PAGE_SIZE_OPTIONS = [10, 25, 50]
+const PAGE_SIZE_OPTIONS = [20, 25, 50]
 
 // ---------------------------------------------------------------------------
 // Component
@@ -142,7 +142,7 @@ export function AuditPage() {
   const [search, setSearch] = useState('')
   const [expandedRows, setExpandedRows] = useState<Set<number>>(new Set())
   const [page, setPage] = useState(1)
-  const [pageSize, setPageSize] = useState(10)
+  const [pageSize, setPageSize] = useState(20)
 
   // Advanced filters
   const [filtersOpen, setFiltersOpen] = useState(false)
@@ -216,7 +216,7 @@ export function AuditPage() {
         <Button variant="outline" onClick={refreshLog}>Refresh</Button>
       </div>
 
-      <Card>
+      <Card className="table-page-card">
         <CardHeader>
           <CardTitle
             title="System Events Log"

@@ -268,7 +268,7 @@ export function DashboardPage() {
   const [trendPeriod, setTrendPeriod] = useState<'7d' | '30d' | '90d'>('30d')
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-5">
       {/* 1. Page Header */}
       <PageHeader
         title="Dashboard"
