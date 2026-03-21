@@ -12,18 +12,26 @@ export function BadgesPage() {
         <ComponentBlock
           preview={
             <div className="flex gap-4 items-center">
-              <BadgeDot color="success" />
-              <BadgeDot color="alert" />
-              <BadgeDot color="accent" />
-              <BadgeDot color="warn" />
               <BadgeDot color="neutral" />
+              <BadgeDot color="inactive" />
+              <BadgeDot color="secure" />
+              <BadgeDot color="success" />
+              <BadgeDot color="accent" />
+              <BadgeDot color="guide" />
+              <BadgeDot color="alert" />
+              <BadgeDot color="warn" />
+              <BadgeDot color="caution" />
             </div>
           }
-          code={`<BadgeDot color="success" />
-<BadgeDot color="alert" />
+          code={`<BadgeDot color="neutral" />
+<BadgeDot color="inactive" />
+<BadgeDot color="secure" />
+<BadgeDot color="success" />
 <BadgeDot color="accent" />
+<BadgeDot color="guide" />
+<BadgeDot color="alert" />
 <BadgeDot color="warn" />
-<BadgeDot color="neutral" />`}
+<BadgeDot color="caution" />`}
           language="tsx"
         />
       </Subsection>
@@ -32,16 +40,40 @@ export function BadgesPage() {
         <ComponentBlock
           preview={
             <div className="flex gap-4 items-center">
-              <BadgeNumber value={5} color="accent" />
-              <BadgeNumber value={12} color="alert" />
-              <BadgeNumber value={99} color="success" />
-              <BadgeNumber value={0} color="neutral" />
+              <BadgeNumber value={1} color="neutral" />
+              <BadgeNumber value={2} color="inactive" />
+              <BadgeNumber value={3} color="secure" />
+              <BadgeNumber value={5} color="success" />
+              <BadgeNumber value={8} color="accent" />
+              <BadgeNumber value={13} color="guide" />
+              <BadgeNumber value={21} color="alert" />
+              <BadgeNumber value={34} color="warn" />
+              <BadgeNumber value={99} color="caution" />
             </div>
           }
-          code={`<BadgeNumber value={5} color="accent" />
-<BadgeNumber value={12} color="alert" />
-<BadgeNumber value={99} color="success" />
-<BadgeNumber value={0} color="neutral" />`}
+          code={`<BadgeNumber value={1} color="neutral" />
+<BadgeNumber value={2} color="inactive" />
+<BadgeNumber value={3} color="secure" />
+<BadgeNumber value={5} color="success" />
+<BadgeNumber value={8} color="accent" />
+<BadgeNumber value={13} color="guide" />
+<BadgeNumber value={21} color="alert" />
+<BadgeNumber value={34} color="warn" />
+<BadgeNumber value={99} color="caution" />`}
+          language="tsx"
+        />
+      </Subsection>
+
+      <Subsection title="Skeleton">
+        <ComponentBlock
+          preview={
+            <div className="flex gap-4 items-center">
+              <BadgeDot skeleton />
+              <BadgeNumber skeleton value={0} />
+            </div>
+          }
+          code={`<BadgeDot skeleton />
+<BadgeNumber skeleton value={0} />`}
           language="tsx"
         />
       </Subsection>
@@ -50,8 +82,10 @@ export function BadgesPage() {
         <PropsTable
           headers={['Prop', 'Type', 'Default', 'Description']}
           rows={[
-            [<InlineCode>color</InlineCode>, <InlineCode>BadgeColor</InlineCode>, <InlineCode>"neutral"</InlineCode>, 'Badge color'],
+            [<InlineCode>color</InlineCode>, <InlineCode>BadgeColor</InlineCode>, <InlineCode>"neutral"</InlineCode>, 'Badge color variant'],
             [<InlineCode>value</InlineCode>, <InlineCode>number</InlineCode>, '—', 'Number to display (BadgeNumber only)'],
+            [<InlineCode>skeleton</InlineCode>, <InlineCode>boolean</InlineCode>, <InlineCode>false</InlineCode>, 'Renders as a loading skeleton'],
+            [<InlineCode>className</InlineCode>, <InlineCode>string</InlineCode>, '—', 'Additional CSS classes'],
           ]}
         />
       </Subsection>

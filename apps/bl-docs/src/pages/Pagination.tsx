@@ -4,6 +4,7 @@ import { Section, Subsection, ComponentBlock, PropsTable, InlineCode } from '../
 
 export function PaginationPage() {
   const [page, setPage] = useState(1)
+  const [pageSize, setPageSize] = useState(20)
 
   return (
     <Section
@@ -17,15 +18,18 @@ export function PaginationPage() {
             <Pagination
               totalPages={8}
               page={page}
-              pageSize={20}
+              pageSize={pageSize}
               onPageChange={setPage}
-              onPageSizeChange={() => {}}
+              onPageSizeChange={setPageSize}
             />
           }
-          code={`<Pagination
+          code={`const [page, setPage] = useState(1)
+const [pageSize, setPageSize] = useState(20)
+
+<Pagination
   totalPages={8}
   page={page}
-  pageSize={20}
+  pageSize={pageSize}
   onPageChange={setPage}
   onPageSizeChange={setPageSize}
 />`}
@@ -40,8 +44,9 @@ export function PaginationPage() {
             [<InlineCode>totalPages</InlineCode>, <InlineCode>number</InlineCode>, 'Total number of pages'],
             [<InlineCode>page</InlineCode>, <InlineCode>number</InlineCode>, 'Current page (1-based)'],
             [<InlineCode>pageSize</InlineCode>, <InlineCode>number</InlineCode>, 'Rows per page'],
-            [<InlineCode>onPageChange</InlineCode>, <InlineCode>(page: number) =&gt; void</InlineCode>, 'Page change callback'],
-            [<InlineCode>onPageSizeChange</InlineCode>, <InlineCode>(size: number) =&gt; void</InlineCode>, 'Page size change callback'],
+            [<InlineCode>onPageChange</InlineCode>, <InlineCode>{'(page: number) => void'}</InlineCode>, 'Page change callback'],
+            [<InlineCode>onPageSizeChange</InlineCode>, <InlineCode>{'(size: number) => void'}</InlineCode>, 'Page size change callback'],
+            [<InlineCode>pageSizeOptions</InlineCode>, <InlineCode>{'number[]'}</InlineCode>, 'Available page size options (e.g. [10, 20, 50, 100])'],
           ]}
         />
       </Subsection>

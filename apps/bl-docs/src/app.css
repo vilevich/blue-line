@@ -48,3 +48,47 @@ code[class*="language-"] {
 ::-webkit-scrollbar-thumb:hover { background: var(--color-neutral-400); }
 [data-theme="dark"] ::-webkit-scrollbar-thumb { background: var(--color-neutral-800); }
 [data-theme="dark"] ::-webkit-scrollbar-thumb:hover { background: var(--color-neutral-700); }
+
+/* ===== RESPONSIVE ===== */
+
+/* 1460px: tighter content padding */
+@media (max-width: 1460px) {
+  .docs-main { padding-left: 20px; padding-right: 20px; }
+}
+
+/* 1024px: sidebar auto-collapses, nav-text hidden */
+@media (max-width: 1024px) {
+  :root { --ds-sidebar-w: 48px; }
+  .docs-sidebar h4,
+  .docs-sidebar button,
+  .docs-sidebar input,
+  .docs-sidebar > div:last-child { display: none; }
+}
+
+/* 768px: sidebar hidden, mobile overlay with hamburger */
+@media (max-width: 768px) {
+  :root { --ds-sidebar-w: 0px; }
+
+  .docs-hamburger { display: flex !important; }
+
+  .docs-sidebar {
+    width: 240px;
+    transform: translateX(-100%);
+    border-right: 1px solid var(--border-200);
+  }
+  .docs-sidebar.docs-sidebar-open {
+    transform: translateX(0);
+  }
+  /* Restore all sidebar content on mobile when open */
+  .docs-sidebar.docs-sidebar-open h4,
+  .docs-sidebar.docs-sidebar-open button,
+  .docs-sidebar.docs-sidebar-open input,
+  .docs-sidebar.docs-sidebar-open > div:last-child { display: revert; }
+
+  .docs-header-github-label { display: none; }
+}
+
+/* 480px: minimal padding */
+@media (max-width: 480px) {
+  .docs-main { padding-left: 12px; padding-right: 12px; }
+}

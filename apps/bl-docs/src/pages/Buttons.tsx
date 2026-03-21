@@ -36,6 +36,40 @@ export function ButtonsPage() {
         />
       </Subsection>
 
+      <Subsection title="Icon Button">
+        <ComponentBlock
+          preview={
+            <div className="flex flex-wrap gap-3 items-center">
+              <Button variant="icon" icon="search" />
+              <Button variant="icon" icon="filter" />
+              <Button variant="icon" icon="edit" />
+              <Button variant="icon" icon="close" />
+            </div>
+          }
+          code={`<Button variant="icon" icon="search" />
+<Button variant="icon" icon="filter" />
+<Button variant="icon" icon="edit" />
+<Button variant="icon" icon="close" />`}
+          language="tsx"
+        />
+      </Subsection>
+
+      <Subsection title="With Icon">
+        <ComponentBlock
+          preview={
+            <div className="flex flex-wrap gap-3 items-center">
+              <Button variant="primary" icon="add">Add Item</Button>
+              <Button variant="outline" icon="edit">Edit</Button>
+              <Button variant="text" icon="upload">Upload</Button>
+            </div>
+          }
+          code={`<Button variant="primary" icon="add">Add Item</Button>
+<Button variant="outline" icon="edit">Edit</Button>
+<Button variant="text" icon="upload">Upload</Button>`}
+          language="tsx"
+        />
+      </Subsection>
+
       <Subsection title="Danger Variants">
         <ComponentBlock
           preview={
@@ -48,6 +82,20 @@ export function ButtonsPage() {
           code={`<Button variant="danger">Danger</Button>
 <Button variant="outline" danger>Outline Danger</Button>
 <Button variant="text" danger>Text Danger</Button>`}
+          language="tsx"
+        />
+      </Subsection>
+
+      <Subsection title="Menu Button Active State">
+        <ComponentBlock
+          preview={
+            <div className="flex flex-wrap gap-3 items-center">
+              <Button variant="menu">Inactive</Button>
+              <Button variant="menu" active>Active</Button>
+            </div>
+          }
+          code={`<Button variant="menu">Inactive</Button>
+<Button variant="menu" active>Active</Button>`}
           language="tsx"
         />
       </Subsection>
@@ -74,8 +122,10 @@ export function ButtonsPage() {
         <PropsTable
           headers={['Prop', 'Type', 'Default', 'Description']}
           rows={[
-            [<InlineCode>variant</InlineCode>, <InlineCode>ButtonVariant</InlineCode>, <InlineCode>"outline"</InlineCode>, 'Visual style'],
+            [<InlineCode>variant</InlineCode>, <InlineCode>ButtonVariant</InlineCode>, <InlineCode>"primary"</InlineCode>, 'Visual style'],
+            [<InlineCode>icon</InlineCode>, <InlineCode>IconName</InlineCode>, '—', 'Icon to display (icon-only when variant is "icon", or left of text)'],
             [<InlineCode>danger</InlineCode>, <InlineCode>boolean</InlineCode>, <InlineCode>false</InlineCode>, 'Red text for outline/text variants'],
+            [<InlineCode>active</InlineCode>, <InlineCode>boolean</InlineCode>, <InlineCode>false</InlineCode>, 'Active/selected state for menu buttons'],
             [<InlineCode>loading</InlineCode>, <InlineCode>boolean</InlineCode>, <InlineCode>false</InlineCode>, 'Show spinner, hide text'],
             [<InlineCode>disabled</InlineCode>, <InlineCode>boolean</InlineCode>, <InlineCode>false</InlineCode>, '40% opacity, no pointer events'],
             [<InlineCode>className</InlineCode>, <InlineCode>string</InlineCode>, '—', 'Additional CSS classes'],

@@ -5,6 +5,7 @@ import { Section, Subsection, ComponentBlock, PropsTable, InlineCode } from '../
 export function ModalsPage() {
   const [modalOpen, setModalOpen] = useState(false)
   const [panelOpen, setPanelOpen] = useState(false)
+  const [panelFooterOpen, setPanelFooterOpen] = useState(false)
 
   return (
     <>
@@ -56,13 +57,15 @@ export function ModalsPage() {
 
         <Subsection title="Props">
           <PropsTable
-            headers={['Prop', 'Type', 'Description']}
+            headers={['Prop', 'Type', 'Default', 'Description']}
             rows={[
-              [<InlineCode>open</InlineCode>, <InlineCode>boolean</InlineCode>, 'Whether modal is visible'],
-              [<InlineCode>onClose</InlineCode>, <InlineCode>() =&gt; void</InlineCode>, 'Close callback'],
-              [<InlineCode>title</InlineCode>, <InlineCode>string</InlineCode>, 'Modal header title'],
-              [<InlineCode>footer</InlineCode>, <InlineCode>ReactNode</InlineCode>, 'Footer content (buttons)'],
-              [<InlineCode>children</InlineCode>, <InlineCode>ReactNode</InlineCode>, 'Modal body content'],
+              [<InlineCode>open</InlineCode>, <InlineCode>boolean</InlineCode>, <InlineCode>false</InlineCode>, 'Whether modal is visible'],
+              [<InlineCode>onClose</InlineCode>, <InlineCode>{'() => void'}</InlineCode>, '—', 'Close callback'],
+              [<InlineCode>title</InlineCode>, <InlineCode>string</InlineCode>, '—', 'Modal header title'],
+              [<InlineCode>footer</InlineCode>, <InlineCode>ReactNode</InlineCode>, '—', 'Footer content (buttons)'],
+              [<InlineCode>children</InlineCode>, <InlineCode>ReactNode</InlineCode>, '—', 'Modal body content'],
+              [<InlineCode>width</InlineCode>, <InlineCode>number</InlineCode>, '—', 'Modal width in pixels'],
+              [<InlineCode>className</InlineCode>, <InlineCode>string</InlineCode>, '—', 'Additional CSS classes'],
             ]}
           />
         </Subsection>
@@ -99,6 +102,62 @@ export function ModalsPage() {
   <p>Panel content here.</p>
 </SlidePanel>`}
             language="tsx"
+          />
+        </Subsection>
+
+        <Subsection title="With Footer">
+          <ComponentBlock
+            preview={
+              <div>
+                <Button variant="outline" onClick={() => setPanelFooterOpen(true)}>
+                  Open Panel with Footer
+                </Button>
+                <SlidePanel
+                  open={panelFooterOpen}
+                  onClose={() => setPanelFooterOpen(false)}
+                  title="Edit Details"
+                  footer={
+                    <>
+                      <Button variant="outline" onClick={() => setPanelFooterOpen(false)}>Cancel</Button>
+                      <Button variant="primary" onClick={() => setPanelFooterOpen(false)}>Save</Button>
+                    </>
+                  }
+                >
+                  <p className="text-[14px] text-[var(--text-subtle)]">
+                    Panel content here.
+                  </p>
+                </SlidePanel>
+              </div>
+            }
+            code={`<SlidePanel
+  open={panelOpen}
+  onClose={() => setPanelOpen(false)}
+  title="Edit Details"
+  footer={
+    <>
+      <Button variant="outline" onClick={() => setPanelOpen(false)}>Cancel</Button>
+      <Button variant="primary" onClick={() => setPanelOpen(false)}>Save</Button>
+    </>
+  }
+>
+  <p>Panel content here.</p>
+</SlidePanel>`}
+            language="tsx"
+          />
+        </Subsection>
+
+        <Subsection title="Props">
+          <PropsTable
+            headers={['Prop', 'Type', 'Default', 'Description']}
+            rows={[
+              [<InlineCode>open</InlineCode>, <InlineCode>boolean</InlineCode>, <InlineCode>false</InlineCode>, 'Whether the panel is visible'],
+              [<InlineCode>onClose</InlineCode>, <InlineCode>{'() => void'}</InlineCode>, '—', 'Close callback'],
+              [<InlineCode>title</InlineCode>, <InlineCode>string</InlineCode>, '—', 'Panel header title'],
+              [<InlineCode>children</InlineCode>, <InlineCode>ReactNode</InlineCode>, '—', 'Panel body content'],
+              [<InlineCode>footer</InlineCode>, <InlineCode>ReactNode</InlineCode>, '—', 'Footer content (buttons)'],
+              [<InlineCode>width</InlineCode>, <InlineCode>number</InlineCode>, <InlineCode>400</InlineCode>, 'Panel width in pixels'],
+              [<InlineCode>className</InlineCode>, <InlineCode>string</InlineCode>, '—', 'Additional CSS classes'],
+            ]}
           />
         </Subsection>
       </Section>

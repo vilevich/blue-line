@@ -38,7 +38,7 @@ export function ComponentBlock({
       <div className="flex border-b border-[var(--border-200)] bg-[var(--surface-card)] px-1">
         <button
           onClick={() => setTab('preview')}
-          className={`px-4 py-2.5 text-[13px] font-medium border-b-2 -mb-px cursor-pointer transition-colors bg-transparent border-none ${
+          className={`px-4 py-2.5 text-[12px] font-medium border-b-2 -mb-px cursor-pointer transition-colors bg-transparent border-none ${
             tab === 'preview'
               ? 'text-[var(--text-strong)] border-b-[var(--text-strong)]'
               : 'text-[var(--text-muted)] border-b-transparent hover:text-[var(--text-strong)]'
@@ -53,7 +53,7 @@ export function ComponentBlock({
         </button>
         <button
           onClick={() => setTab('code')}
-          className={`px-4 py-2.5 text-[13px] font-medium border-b-2 -mb-px cursor-pointer transition-colors bg-transparent border-none ${
+          className={`px-4 py-2.5 text-[12px] font-medium border-b-2 -mb-px cursor-pointer transition-colors bg-transparent border-none ${
             tab === 'code'
               ? 'text-[var(--text-strong)] border-b-[var(--text-strong)]'
               : 'text-[var(--text-muted)] border-b-transparent hover:text-[var(--text-strong)]'
@@ -166,7 +166,7 @@ export function Section({
       </h2>
       <div className="h-px bg-[var(--border-200)] mt-3 mb-4" />
       {description && (
-        <p className="text-[15px] text-[var(--text-subtle)] mb-8 leading-relaxed max-w-[680px]">
+        <p className="text-[14px] text-[var(--text-subtle)] mb-8 leading-relaxed max-w-[680px]">
           {description}
         </p>
       )}
@@ -232,7 +232,7 @@ export function PropsTable({
             {headers.map((h) => (
               <th
                 key={h}
-                className="text-left px-4 py-2.5 text-[13px] font-medium text-[var(--text-muted)] border-b border-[var(--border-200)]"
+                className="text-left px-4 py-2.5 text-[12px] font-medium text-[var(--text-muted)] border-b border-[var(--border-200)]"
               >
                 {h}
               </th>
@@ -262,7 +262,7 @@ export function PropsTable({
 export function InlineCode({ children }: { children: string }) {
   return (
     <code
-      className="text-[12.5px] px-1.5 py-0.5 rounded bg-[var(--color-neutral-100)] text-[var(--text-strong)] dark:bg-[rgba(255,255,255,0.06)] dark:text-[#e4e4e7]"
+      className="text-[12px] px-1.5 py-0.5 rounded bg-[var(--color-neutral-100)] text-[var(--text-strong)] dark:bg-[rgba(255,255,255,0.06)] dark:text-[#e4e4e7]"
       style={{ fontFamily: 'var(--ds-mono)' }}
     >
       {children}

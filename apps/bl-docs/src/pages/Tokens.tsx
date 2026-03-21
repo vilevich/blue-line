@@ -26,8 +26,8 @@ function SwatchRow({ label, swatches }: { label: string; swatches: { hex: string
 function TypeRow({ name, size, sample, style }: { name: string; size: string; sample: string; style: React.CSSProperties }) {
   return (
     <div className="flex items-baseline gap-4 py-2.5 border-b border-[var(--border-card)]">
-      <span className="w-[120px] shrink-0 text-[13px] text-[var(--text-muted)]" style={{ fontFamily: 'var(--ds-mono)' }}>{name}</span>
-      <span className="w-[60px] shrink-0 text-[13px] text-[var(--text-muted)]" style={{ fontFamily: 'var(--ds-mono)' }}>{size}</span>
+      <span className="w-[120px] shrink-0 text-[12px] text-[var(--text-muted)]" style={{ fontFamily: 'var(--ds-mono)' }}>{name}</span>
+      <span className="w-[60px] shrink-0 text-[12px] text-[var(--text-muted)]" style={{ fontFamily: 'var(--ds-mono)' }}>{size}</span>
       <span style={style}>{sample}</span>
     </div>
   )
@@ -37,9 +37,9 @@ function TypeRow({ name, size, sample, style }: { name: string; size: string; sa
 function SpaceRow({ name, value }: { name: string; value: string }) {
   return (
     <div className="flex items-center gap-3 py-1.5">
-      <span className="w-[180px] shrink-0 text-[13px] text-[var(--text-muted)]" style={{ fontFamily: 'var(--ds-mono)' }}>{name}</span>
+      <span className="w-[180px] shrink-0 text-[12px] text-[var(--text-muted)]" style={{ fontFamily: 'var(--ds-mono)' }}>{name}</span>
       <div className="h-5 rounded-sm bg-[var(--color-blue-200)] dark:bg-[rgba(29,107,252,0.3)]" style={{ width: value }} />
-      <span className="text-[13px] text-[var(--text-subtle)]" style={{ fontFamily: 'var(--ds-mono)' }}>{value}</span>
+      <span className="text-[12px] text-[var(--text-subtle)]" style={{ fontFamily: 'var(--ds-mono)' }}>{value}</span>
     </div>
   )
 }
