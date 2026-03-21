@@ -12,21 +12,21 @@ export function ScanStatusPage() {
         <Subsection title="All Variants">
           <ComponentBlock
             preview={
-              <div className="flex flex-wrap gap-3 items-center">
-                <ScanStatus variant="pending">Pending</ScanStatus>
-                <ScanStatus variant="complete">Complete</ScanStatus>
-                <ScanStatus variant="failed">Failed</ScanStatus>
+              <div className="flex flex-col gap-3 items-start">
                 <ScanStatus variant="allowed">Allowed</ScanStatus>
                 <ScanStatus variant="blocked">Blocked</ScanStatus>
+                <ScanStatus variant="complete">Complete</ScanStatus>
+                <ScanStatus variant="failed">Failed</ScanStatus>
                 <ScanStatus variant="skipped">Skipped</ScanStatus>
+                <ScanStatus variant="pending">Pending</ScanStatus>
               </div>
             }
-            code={`<ScanStatus variant="pending">Pending</ScanStatus>
+            code={`<ScanStatus variant="allowed">Allowed</ScanStatus>
+<ScanStatus variant="blocked">Blocked</ScanStatus>
 <ScanStatus variant="complete">Complete</ScanStatus>
 <ScanStatus variant="failed">Failed</ScanStatus>
-<ScanStatus variant="allowed">Allowed</ScanStatus>
-<ScanStatus variant="blocked">Blocked</ScanStatus>
-<ScanStatus variant="skipped">Skipped</ScanStatus>`}
+<ScanStatus variant="skipped">Skipped</ScanStatus>
+<ScanStatus variant="pending">Pending</ScanStatus>`}
             language="tsx"
           />
         </Subsection>
