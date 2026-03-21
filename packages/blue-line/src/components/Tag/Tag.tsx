@@ -18,7 +18,7 @@ export interface TagGroupProps {
   className?: string
 }
 
-const base = 'inline-flex items-center justify-center px-2 text-label font-regular leading-4 whitespace-nowrap'
+const base = 'inline-flex items-center justify-center px-2 py-1 text-label font-regular leading-4 whitespace-nowrap'
 
 const variantStyles: Record<TagVariant, string> = {
   neutral:  'bg-[var(--ds-neutral-100)] text-[var(--ds-neutral-text)]',
