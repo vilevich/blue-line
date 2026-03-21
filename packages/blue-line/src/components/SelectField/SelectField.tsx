@@ -10,7 +10,7 @@ export interface SelectFieldProps extends SelectHTMLAttributes<HTMLSelectElement
 }
 
 const statusBorder: Record<SelectStatus, string> = {
-  default: 'border-[var(--border-default)]',
+  default: 'border-[var(--border-default)] hover:border-[var(--color-neutral-900)] dark:hover:border-[var(--color-neutral-200)]',
   error: 'border-[var(--danger)]',
   success: 'border-[var(--feedback-success)]',
 }

@@ -21,7 +21,7 @@ export interface CardTitleProps {
 
 export function Card({ children, className }: CardProps) {
   return (
-    <div className={cn('bg-[var(--surface-card)] border border-[var(--border-card)] rounded shadow-card overflow-hidden', className)}>
+    <div className={cn('bg-[var(--surface-card)] border border-[var(--border-card)] rounded-[6px] shadow-card overflow-hidden', className)}>
       {children}
     </div>
   )

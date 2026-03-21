@@ -21,14 +21,14 @@ export interface DataTableProps<T> {
 
 export function DataTable<T extends Record<string, unknown>>({ columns, data, onRowClick, rowKey, emptyMessage = 'No data', className }: DataTableProps<T>) {
   return (
-    <table className={cn('w-full border-collapse font-sans', className)}>
+    <table className={cn('w-full border-separate border-spacing-0 font-sans', className)}>
       <thead>
         <tr>
           {columns.map((col, ci) => (
             <th
               key={col.key}
               className={cn(
-                'h-14 px-3 text-note font-medium text-[var(--text-muted)] uppercase tracking-wider text-left whitespace-nowrap',
+                'h-14 px-3 text-label font-medium text-[var(--text-strong)] text-left whitespace-nowrap leading-4 bg-[var(--surface-card)] border-b border-[var(--border-card)] relative',
                 ci === 0 && 'pl-5',
                 ci === columns.length - 1 && 'pr-5',
                 col.align === 'center' && 'text-center',
@@ -45,7 +45,7 @@ export function DataTable<T extends Record<string, unknown>>({ columns, data, on
       <tbody>
         {data.length === 0 ? (
           <tr>
-            <td colSpan={columns.length} className="h-14 px-5 text-label text-[var(--text-muted)] text-center">
+            <td colSpan={columns.length} className="h-14 px-5 text-label text-[var(--text-muted)] text-center bg-[var(--surface-card)]">
               {emptyMessage}
             </td>
           </tr>
@@ -55,7 +55,7 @@ export function DataTable<T extends Record<string, unknown>>({ columns, data, on
               key={rowKey ? rowKey(row, ri) : ri}
               onClick={onRowClick ? () => onRowClick(row, ri) : undefined}
               className={cn(
-                'border-b border-[var(--border-card)] last:border-b-0 hover:bg-[var(--surface-hover)] transition-colors duration-100',
+                'group last:[&>td]:border-b-0',
                 onRowClick && 'cursor-pointer',
               )}
             >
@@ -63,7 +63,7 @@ export function DataTable<T extends Record<string, unknown>>({ columns, data, on
                 <td
                   key={col.key}
                   className={cn(
-                    'h-14 px-3 text-label text-[var(--text-subtle)] whitespace-nowrap overflow-hidden text-ellipsis',
+                    'h-14 px-3 text-label text-[var(--text-subtle)] whitespace-nowrap overflow-hidden text-ellipsis leading-4 bg-[var(--surface-card)] border-b border-[var(--border-card)] group-hover:bg-[var(--surface-hover)] transition-colors duration-100',
                     ci === 0 && 'pl-5',
                     ci === columns.length - 1 && 'pr-5',
                     col.align === 'center' && 'text-center',

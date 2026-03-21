@@ -14,7 +14,7 @@ export interface InputFieldProps extends Omit<InputHTMLAttributes<HTMLInputEleme
 }
 
 const statusBorder: Record<InputStatus, string> = {
-  default: 'border-[var(--border-default)]',
+  default: 'border-[var(--border-default)] hover:border-[var(--color-neutral-900)] dark:hover:border-[var(--color-neutral-200)]',
   error: 'border-[var(--danger)] dark:border-[var(--color-red-500)]',
   success: 'border-[var(--feedback-success)] dark:border-[var(--color-green-600)]',
 }
