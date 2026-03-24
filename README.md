@@ -9,6 +9,7 @@ packages/
   blue-line/       — Blue Line design system (React + Tailwind CSS v4)
 apps/
   mdss/            — MetaDefender Storage Security product UI
+  md-icap/         — MetaDefender ICAP Server product UI
   bl-docs/         — Blue Line documentation site
 ```
 
@@ -42,4 +43,5 @@ pnpm --filter @opswat/bl-docs build # Docs
 
 - **Blue Line Docs:** https://vilevich.github.io/blue-line/
 - **MDSS Prototype:** https://vilevich.github.io/blue-line/mdss/
+- **MD ICAP Prototype:** https://vilevich.github.io/blue-line/md-icap/
 - **Figma:** https://www.figma.com/design/TkdLHVmqTZ9eAXbIBuuDul/Blue-Line-2.2.3
